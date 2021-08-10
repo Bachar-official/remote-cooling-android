@@ -7,8 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:remote_cooling_android/main.dart';
 import 'package:remote_cooling_android/app/app.dart';
 
 void main() {
