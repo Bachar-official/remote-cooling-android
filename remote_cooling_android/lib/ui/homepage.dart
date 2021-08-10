@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/app/routing.dart';
+import 'package:remote_cooling_android/constants.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 
 class Homepage extends StatefulWidget {
@@ -13,10 +14,13 @@ SizedBox generateCard(String title, BuildContext context) {
       child: GestureDetector(
         onTap: () => RouteUtils.goToPage(context, AppRouter.conditionerPage, null),
         child: Card(
+          color: Constants.mainOrange,
       child: Row(children: [
-        Text(title, style: TextStyle(fontSize: 20,),),
+        Text(title, style:
+        TextStyle(fontSize: 20, color: Constants.mainBlack),
+        ),
         Spacer(),
-        Icon(Icons.ac_unit),
+        Icon(Icons.ac_unit, color: Constants.mainBlack,),
       ],
       ),
     )));

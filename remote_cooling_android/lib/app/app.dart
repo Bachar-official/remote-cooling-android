@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/app/routing.dart';
+import 'package:remote_cooling_android/constants.dart';
 
 class App extends StatefulWidget{
   @override
@@ -11,7 +12,12 @@ class _AppState extends State<App>{
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Cinimex Conditioner',
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColorLight: Constants.mainOrange,
+        primaryColor: Constants.mainBlue,
+        scaffoldBackgroundColor: Constants.mainBlack,
+      ),
       onGenerateRoute: AppRouter.generateRoute,
     );
   }
