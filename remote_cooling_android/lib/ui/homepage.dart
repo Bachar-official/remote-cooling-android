@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:remote_cooling_android/app/routing.dart';
+import 'package:remote_cooling_android/utils/routeUtils.dart';
 
 class Homepage extends StatefulWidget {
   @override
   _HomepageState createState() => _HomepageState();
 }
 
-SizedBox generateCard(String title) {
+SizedBox generateCard(String title, BuildContext context) {
     return SizedBox(
       height: 80,
-      child: Card(
+      child: GestureDetector(
+        onTap: () => RouteUtils.goToPage(context, AppRouter.conditionerPage, null),
+        child: Card(
       child: Row(children: [
         Text(title, style: TextStyle(fontSize: 20,),),
         Spacer(),
         Icon(Icons.ac_unit),
-      ],),
-    ));
+      ],
+      ),
+    )));
   }
 
-class _HomepageState extends State<Homepage> {  
+List<SizedBox> getConditioners(BuildContext context) {
+  List<SizedBox> result = [];
+  result.add(generateCard('Кухня', context));
+  result.add(generateCard('Переговорка', context));
+  return result;
+}
 
-  List<SizedBox> conditioners = [
-    generateCard('Кухня'),
-    generateCard('Переговорка'),
-  ];
+class _HomepageState extends State<Homepage> {  
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +39,7 @@ class _HomepageState extends State<Homepage> {
       ),
       body: Builder(
         builder: (ctx) => Column(
-          children: conditioners,
+          children: getConditioners(ctx),
         ),
       ),
     );
