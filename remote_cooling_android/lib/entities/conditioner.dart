@@ -13,4 +13,14 @@ class Conditioner extends HiveObject {
   @HiveField(2)
   ConditionerStatus status;
 
+  @HiveField(3)
+  DateTime updatedAt;
+
+  Conditioner(String name, String endpoint, ConditionerStatus status, DateTime updatedAt) {
+    this.name = name;
+    this.endpoint = endpoint;
+    this.status = status;
+    this.updatedAt = updatedAt;
+  }
+
 }

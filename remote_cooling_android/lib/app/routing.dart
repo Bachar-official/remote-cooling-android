@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/ui/homepage.dart';
-import 'package:remote_cooling_android/ui/conditioner.dart';
+import 'package:remote_cooling_android/ui/conditioner_page.dart';
 import 'package:remote_cooling_android/ui/about.dart';
 
 class AppRouter {
