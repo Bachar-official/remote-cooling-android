@@ -11,7 +11,7 @@ class Homepage extends StatefulWidget {
 
 SizedBox generateCard(String title, BuildContext context) {
     return SizedBox(
-      height: 80,
+      height: 60,
       child: GestureDetector(
         onTap: () => RouteUtils.goToPage(context, AppRouter.conditionerPage, null),
         child: Card(

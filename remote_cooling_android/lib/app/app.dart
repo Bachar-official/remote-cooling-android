@@ -17,6 +17,12 @@ class _AppState extends State<App>{
         primaryColorLight: Constants.mainOrange,
         primaryColor: Constants.mainBlue,
         scaffoldBackgroundColor: Constants.mainBlack,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              primary: Constants.mainOrange,
+              onPrimary: Constants.mainBlack,
+            ),
+          ),
       ),
       onGenerateRoute: AppRouter.generateRoute,
     );

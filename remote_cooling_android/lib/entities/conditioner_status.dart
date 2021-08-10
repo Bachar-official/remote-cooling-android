@@ -1,4 +1,5 @@
 enum ConditionerStatus {
   off,
-  undefined
+  undefined,
+  unavailable,
 }
