@@ -36,4 +36,12 @@ class RenderUtils {
               ),
             )));
   }
+
+  static List<SizedBox> renderConditioners(List<Conditioner> conditioners, BuildContext context) {
+    List<SizedBox> result = [];
+    conditioners.forEach((conditioner) {
+      result.add(generateCard(conditioner, context));
+    });
+    return result;
+  }
 }

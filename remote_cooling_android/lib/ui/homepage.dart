@@ -12,15 +12,14 @@ class Homepage extends StatefulWidget {
   _HomepageState createState() => _HomepageState();
 }
 
-List<Conditioner> getConditioners(BuildContext context) {
-  List<Conditioner> result = [];
-  result.add(Conditioner(
-    'Кухня', '/kitchen', ConditionerStatus.off, DateTime.now()
-  ));
-  return result;
-}
+
 
 class _HomepageState extends State<Homepage> {  
+
+  List<Conditioner> conditioners = [
+    Conditioner('Кухня', '/kitchen', ConditionerStatus.off, DateTime.now()),
+    Conditioner('Север', '/north', ConditionerStatus.undefined, DateTime.now())
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class _HomepageState extends State<Homepage> {
       ),
       body: Builder(
         builder: (ctx) => Column(
-          children: [],
+          children: RenderUtils.renderConditioners(conditioners, context),
         ),
       ),
     );
