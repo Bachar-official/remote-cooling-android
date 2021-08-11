@@ -8,7 +8,8 @@ class NewConditionerPage extends StatefulWidget {
 class _NewConditionerState extends State<NewConditionerPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      child: Scaffold(
       appBar: AppBar(
         title: Text('Добавить кондиционер'),
       ),
@@ -16,10 +17,14 @@ class _NewConditionerState extends State<NewConditionerPage> {
       body: Builder(
         builder: (ctx) => Column(
           children: [
-            
+
           ],
         ),
       ),
-    );
+    ),
+    onWillPop: () {
+      Navigator.of(context).popUntil(ModalRoute.withName("/"));
+      return Future.value(false);
+    });
   }
 }
