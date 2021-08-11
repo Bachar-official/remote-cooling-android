@@ -16,7 +16,7 @@ class _AppState extends State<App>{
         brightness: Brightness.dark,
         primaryColorLight: Constants.mainOrange,
         primaryColor: Constants.mainBlue,
-        scaffoldBackgroundColor: Constants.mainBlack,
+        scaffoldBackgroundColor: Constants.mainBlue,
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               primary: Constants.mainOrange,

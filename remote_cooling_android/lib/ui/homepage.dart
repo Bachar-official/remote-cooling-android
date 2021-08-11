@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/app/routing.dart';
 import 'package:remote_cooling_android/constants.dart';
@@ -27,10 +30,18 @@ class _HomepageState extends State<Homepage> {
       drawer: NavBar(),
       appBar: AppBar(
         title: Text('Cinimex Охлаждайка'),
+        actions: [
+          IconButton(
+            onPressed: () => {
+              BarcodeScanner.scan().then((value) =>
+              conditioners.add(Conditioner.fromJson(jsonDecode(value.rawContent))))
+            },
+            icon: Icon(Icons.add)),
+        ],
       ),
       body: Builder(
         builder: (ctx) => Column(
-          children: RenderUtils.renderConditioners(conditioners, context),
+          children: RenderUtils.renderConditioners(conditioners, ctx),
         ),
       ),
     );
