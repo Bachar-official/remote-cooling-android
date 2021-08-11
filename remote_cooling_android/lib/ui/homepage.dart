@@ -28,42 +28,6 @@ class _HomepageState extends State<Homepage> {
       drawer: NavBar(),
       appBar: AppBar(
         title: Text('Cinimex Охлаждайка'),
-        actions: [
-          IconButton(
-              onPressed: () => {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                            title: Text('Выберите вариант'),
-                            content: Container(
-                              height: 100,
-                              child: Column(
-                                children: [
-                                  TextButton(
-                                      onPressed: () => {
-                                        RouteUtils.goToPage(context, AppRouter.newConditioner, null)
-                                      },
-                                      child: Text('Добавить вручную')),
-                                  TextButton(
-                                      onPressed: () => {
-                                            BarcodeScanner.scan()
-                                                .then(
-                                                    (value) =>
-                                                        setState(
-                                                            () => {
-                                                                  conditioners.add(
-                                                                      Conditioner
-                                                                          .fromJson(
-                                                                              jsonDecode(value.rawContent)))
-                                                                }))
-                                          },
-                                      child: Text('Сканировать QR-код')),
-                                ],
-                              ),
-                            ))),
-                  },
-              icon: Icon(Icons.add)),
-        ],
       ),
       body: Builder(
         builder: (ctx) => Column(

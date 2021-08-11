@@ -88,4 +88,20 @@ class RenderUtils {
       size: 200.0,
       );
   }
+
+  static AlertDialog renderAlert(
+    String title, double width, double height, List<Widget> content, List<Widget> actions
+    ) {
+    return AlertDialog(
+      title: Text(title),
+      content: Container(
+        width: width,
+        height: height,
+        child: Column(
+          children: content,
+        ),
+      ),
+      actions: actions,
+    );
+  }
 }
