@@ -36,13 +36,8 @@ class NavBar extends StatelessWidget {
                                           onPressed: () => {
                                                 BarcodeScanner.scan()
                                                     .then(
-                                                        (value) => print(value.rawContent),
-                                                            /*setState(
-                                                                () => {
-                                                                      conditioners.add(
-                                                                          Conditioner.fromJson(
-                                                                              jsonDecode(value.rawContent)))
-                                                                    }))*/
+                                                        (value) => 
+                                                            RouteUtils.showNotification(ctx, value.rawContent, Colors.yellow)
                                                     )},
                                           child: Text('Сканировать QR-код')),
                                     ],
