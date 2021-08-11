@@ -18,7 +18,7 @@ class _HomepageState extends State<Homepage> {
 
   List<Conditioner> conditioners = [
     Conditioner('Кухня', '/kitchen', ConditionerStatus.off, DateTime.now()),
-    Conditioner('Север', '/north', ConditionerStatus.undefined, DateTime.now())
+    Conditioner('Север', '/north', ConditionerStatus.undefined, DateTime(2021, 8, 1, 14, 30))
   ];
 
   @override
