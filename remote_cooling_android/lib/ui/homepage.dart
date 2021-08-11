@@ -34,7 +34,9 @@ class _HomepageState extends State<Homepage> {
           IconButton(
             onPressed: () => {
               BarcodeScanner.scan().then((value) =>
-              conditioners.add(Conditioner.fromJson(jsonDecode(value.rawContent))))
+              setState(() => {
+                conditioners.add(Conditioner.fromJson(jsonDecode(value.rawContent)))
+              }))              
             },
             icon: Icon(Icons.add)),
         ],

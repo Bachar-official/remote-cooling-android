@@ -72,6 +72,14 @@ class RenderUtils {
     ],);
   }
 
+  static Row getEndpoint(Conditioner conditioner) {
+    return Row(mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text('API: '),
+      Text(conditioner.endpoint),
+    ],);
+  }
+
   static QrImage generateImage(conditionerData) {
     return QrImage(
       backgroundColor: Colors.white,

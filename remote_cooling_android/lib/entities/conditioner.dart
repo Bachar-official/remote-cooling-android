@@ -30,7 +30,7 @@ class Conditioner extends HiveObject {
         updatedAt = DateTime.now();
 
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'endpoint': endpoint,
+        '\"name\"': '"$name"',
+        '\"endpoint\"': '"$endpoint"',
       };
 }

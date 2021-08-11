@@ -33,6 +33,7 @@ class _ConditionerState extends State<ConditionerPage> {
           builder: (ctx) => Column(
               children: [
                 RenderUtils.getStatus(conditioner),
+                RenderUtils.getEndpoint(conditioner),
                 RenderUtils.getUpdated(conditioner),
               ],
             ),
