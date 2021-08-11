@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/utils/renderUtils.dart';
-import 'package:remote_cooling_android/utils/time_ago.dart';
 
 class ConditionerPage extends StatefulWidget {
   @override
@@ -22,7 +21,10 @@ class _ConditionerState extends State<ConditionerPage> {
                 showDialog<void>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
-                    content: RenderUtils.generateImage(conditioner.toJson())
+                    content: Container(
+                      width: 220,
+                      height: 220,
+                      child: Center(child: RenderUtils.generateImage(conditioner.toJson())))
                   ),
                 ),
               }

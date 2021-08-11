@@ -15,13 +15,11 @@ class Homepage extends StatefulWidget {
   _HomepageState createState() => _HomepageState();
 }
 
-
-
-class _HomepageState extends State<Homepage> {  
-
+class _HomepageState extends State<Homepage> {
   List<Conditioner> conditioners = [
     Conditioner('Кухня', '/kitchen', ConditionerStatus.off, DateTime.now()),
-    Conditioner('Север', '/north', ConditionerStatus.undefined, DateTime(2021, 8, 1, 14, 30))
+    Conditioner('Север', '/north', ConditionerStatus.undefined,
+        DateTime(2021, 8, 1, 14, 30))
   ];
 
   @override
@@ -32,13 +30,39 @@ class _HomepageState extends State<Homepage> {
         title: Text('Cinimex Охлаждайка'),
         actions: [
           IconButton(
-            onPressed: () => {
-              BarcodeScanner.scan().then((value) =>
-              setState(() => {
-                conditioners.add(Conditioner.fromJson(jsonDecode(value.rawContent)))
-              }))              
-            },
-            icon: Icon(Icons.add)),
+              onPressed: () => {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                            title: Text('Выберите вариант'),
+                            content: Container(
+                              height: 100,
+                              child: Column(
+                                children: [
+                                  TextButton(
+                                      onPressed: () => {
+                                        RouteUtils.goToPage(context, AppRouter.newConditioner, null)
+                                      },
+                                      child: Text('Добавить вручную')),
+                                  TextButton(
+                                      onPressed: () => {
+                                            BarcodeScanner.scan()
+                                                .then(
+                                                    (value) =>
+                                                        setState(
+                                                            () => {
+                                                                  conditioners.add(
+                                                                      Conditioner
+                                                                          .fromJson(
+                                                                              jsonDecode(value.rawContent)))
+                                                                }))
+                                          },
+                                      child: Text('Сканировать QR-код')),
+                                ],
+                              ),
+                            ))),
+                  },
+              icon: Icon(Icons.add)),
         ],
       ),
       body: Builder(
