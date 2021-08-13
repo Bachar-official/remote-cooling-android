@@ -15,6 +15,14 @@ class Conditioner extends HiveObject {
   @HiveField(3)
   DateTime updatedAt;
 
+  static ConditionerStatus getConditionerStatus(String digitStatus) {
+    switch(digitStatus) {
+      case '200': return ConditionerStatus.on;
+      case '300': return ConditionerStatus.off;
+      default: return ConditionerStatus.undefined;
+    }
+  }
+
   Conditioner(String name, String endpoint, ConditionerStatus status,
       DateTime updatedAt) {
     this.name = name;
@@ -26,7 +34,7 @@ class Conditioner extends HiveObject {
   Conditioner.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         endpoint = json['ipAddress'],
-        status = ConditionerStatus.undefined,
+        status = getConditionerStatus(json['status']),
         updatedAt = DateTime.now();
 
   Map<String, dynamic> toJson() => {

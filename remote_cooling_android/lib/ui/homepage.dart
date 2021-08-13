@@ -32,7 +32,11 @@ class _HomepageState extends State<Homepage> {
       appBar: AppBar(
         title: Text('Cinimex Охлаждайка'),
         actions: [
-          IconButton(icon: Icon(Icons.refresh), onPressed: () => {}),
+          IconButton(icon: Icon(Icons.refresh), onPressed: () => {
+            setState(() => {
+              conditioners = conditioners = InetUtils.getConditioners(),
+            })
+          }),
         ],
       ),
       body: FutureBuilder(

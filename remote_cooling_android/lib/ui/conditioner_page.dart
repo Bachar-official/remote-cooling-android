@@ -14,22 +14,6 @@ class _ConditionerState extends State<ConditionerPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(conditioner.name),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.qr_code),
-              onPressed: () => {
-                showDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    content: Container(
-                      width: 220,
-                      height: 220,
-                      child: Center(child: RenderUtils.generateImage(conditioner.toJson())))
-                  ),
-                ),
-              }
-            )
-          ],
         ),
         body: Builder(
           builder: (ctx) => Column(
