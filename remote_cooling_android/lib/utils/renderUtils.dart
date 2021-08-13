@@ -20,6 +20,14 @@ class RenderUtils {
     }
   }
 
+  static List<SizedBox> renderCards(List<Conditioner> conditioners, BuildContext context) {
+    List<SizedBox> result = [];
+    for (Conditioner conditioner in conditioners) {
+      result.add(generateCard(conditioner, context));
+    }
+    return result;
+  }
+
   static SizedBox generateCard(Conditioner conditioner, BuildContext context) {
     return SizedBox(
         height: 60,

@@ -28,12 +28,12 @@ class InetUtils {
     return utf8.decode(bytes);
   }
 
-  static Future<List<String>> pingHosts() async {
-    List<String> result = [];
+  static Future<List<Conditioner>> getConditioners() async {
+    List<Conditioner> result = [];
     List<String> addresses = await searchDevices();
     for (String address in addresses) {
       var response = await http.get(Uri.http(address, 'ping'));
-      result.add(response.body);
+      result.add(Conditioner.fromJson(json.decode(response.body)));
     }
     return result;
   }

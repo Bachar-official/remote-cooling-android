@@ -17,14 +17,14 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  Future<List<String>> endpoints;
+  Future<List<Conditioner>> conditioners;
 
   @override
   void initState() {
     super.initState();
-    endpoints = InetUtils.pingHosts();
+    conditioners = InetUtils.getConditioners();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,23 +32,25 @@ class _HomepageState extends State<Homepage> {
       appBar: AppBar(
         title: Text('Cinimex Охлаждайка'),
         actions: [
-          IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () => {
-                    
-                  }),
+          IconButton(icon: Icon(Icons.refresh), onPressed: () => {}),
         ],
       ),
       body: FutureBuilder(
-        future: endpoints,
-        builder: (ctx, data) {
-          switch(data.connectionState) {
-            case ConnectionState.waiting: return Text('loading');
-            case ConnectionState.done: return Text(data.data.length.toString());
-            default: return null;
-          }
-        }
-      ),
+          future: conditioners,
+          builder: (ctx, data) {
+            switch (data.connectionState) {
+              case ConnectionState.waiting:
+                return Center(
+                    child:
+                        CircularProgressIndicator(color: Constants.mainOrange));
+              case ConnectionState.done:
+                return Center(child: Column(
+                  children: RenderUtils.renderCards(data.data, context),
+                ));
+              default:
+                return null;
+            }
+          }),
     );
   }
 }
