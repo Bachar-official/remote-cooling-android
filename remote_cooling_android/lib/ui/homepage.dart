@@ -7,6 +7,7 @@ import 'package:remote_cooling_android/constants.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/ui/navbar.dart';
+import 'package:remote_cooling_android/utils/inetUtils.dart';
 import 'package:remote_cooling_android/utils/renderUtils.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 
@@ -16,23 +17,40 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  List<Conditioner> conditioners = [
-    Conditioner('Кухня', '/kitchen', ConditionerStatus.off, DateTime.now()),
-    Conditioner('Север', '/north', ConditionerStatus.undefined,
-        DateTime(2021, 8, 1, 14, 30))
-  ];
+  Future<List<String>> endpoints;
+  Future<dynamic> ip;
+  bool loading = false;
 
+  @override
+  void initState() {
+    super.initState();
+    endpoints = InetUtils.searchDevices();
+    ip = endpoints.then((value) => InetUtils.pingHost(value[0]));
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavBar(),
       appBar: AppBar(
         title: Text('Cinimex Охлаждайка'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () => {
+                    
+                  }),
+        ],
       ),
-      body: Builder(
-        builder: (ctx) => Column(
-          children: RenderUtils.renderConditioners(conditioners, ctx),
-        ),
+      body: FutureBuilder(
+        future: ip,
+        builder: (ctx, data) {
+          switch(data.connectionState) {
+            case ConnectionState.waiting: return Text('loading');
+            case ConnectionState.done: return Text(data.data.body);
+            default: return null;
+          }
+        }
       ),
     );
   }

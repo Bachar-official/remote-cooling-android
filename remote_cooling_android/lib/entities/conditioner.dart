@@ -25,7 +25,7 @@ class Conditioner extends HiveObject {
 
   Conditioner.fromJson(Map<String, dynamic> json)
       : name = json['name'],
-        endpoint = json['endpoint'],
+        endpoint = json['ipAddress'],
         status = ConditionerStatus.undefined,
         updatedAt = DateTime.now();
 
