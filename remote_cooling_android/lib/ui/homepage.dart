@@ -18,14 +18,11 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   Future<List<String>> endpoints;
-  Future<dynamic> ip;
-  bool loading = false;
 
   @override
   void initState() {
     super.initState();
-    endpoints = InetUtils.searchDevices();
-    ip = endpoints.then((value) => InetUtils.pingHost(value[0]));
+    endpoints = InetUtils.pingHosts();
   }
   
   @override
@@ -43,11 +40,11 @@ class _HomepageState extends State<Homepage> {
         ],
       ),
       body: FutureBuilder(
-        future: ip,
+        future: endpoints,
         builder: (ctx, data) {
           switch(data.connectionState) {
             case ConnectionState.waiting: return Text('loading');
-            case ConnectionState.done: return Text(data.data.body);
+            case ConnectionState.done: return Text(data.data.length.toString());
             default: return null;
           }
         }

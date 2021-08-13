@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:remote_cooling_android/entities/conditioner.dart';
@@ -27,7 +28,13 @@ class InetUtils {
     return utf8.decode(bytes);
   }
 
-  static Future<http.Response> pingHost(String url) async {
-    return http.get(Uri.http(url, 'ping'));
+  static Future<List<String>> pingHosts() async {
+    List<String> result = [];
+    List<String> addresses = await searchDevices();
+    for (String address in addresses) {
+      var response = await http.get(Uri.http(address, 'ping'));
+      result.add(response.body);
+    }
+    return result;
   }
 }
