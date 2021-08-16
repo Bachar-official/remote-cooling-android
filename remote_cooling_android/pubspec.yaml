@@ -32,7 +32,6 @@ dependencies:
   intl: ^0.17.0
   path_provider: ^2.0.2
   barcode_scan: ^3.0.1
-  qr_flutter: ^4.0.0
   http: ^0.13.3
   ping_discover_network: ^0.2.0+1
   wifi: ^0.1.5

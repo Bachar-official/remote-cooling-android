@@ -16,10 +16,13 @@ class Conditioner extends HiveObject {
   DateTime updatedAt;
 
   static ConditionerStatus getConditionerStatus(String digitStatus) {
-    switch(digitStatus) {
-      case '200': return ConditionerStatus.on;
-      case '300': return ConditionerStatus.off;
-      default: return ConditionerStatus.undefined;
+    switch (digitStatus) {
+      case '200':
+        return ConditionerStatus.on;
+      case '300':
+        return ConditionerStatus.off;
+      default:
+        return ConditionerStatus.undefined;
     }
   }
 
@@ -29,6 +32,16 @@ class Conditioner extends HiveObject {
     this.endpoint = endpoint;
     this.status = status;
     this.updatedAt = updatedAt;
+  }
+
+  void setStatus(String status) {
+    this.status = getConditionerStatus(status);
+    this.updatedAt = DateTime.now();
+  }
+
+  @override
+  String toString() {
+    return 'name: $name, endpoint: $endpoint, status:$status';
   }
 
   Conditioner.fromJson(Map<String, dynamic> json)

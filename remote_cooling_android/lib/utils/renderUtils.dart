@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:remote_cooling_android/app/routing.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
@@ -15,6 +14,8 @@ class RenderUtils {
         return Icon(Icons.leak_remove, color: Constants.mainBlack);
       case ConditionerStatus.off:
         return Icon(Icons.flash_off, color: Constants.mainBlack);
+      case ConditionerStatus.on:
+        return Icon(Icons.flash_on, color: Constants.mainBlack);
       default:
         return null;
     }
@@ -38,6 +39,8 @@ class RenderUtils {
               color: Constants.mainOrange,
               child: Row(
                 children: [
+                  conditioner.name == null ?
+                  Text(''):
                   Text(
                     conditioner.name,
                     style: TextStyle(fontSize: 20, color: Constants.mainBlack),
@@ -69,6 +72,7 @@ class RenderUtils {
     switch(status) {
       case ConditionerStatus.off: return 'выключен';
       case ConditionerStatus.undefined: return 'нет связи';
+      case ConditionerStatus.on: return 'включён';
     }
   }
 
@@ -88,15 +92,6 @@ class RenderUtils {
     ],);
   }
 
-  static QrImage generateImage(conditionerData) {
-    return QrImage(
-      backgroundColor: Colors.white,
-      data: conditionerData.toString(),
-      version: QrVersions.auto,
-      size: 200.0,
-      );
-  }
-
   static AlertDialog renderAlert(
     String title, double width, double height, List<Widget> content, List<Widget> actions
     ) {
@@ -111,5 +106,13 @@ class RenderUtils {
       ),
       actions: actions,
     );
+  }
+
+  static bool isConditionerOn(Conditioner conditioner) {
+    switch(conditioner.status) {
+      case ConditionerStatus.off: return false;
+      case ConditionerStatus.on: return true;
+      default: return false;
+    }
   }
 }

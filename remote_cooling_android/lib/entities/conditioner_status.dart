@@ -3,3 +3,9 @@ enum ConditionerStatus {
   off,
   undefined,
 }
+
+enum ConditionerCommand {
+  on,
+  off,
+  ping
+}

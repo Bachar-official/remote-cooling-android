@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
+import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:wifi/wifi.dart';
 import 'package:ping_discover_network/ping_discover_network.dart';
 import 'package:http/http.dart' as http;
@@ -23,18 +25,21 @@ class InetUtils {
     return result;
   }
 
-  static String utf8convert(String text) {
-    List<int> bytes = text.toString().codeUnits;
-    return utf8.decode(bytes);
+  static String getCommand(ConditionerCommand command) {
+    return command.toString().split('.')[1];
   }
 
   static Future<List<Conditioner>> getConditioners() async {
     List<Conditioner> result = [];
     List<String> addresses = await searchDevices();
     for (String address in addresses) {
-      var response = await http.get(Uri.http(address, 'ping'));
+      var response = await sendCommand(address, ConditionerCommand.ping);
       result.add(Conditioner.fromJson(json.decode(response.body)));
     }
     return result;
+  }
+
+  static Future<http.Response> sendCommand(String url, ConditionerCommand command) async {
+    return await http.get(Uri.http(url, getCommand(command)));
   }
 }
