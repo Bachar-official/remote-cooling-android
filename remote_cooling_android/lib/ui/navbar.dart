@@ -13,41 +13,6 @@ class NavBar extends StatelessWidget {
           child: ListView(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: ElevatedButton.icon(
-                    onPressed: () => {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext ctx) =>
-                                RenderUtils.renderAlert(
-                                    'Выберите вариант',
-                                    200,
-                                    100,
-                                    [
-                                      TextButton(
-                                          onPressed: () => {
-                                                RouteUtils.goToPage(
-                                                    context,
-                                                    AppRouter.newConditioner,
-                                                    null)
-                                              },
-                                          child: Text('Добавить вручную')),
-                                      TextButton(
-                                          onPressed: () => {
-                                                BarcodeScanner.scan()
-                                                    .then(
-                                                        (value) => 
-                                                            RouteUtils.showNotification(ctx, value.rawContent, Colors.yellow)
-                                                    )},
-                                          child: Text('Сканировать QR-код')),
-                                    ],
-                                    null),
-                          ),
-                        },
-                    icon: Icon(Icons.add),
-                    label: Text('Добавить кондиционер')),
-              ),
-              Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: ElevatedButton.icon(
