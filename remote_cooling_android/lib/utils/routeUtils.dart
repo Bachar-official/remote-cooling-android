@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RouteUtils {
-  static void goToPage(context, path, param) {
-    Navigator.pushNamed(context, path, arguments: param);
+  static void goToPage(context, path, param, Function callback) {
+    Navigator.pushNamed(context, path, arguments: param).then((value) => {callback()});
   }
 
   static void showNotification(BuildContext context, String message, Color color) {

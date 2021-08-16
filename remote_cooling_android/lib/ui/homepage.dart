@@ -25,6 +25,12 @@ class _HomepageState extends State<Homepage> {
     conditioners = InetUtils.getConditioners();
   }
 
+  void _update() {
+    setState(() => {
+          conditioners = conditioners = InetUtils.getConditioners(),
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,11 +38,11 @@ class _HomepageState extends State<Homepage> {
       appBar: AppBar(
         title: Text('Cinimex Охлаждайка'),
         actions: [
-          IconButton(icon: Icon(Icons.refresh), onPressed: () => {
-            setState(() => {
-              conditioners = conditioners = InetUtils.getConditioners(),
-            })
-          }),
+          IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () => {
+                    _update(),
+                  }),
         ],
       ),
       body: FutureBuilder(
@@ -48,9 +54,13 @@ class _HomepageState extends State<Homepage> {
                     child:
                         CircularProgressIndicator(color: Constants.mainOrange));
               case ConnectionState.done:
-                return Center(child: Column(
-                  children: RenderUtils.renderCards(data.data, context),
-                ));
+                return Center(
+                    child: Column(
+                  children: RenderUtils.renderCards(
+                      data.data,
+                      context,
+                      _update,
+                )));
               default:
                 return null;
             }

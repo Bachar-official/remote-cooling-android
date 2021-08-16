@@ -21,20 +21,28 @@ class RenderUtils {
     }
   }
 
-  static List<SizedBox> renderCards(List<Conditioner> conditioners, BuildContext context) {
+  static List<SizedBox> renderCards(
+    List<Conditioner> conditioners,
+    BuildContext context,
+    Function callback
+    ) {
     List<SizedBox> result = [];
     for (Conditioner conditioner in conditioners) {
-      result.add(generateCard(conditioner, context));
+      result.add(generateCard(conditioner, context, callback));
     }
     return result;
   }
 
-  static SizedBox generateCard(Conditioner conditioner, BuildContext context) {
+  static SizedBox generateCard(
+    Conditioner conditioner,
+    BuildContext context,
+    Function callback
+    ) {
     return SizedBox(
         height: 60,
         child: GestureDetector(
             onTap: () => RouteUtils.goToPage(
-                context, AppRouter.conditionerPage, conditioner),
+                context, AppRouter.conditionerPage, conditioner, callback),
             child: Card(
               color: Constants.mainOrange,
               child: Row(
@@ -53,10 +61,10 @@ class RenderUtils {
   }
 
   static List<SizedBox> renderConditioners(
-      List<Conditioner> conditioners, BuildContext context) {
+      List<Conditioner> conditioners, BuildContext context, Function callback) {
     List<SizedBox> result = [];
     conditioners.forEach((conditioner) {
-      result.add(generateCard(conditioner, context));
+      result.add(generateCard(conditioner, context, callback));
     });
     return result;
   }

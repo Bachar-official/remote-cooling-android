@@ -25,7 +25,7 @@ class NavBar extends StatelessWidget {
                 child: ElevatedButton.icon(
                     onPressed: () => {
                           RouteUtils.goToPage(
-                              context, AppRouter.aboutPage, null),
+                              context, AppRouter.aboutPage, null, null),
                         },
                     icon: Icon(Icons.add_to_home_screen),
                     label: Text('О программе')),
