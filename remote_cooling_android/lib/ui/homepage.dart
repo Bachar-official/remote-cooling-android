@@ -1,15 +1,9 @@
-import 'dart:convert';
-
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
-import 'package:remote_cooling_android/app/routing.dart';
 import 'package:remote_cooling_android/constants.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/ui/navbar.dart';
 import 'package:remote_cooling_android/utils/inetUtils.dart';
 import 'package:remote_cooling_android/utils/renderUtils.dart';
-import 'package:remote_cooling_android/utils/routeUtils.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -61,8 +55,9 @@ class _HomepageState extends State<Homepage> {
                       context,
                       _update,
                 )));
+                case ConnectionState.none: return Center(child: Text('Something went wrong!'));
               default:
-                return null;
+                return Center(child: Text('Something went wrong!'));
             }
           }),
     );

@@ -1,7 +1,5 @@
-import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/app/routing.dart';
-import 'package:remote_cooling_android/utils/renderUtils.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 
 class NavBar extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:wifi/wifi.dart';
@@ -11,7 +11,19 @@ import 'package:http/http.dart' as http;
 class InetUtils {
   static Future<List<String>> searchDevices() async {
     List<String> result = [];
-    final String ip = await Wifi.ip;
+    String ip = '';
+    if (Platform.isWindows) {
+      List<NetworkInterface> list =  await NetworkInterface.list();
+      for (NetworkInterface interface in list) {
+        for(InternetAddress address in interface.addresses) {
+          if (address.address.contains('192.168')) {
+            ip = address.address;
+          }
+        }
+      }
+    } else if (Platform.isAndroid) {      
+      ip = await Wifi.ip;
+    }
     final String subnet = ip.substring(0, ip.lastIndexOf('.'));
     final int port = 1337;
 

@@ -4,8 +4,7 @@ import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 import 'package:remote_cooling_android/utils/time_ago.dart';
-
-import '../constants.dart';
+import 'package:remote_cooling_android/constants.dart';
 
 class RenderUtils {
   static Icon getIconStatus(ConditionerStatus status) {
@@ -22,22 +21,21 @@ class RenderUtils {
   }
 
   static List<SizedBox> renderCards(
-    List<Conditioner> conditioners,
-    BuildContext context,
-    Function callback
-    ) {
+      List<Conditioner> conditioners, BuildContext context, Function callback) {
     List<SizedBox> result = [];
-    for (Conditioner conditioner in conditioners) {
-      result.add(generateCard(conditioner, context, callback));
+    if (conditioners == null) {
+      return result;
+    } else {
+      for (Conditioner conditioner in conditioners) {
+        result.add(generateCard(conditioner, context, callback));
+      }
     }
+
     return result;
   }
 
   static SizedBox generateCard(
-    Conditioner conditioner,
-    BuildContext context,
-    Function callback
-    ) {
+      Conditioner conditioner, BuildContext context, Function callback) {
     return SizedBox(
         height: 60,
         child: GestureDetector(
@@ -47,12 +45,13 @@ class RenderUtils {
               color: Constants.mainOrange,
               child: Row(
                 children: [
-                  conditioner.name == null ?
-                  Text(''):
-                  Text(
-                    conditioner.name,
-                    style: TextStyle(fontSize: 20, color: Constants.mainBlack),
-                  ),
+                  conditioner.name == null
+                      ? Text('')
+                      : Text(
+                          conditioner.name,
+                          style: TextStyle(
+                              fontSize: 20, color: Constants.mainBlack),
+                        ),
                   Spacer(),
                   getIconStatus(conditioner.status),
                 ],
@@ -77,32 +76,40 @@ class RenderUtils {
   }
 
   static String getStringStatus(ConditionerStatus status) {
-    switch(status) {
-      case ConditionerStatus.off: return 'выключен';
-      case ConditionerStatus.undefined: return 'нет связи';
-      case ConditionerStatus.on: return 'включён';
+    switch (status) {
+      case ConditionerStatus.off:
+        return 'выключен';
+      case ConditionerStatus.undefined:
+        return 'нет связи';
+      case ConditionerStatus.on:
+        return 'включён';
+      default:
+        return 'нет связи';
     }
   }
 
   static Row getStatus(Conditioner conditioner) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text('Статус: '),
-      Text(getStringStatus(conditioner.status)),
-    ],);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Статус: '),
+        Text(getStringStatus(conditioner.status)),
+      ],
+    );
   }
 
   static Row getEndpoint(Conditioner conditioner) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text('API: '),
-      Text(conditioner.endpoint),
-    ],);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('API: '),
+        Text(conditioner.endpoint),
+      ],
+    );
   }
 
-  static AlertDialog renderAlert(
-    String title, double width, double height, List<Widget> content, List<Widget> actions
-    ) {
+  static AlertDialog renderAlert(String title, double width, double height,
+      List<Widget> content, List<Widget> actions) {
     return AlertDialog(
       title: Text(title),
       content: Container(
@@ -117,10 +124,13 @@ class RenderUtils {
   }
 
   static bool isConditionerOn(Conditioner conditioner) {
-    switch(conditioner.status) {
-      case ConditionerStatus.off: return false;
-      case ConditionerStatus.on: return true;
-      default: return false;
+    switch (conditioner.status) {
+      case ConditionerStatus.off:
+        return false;
+      case ConditionerStatus.on:
+        return true;
+      default:
+        return false;
     }
   }
 }
