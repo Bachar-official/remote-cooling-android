@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:wifi/wifi.dart';
@@ -16,7 +15,7 @@ class InetUtils {
       List<NetworkInterface> list =  await NetworkInterface.list();
       for (NetworkInterface interface in list) {
         for(InternetAddress address in interface.addresses) {
-          if (address.address.contains('192.168')) {
+          if (address.address.contains('192.168') || address.address.contains('192.167')) {
             ip = address.address;
           }
         }
@@ -37,8 +36,23 @@ class InetUtils {
     return result;
   }
 
+  static Map<String, String> getQueryParameters(ConditionerCommand command) {
+    if (command == ConditionerCommand.off || command == ConditionerCommand.ping) {
+      return null;
+    }
+    List<String> stringCommand = command.toString().split('.');
+    List<String> profileNumber = stringCommand[1].split('_');
+    return {
+      'profile': profileNumber[1],
+    };
+  }
+
   static String getCommand(ConditionerCommand command) {
-    return command.toString().split('.')[1];
+    String commandPrefix = command.toString().split('.')[1];
+    if (commandPrefix.contains('set')) {
+      return 'set';
+    }
+    return commandPrefix;
   }
 
   static Future<List<Conditioner>> getConditioners() async {
@@ -46,12 +60,14 @@ class InetUtils {
     List<String> addresses = await searchDevices();
     for (String address in addresses) {
       var response = await sendCommand(address, ConditionerCommand.ping);
-      result.add(Conditioner.fromJson(json.decode(response.body)));
+      if (response.statusCode == 200) {
+        result.add(Conditioner.fromJson(json.decode(response.body)));
+      }      
     }
     return result;
   }
 
   static Future<http.Response> sendCommand(String url, ConditionerCommand command) async {
-    return await http.get(Uri.http(url, getCommand(command)));
+    return await http.get(Uri.http(url, getCommand(command), getQueryParameters(command)));
   }
 }

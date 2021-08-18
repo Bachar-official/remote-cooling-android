@@ -23,39 +23,61 @@ class _ConditionerState extends State<ConditionerPage> {
       appBar: AppBar(
         title: Text(conditioner.name),
         actions: [
-          isLoading ?
-          Icon(Icons.watch_later_outlined, color: Constants.mainOrange):
-          Switch(
-              value: on,
-              onChanged: (value) {
-                setState(() {
-                  isLoading = true;
-                });
-                InetUtils.sendCommand(conditioner.endpoint,
-                        on ? ConditionerCommand.off : ConditionerCommand.on)
-                    .then((response) => {
-                          if (response.statusCode == 200)
-                            {
-                              setState(() {
-                                conditioner.setStatus(
-                                    json.decode(response.body)['status']);
-                                isLoading = false;
-                              })
-                            }
-                        });
-                RouteUtils.showNotification(
-                    context,
-                    'Статус кондиционера "${conditioner.name}" изменен!"',
-                    Colors.green);
-              }),
+          isLoading
+              ? Icon(Icons.watch_later_outlined, color: Constants.mainOrange)
+              : Switch(
+                  value: on,
+                  onChanged: (value) {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    InetUtils.sendCommand(
+                            conditioner.endpoint,
+                            on
+                                ? ConditionerCommand.off
+                                : ConditionerCommand.set_100)
+                        .then((response) => {
+                              if (response.statusCode == 200)
+                                {
+                                  setState(() {
+                                    conditioner.setStatus(
+                                        json.decode(response.body)['status']);
+                                    isLoading = false;
+                                  })
+                                }
+                            });
+                    RouteUtils.showNotification(
+                        context,
+                        'Статус кондиционера "${conditioner.name}" изменен!"',
+                        Colors.green);
+                  }),
         ],
       ),
       body: Builder(
         builder: (ctx) => Column(
           children: isLoading
-              ? [Center(child: CircularProgressIndicator(color: Constants.mainOrange))]
+              ? [
+                  Center(
+                      child: CircularProgressIndicator(
+                          color: Constants.mainOrange))
+                ]
               : [
                   RenderUtils.getStatus(conditioner),
+                  Divider(
+                    height: 20,
+                    thickness: 5,
+                    indent: 20,
+                    endIndent: 20,
+                  ),
+                  RenderUtils.renderModeChoose(
+                      conditioner, (value) => print(value)),
+                  Divider(
+                    height: 20,
+                    thickness: 5,
+                    indent: 20,
+                    endIndent: 20,
+                  ),
+                  Spacer(),
                   RenderUtils.getEndpoint(conditioner),
                   RenderUtils.getUpdated(conditioner),
                 ],
