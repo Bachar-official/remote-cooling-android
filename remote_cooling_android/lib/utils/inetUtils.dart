@@ -47,6 +47,16 @@ class InetUtils {
     };
   }
 
+  static ConditionerCommand statusToCommand(ConditionerStatus status) {
+    switch(status) {
+      case ConditionerStatus.auto: return ConditionerCommand.set_100;
+      case ConditionerStatus.fan: return ConditionerCommand.set_101;
+      case ConditionerStatus.cold17: return ConditionerCommand.set_200;
+      case ConditionerStatus.cold22: return ConditionerCommand.set_201;
+      default: return ConditionerCommand.off;
+    }
+  }
+
   static String getCommand(ConditionerCommand command) {
     String commandPrefix = command.toString().split('.')[1];
     if (commandPrefix.contains('set')) {

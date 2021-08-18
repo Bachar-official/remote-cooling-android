@@ -15,9 +15,27 @@ class ConditionerPage extends StatefulWidget {
 class _ConditionerState extends State<ConditionerPage> {
   bool isLoading = false;
   bool on;
+
   @override
   Widget build(BuildContext context) {
     Conditioner conditioner = ModalRoute.of(context).settings.arguments;
+
+    void _setMode(ConditionerStatus status) {
+    ConditionerCommand command = InetUtils.statusToCommand(status);
+    setState(() {
+      isLoading = true;
+    });
+    InetUtils.sendCommand(conditioner.endpoint, command).then((response) => {
+          if (response.statusCode == 200)
+            {
+              setState(() {
+                conditioner.setStatus(json.decode(response.body)['status']);
+                isLoading = false;
+              })
+            }
+        });
+  }
+
     on = RenderUtils.isConditionerOn(conditioner);
     return Scaffold(
       appBar: AppBar(
@@ -70,7 +88,7 @@ class _ConditionerState extends State<ConditionerPage> {
                     endIndent: 20,
                   ),
                   RenderUtils.renderModeChoose(
-                      conditioner, (value) => print(value)),
+                      conditioner, _setMode),
                   Divider(
                     height: 20,
                     thickness: 5,
