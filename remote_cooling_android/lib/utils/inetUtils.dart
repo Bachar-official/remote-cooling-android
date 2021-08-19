@@ -49,11 +49,15 @@ class InetUtils {
   }
 
   static Future<List<Conditioner>> sendBroadcast() async {
+    String broadcastIP = "255.255.255.255";
+    String pingMessage = 'ping';
+    int broadcastPort = 1337;
+    int delayInSeconds = 3;
     List<Conditioner> result = [];
-    InternetAddress destination = InternetAddress("255.255.255.255");
+    InternetAddress destination = InternetAddress(broadcastIP);
     RawDatagramSocket udp =
-        await RawDatagramSocket.bind(InternetAddress.anyIPv4, 1337);
-    List<int> message = utf8.encode('test');
+        await RawDatagramSocket.bind(InternetAddress.anyIPv4, broadcastPort);
+    List<int> message = utf8.encode(pingMessage);
     udp.broadcastEnabled = true;
     udp.listen((e) {
       Datagram dg = udp.receive();
@@ -62,8 +66,8 @@ class InetUtils {
         result.add(Conditioner.fromJson(jsonDecode(json)));
       }
     });
-    udp.send(message, destination, 1337);
-    await Future.delayed(Duration(seconds: 3));
+    udp.send(message, destination, broadcastPort);
+    await Future.delayed(Duration(seconds: delayInSeconds));
     udp.close();
     return result;
   }
