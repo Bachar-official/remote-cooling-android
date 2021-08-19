@@ -3,41 +3,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
-import 'package:wifi/wifi.dart';
-import 'package:ping_discover_network/ping_discover_network.dart';
 import 'package:http/http.dart' as http;
 
 class InetUtils {
-  static Future<List<String>> searchDevices() async {
-    List<String> result = [];
-    String ip = '';
-    if (Platform.isWindows) {
-      List<NetworkInterface> list =  await NetworkInterface.list();
-      for (NetworkInterface interface in list) {
-        for(InternetAddress address in interface.addresses) {
-          if (address.address.contains('192.168') || address.address.contains('192.167')) {
-            ip = address.address;
-          }
-        }
-      }
-    } else if (Platform.isAndroid) {      
-      ip = await Wifi.ip;
-    }
-    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
-    final int port = 1337;
-
-    final stream = NetworkAnalyzer.discover2(subnet, port);
-    List<NetworkAddress> adresses = await stream.toList();
-    adresses.forEach((address) {
-      if (address.exists) {
-        result.add('${address.ip}:$port');
-      }
-    });
-    return result;
-  }
 
   static Map<String, String> getQueryParameters(ConditionerCommand command) {
-    if (command == ConditionerCommand.off || command == ConditionerCommand.ping) {
+    if (command == ConditionerCommand.off ||
+        command == ConditionerCommand.ping) {
       return null;
     }
     List<String> stringCommand = command.toString().split('.');
@@ -48,12 +20,17 @@ class InetUtils {
   }
 
   static ConditionerCommand statusToCommand(ConditionerStatus status) {
-    switch(status) {
-      case ConditionerStatus.auto: return ConditionerCommand.set_100;
-      case ConditionerStatus.fan: return ConditionerCommand.set_101;
-      case ConditionerStatus.cold17: return ConditionerCommand.set_200;
-      case ConditionerStatus.cold22: return ConditionerCommand.set_201;
-      default: return ConditionerCommand.off;
+    switch (status) {
+      case ConditionerStatus.auto:
+        return ConditionerCommand.set_100;
+      case ConditionerStatus.fan:
+        return ConditionerCommand.set_101;
+      case ConditionerStatus.cold17:
+        return ConditionerCommand.set_200;
+      case ConditionerStatus.cold22:
+        return ConditionerCommand.set_201;
+      default:
+        return ConditionerCommand.off;
     }
   }
 
@@ -65,19 +42,29 @@ class InetUtils {
     return commandPrefix;
   }
 
-  static Future<List<Conditioner>> getConditioners() async {
-    List<Conditioner> result = [];
-    List<String> addresses = await searchDevices();
-    for (String address in addresses) {
-      var response = await sendCommand(address, ConditionerCommand.ping);
-      if (response.statusCode == 200) {
-        result.add(Conditioner.fromJson(json.decode(response.body)));
-      }      
-    }
-    return result;
+  static Future<http.Response> sendCommand(
+      String url, ConditionerCommand command) async {
+    return await http
+        .get(Uri.http(url, getCommand(command), getQueryParameters(command)));
   }
 
-  static Future<http.Response> sendCommand(String url, ConditionerCommand command) async {
-    return await http.get(Uri.http(url, getCommand(command), getQueryParameters(command)));
+  static Future<List<Conditioner>> sendBroadcast() async {
+    List<Conditioner> result = [];
+    InternetAddress destination = InternetAddress("255.255.255.255");
+    RawDatagramSocket udp =
+        await RawDatagramSocket.bind(InternetAddress.anyIPv4, 1337);
+    List<int> message = utf8.encode('test');
+    udp.broadcastEnabled = true;
+    udp.listen((e) {
+      Datagram dg = udp.receive();
+      if (dg != null && dg.data.length != message.length) {
+        var json = utf8.decode(dg.data);
+        result.add(Conditioner.fromJson(jsonDecode(json)));
+      }
+    });
+    udp.send(message, destination, 1337);
+    await Future.delayed(Duration(seconds: 3));
+    udp.close();
+    return result;
   }
 }

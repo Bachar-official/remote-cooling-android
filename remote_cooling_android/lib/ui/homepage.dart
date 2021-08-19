@@ -16,12 +16,12 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    conditioners = InetUtils.getConditioners();
+    conditioners = InetUtils.sendBroadcast();
   }
 
   void _update() {
     setState(() => {
-          conditioners = conditioners = InetUtils.getConditioners(),
+          conditioners = InetUtils.sendBroadcast(),
         });
   }
 
@@ -34,8 +34,8 @@ class _HomepageState extends State<Homepage> {
         actions: [
           IconButton(
               icon: Icon(Icons.refresh),
-              onPressed: () => {
-                    _update(),
+              onPressed: () {
+                    _update();
                   }),
         ],
       ),
@@ -60,6 +60,7 @@ class _HomepageState extends State<Homepage> {
                 return Center(child: Text('Something went wrong!'));
             }
           }),
+          
     );
   }
 }

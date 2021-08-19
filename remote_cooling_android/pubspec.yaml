@@ -34,7 +34,6 @@ dependencies:
   barcode_scan: ^3.0.1
   http: ^0.13.3
   ping_discover_network: ^0.2.0+1
-  wifi: ^0.1.5
 
 dev_dependencies:
   flutter_test:

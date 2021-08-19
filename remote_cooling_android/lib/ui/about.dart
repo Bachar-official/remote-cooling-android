@@ -10,7 +10,7 @@ class AboutPage extends StatelessWidget{
       body: Center(
         child: Column(
           children: [
-            Text('Cinimex Cooling v.1.0'),
+            Text('Cinimex Cooling v.1.1'),
             Text('Разработчик: Иван Бачарников'),
             Text('(ibacharnikov@cinimex.ru)'),
             Text('github: https://github.com/Bachar_official')
