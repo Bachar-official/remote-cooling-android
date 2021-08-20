@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:http/http.dart' as http;
+import 'package:hive_flutter/hive_flutter.dart';
 
 class InetUtils {
 
@@ -49,10 +50,11 @@ class InetUtils {
   }
 
   static Future<List<Conditioner>> sendBroadcast() async {
+    Box settingsBox = Hive.box('settings');
     String broadcastIP = "255.255.255.255";
-    String pingMessage = 'ping';
-    int broadcastPort = 1337;
-    int delayInSeconds = 3;
+    int broadcastPort = settingsBox.get('port', defaultValue: 1337);
+    int delayInSeconds = settingsBox.get('duration', defaultValue: 2);
+    String pingMessage = settingsBox.get('command', defaultValue: 'ping');
     List<Conditioner> result = [];
     InternetAddress destination = InternetAddress(broadcastIP);
     RawDatagramSocket udp =

@@ -37,21 +37,21 @@ class _SettingsState extends State<SettingsPage> {
                 children: [
                   TextFormField(
                       initialValue: port.toString(),
-                      decoration: InputDecoration(hintText: 'Порт'),
+                      decoration: InputDecoration(labelText: 'Порт'),
                       validator: ValidationUtils.validatePort,
                       onChanged: (newPort) => {
                             port = int.parse(newPort),
                           }),
                   TextFormField(
                       initialValue: pingCommand,
-                      decoration:
-                          InputDecoration(hintText: 'Команда для сканирования'),
+                      decoration: InputDecoration(
+                          labelText: 'Команда для сканирования'),
                       validator: ValidationUtils.validateNull,
                       onChanged: (newCommand) => {pingCommand = newCommand}),
                   TextFormField(
                       initialValue: duration.toString(),
                       decoration: InputDecoration(
-                          hintText: 'Длительность ожидания (сек.)'),
+                          labelText: 'Длительность ожидания (сек.)'),
                       validator: ValidationUtils.validateDuration,
                       onChanged: (newDuration) =>
                           {duration = int.parse(newDuration)}),
