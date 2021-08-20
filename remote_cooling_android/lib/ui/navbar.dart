@@ -14,16 +14,19 @@ class NavBar extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: ElevatedButton.icon(
-                    onPressed: () => {},
+                    onPressed: () {
+                      RouteUtils.goToPage(
+                        context, AppRouter.settingsPage, null, null);
+                    },
                     icon: Icon(Icons.settings),
                     label: Text('Настройки')),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: ElevatedButton.icon(
-                    onPressed: () => {
+                    onPressed: () {
                           RouteUtils.goToPage(
-                              context, AppRouter.aboutPage, null, null),
+                              context, AppRouter.aboutPage, null, null);
                         },
                     icon: Icon(Icons.add_to_home_screen),
                     label: Text('О программе')),

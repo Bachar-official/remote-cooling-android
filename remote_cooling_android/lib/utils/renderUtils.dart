@@ -5,6 +5,7 @@ import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 import 'package:remote_cooling_android/utils/time_ago.dart';
 import 'package:remote_cooling_android/constants.dart';
+import 'package:remote_cooling_android/utils/validation.dart';
 
 class RenderUtils {
   static Icon getIconStatus(ConditionerStatus status) {
@@ -29,14 +30,16 @@ class RenderUtils {
   static List<SizedBox> renderCards(
       List<Conditioner> conditioners, BuildContext context, Function callback) {
     List<SizedBox> result = [];
-    if (conditioners == null) {
-      return result;
+    if (conditioners == null || conditioners.length == 0) {
+      result.add(SizedBox(
+        child: Center(child: Text('Устройств в вашей подсети не найдено.\n'+
+        'Попробуйте повторить поиск или проверьте настройки сети.'))
+      ));
     } else {
       for (Conditioner conditioner in conditioners) {
         result.add(generateCard(conditioner, context, callback));
       }
     }
-
     return result;
   }
 
@@ -185,6 +188,37 @@ class RenderUtils {
       default:
         return false;
     }
+  }
+
+  static List<Widget> renderForm(List<dynamic> values) {
+    List<Widget> result = [];
+
+    result.add(TextFormField(
+      initialValue: values[0].toString(),
+      decoration: InputDecoration(hintText: 'Порт'),
+      validator: ValidationUtils.validatePort,
+      onChanged: (newIp) => {
+        values[0] = newIp
+      }
+    ));
+    result.add(TextFormField(
+      initialValue: values[1],
+      decoration: InputDecoration(hintText: 'Команда для сканирования'),
+      validator: ValidationUtils.validateNull,
+      onChanged: (newCommand) => {
+        values[1] = newCommand
+      }
+    ));
+    result.add(TextFormField(
+      initialValue: values[2].toString(),
+      decoration: InputDecoration(hintText: 'Длительность ожидания (сек.)'),
+      validator: ValidationUtils.validateDuration,
+      onChanged: (newDuration) => {
+        values[2] = newDuration
+      }
+    ));
+    
+    return result;
   }
 
   static Column renderModeChoose(Conditioner conditioner, Function onChange) {
