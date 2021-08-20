@@ -190,37 +190,6 @@ class RenderUtils {
     }
   }
 
-  static List<Widget> renderForm(List<dynamic> values) {
-    List<Widget> result = [];
-
-    result.add(TextFormField(
-      initialValue: values[0].toString(),
-      decoration: InputDecoration(hintText: 'Порт'),
-      validator: ValidationUtils.validatePort,
-      onChanged: (newIp) => {
-        values[0] = newIp
-      }
-    ));
-    result.add(TextFormField(
-      initialValue: values[1],
-      decoration: InputDecoration(hintText: 'Команда для сканирования'),
-      validator: ValidationUtils.validateNull,
-      onChanged: (newCommand) => {
-        values[1] = newCommand
-      }
-    ));
-    result.add(TextFormField(
-      initialValue: values[2].toString(),
-      decoration: InputDecoration(hintText: 'Длительность ожидания (сек.)'),
-      validator: ValidationUtils.validateDuration,
-      onChanged: (newDuration) => {
-        values[2] = newDuration
-      }
-    ));
-    
-    return result;
-  }
-
   static Column renderModeChoose(Conditioner conditioner, Function onChange) {
     return Column(
       children: [
