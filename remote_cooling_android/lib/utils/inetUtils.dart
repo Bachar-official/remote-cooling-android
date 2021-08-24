@@ -45,8 +45,14 @@ class InetUtils {
 
   static Future<http.Response> sendCommand(
       String url, ConditionerCommand command) async {
-    return await http
+      http.Response response;
+      try {
+        response = await http
         .get(Uri.http(url, getCommand(command), getQueryParameters(command)));
+      } catch (e) {
+        print(e);
+      }
+      return response;
   }
 
   static Future<List<Conditioner>> sendBroadcast() async {
