@@ -5,7 +5,6 @@ import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 import 'package:remote_cooling_android/utils/time_ago.dart';
 import 'package:remote_cooling_android/constants.dart';
-import 'package:remote_cooling_android/utils/validation.dart';
 
 class RenderUtils {
   static Icon getIconStatus(ConditionerStatus status) {

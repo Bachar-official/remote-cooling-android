@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:remote_cooling_android/constants.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
