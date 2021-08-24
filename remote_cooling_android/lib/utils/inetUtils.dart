@@ -16,6 +16,7 @@ class InetUtils {
     List<String> profileNumber = stringCommand[1].split('_');
     return {
       'profile': profileNumber[1],
+      'date': DateTime.now().toString(),
     };
   }
 

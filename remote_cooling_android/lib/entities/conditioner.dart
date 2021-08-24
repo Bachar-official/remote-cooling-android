@@ -39,7 +39,7 @@ class Conditioner {
       : name = json['name'],
         endpoint = json['ipAddress'],
         status = getConditionerStatus(json['status']),
-        updatedAt = DateTime.now();
+        updatedAt = DateTime.parse(json['date']);
 
   Map<String, dynamic> toJson() => {
         '\"name\"': '"$name"',

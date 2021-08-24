@@ -20,8 +20,8 @@ class _HomepageState extends State<Homepage> {
   }
 
   void _update() {
-    setState(() => {
-          conditioners = InetUtils.sendBroadcast(),
+    setState(() {
+          conditioners = InetUtils.sendBroadcast();
         });
   }
 
