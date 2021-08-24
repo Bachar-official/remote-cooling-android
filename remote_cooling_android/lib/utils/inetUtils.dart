@@ -10,7 +10,9 @@ class InetUtils {
   static Map<String, String> getQueryParameters(ConditionerCommand command) {
     if (command == ConditionerCommand.off ||
         command == ConditionerCommand.ping) {
-      return null;
+      return {
+        'date': DateTime.now().toString() 
+      };
     }
     List<String> stringCommand = command.toString().split('.');
     List<String> profileNumber = stringCommand[1].split('_');
