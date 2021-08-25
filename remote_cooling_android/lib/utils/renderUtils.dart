@@ -115,7 +115,7 @@ class RenderUtils {
   static String getTemperature(ConditionerStatus status) {
     switch (status) {
       case ConditionerStatus.auto:
-        return 'Авто';
+        return '--';
       case ConditionerStatus.cold17:
         return '17°С';
       case ConditionerStatus.cold22:
@@ -132,7 +132,7 @@ class RenderUtils {
   static String getMode(ConditionerStatus status) {
     switch (status) {
       case ConditionerStatus.auto:
-        return '';
+        return 'автоматически';
       case ConditionerStatus.cold17:
       case ConditionerStatus.cold22:
         return 'охлаждение';
