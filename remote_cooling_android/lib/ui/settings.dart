@@ -54,7 +54,12 @@ class _SettingsState extends State<SettingsPage> {
                           labelText: 'Длительность ожидания (сек.)'),
                       validator: ValidationUtils.validateDuration,
                       onChanged: (newDuration) =>
-                          {duration = int.parse(newDuration)}),
+                          {
+                            if (newDuration == '') {
+                              duration = 0,
+                            } else
+                            duration = int.parse(newDuration)
+                            }),
                   ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
