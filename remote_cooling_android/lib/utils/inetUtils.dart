@@ -10,9 +10,7 @@ class InetUtils {
   static Map<String, String> getQueryParameters(ConditionerCommand command) {
     if (command == ConditionerCommand.off ||
         command == ConditionerCommand.ping) {
-      return {
-        'date': DateTime.now().toString() 
-      };
+      return {'date': DateTime.now().toString()};
     }
     List<String> stringCommand = command.toString().split('.');
     List<String> profileNumber = stringCommand[1].split('_');
@@ -47,14 +45,8 @@ class InetUtils {
 
   static Future<http.Response> sendCommand(
       String url, ConditionerCommand command) async {
-    http.Response response;
-    try {
-      response = await http
-          .get(Uri.http(url, getCommand(command), getQueryParameters(command)));
-    } catch (e) {
-      print(e);
-    }
-    return response;
+    return http
+        .get(Uri.http(url, getCommand(command), getQueryParameters(command)));
   }
 
   static Future<List<Conditioner>> sendBroadcast() async {
@@ -68,22 +60,17 @@ class InetUtils {
     RawDatagramSocket udp =
         await RawDatagramSocket.bind(InternetAddress.anyIPv4, broadcastPort);
     List<int> message = utf8.encode(pingMessage);
-
-    try {
-      udp.broadcastEnabled = true;
-      udp.listen((e) {
-        Datagram dg = udp.receive();
-        if (dg != null && dg.data.length != message.length) {
-          var json = utf8.decode(dg.data);
-          result.add(Conditioner.fromJson(jsonDecode(json)));
-        }
-      });
-      udp.send(message, destination, broadcastPort);
-      await Future.delayed(Duration(seconds: delayInSeconds));
-      udp.close();
-    } catch (e) {
-      print(e);
-    }    
+    udp.broadcastEnabled = true;
+    udp.listen((e) {
+      Datagram dg = udp.receive();
+      if (dg != null && dg.data.length != message.length) {
+        var json = utf8.decode(dg.data);
+        result.add(Conditioner.fromJson(jsonDecode(json)));
+      }
+    });
+    udp.send(message, destination, broadcastPort);
+    await Future.delayed(Duration(seconds: delayInSeconds));
+    udp.close();
     return result;
   }
 }

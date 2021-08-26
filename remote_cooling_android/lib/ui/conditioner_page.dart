@@ -27,6 +27,7 @@ class _ConditionerState extends State<ConditionerPage> {
       });
       InetUtils.sendCommand(conditioner.endpoint, command).then((response) => {
             if (response == null) {
+              isLoading = false,
               RouteUtils.showNotification(context, 'Проверьте подключение к сети!', Colors.red)
             }
             else if (response.statusCode == 200)

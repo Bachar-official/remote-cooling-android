@@ -16,13 +16,21 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    conditioners = InetUtils.sendBroadcast();
+    try {
+      conditioners = InetUtils.sendBroadcast();
+    } catch (e) {
+      print(e);
+    }
   }
 
   void _update() {
     setState(() {
-          conditioners = InetUtils.sendBroadcast();
-        });
+      try {
+        conditioners = InetUtils.sendBroadcast();
+      } catch (e) {
+        print(e);
+      }
+    });
   }
 
   @override
@@ -35,8 +43,8 @@ class _HomepageState extends State<Homepage> {
           IconButton(
               icon: Icon(Icons.refresh),
               onPressed: () {
-                    _update();
-                  }),
+                _update();
+              }),
         ],
       ),
       body: FutureBuilder(
@@ -50,17 +58,17 @@ class _HomepageState extends State<Homepage> {
               case ConnectionState.done:
                 return Center(
                     child: Column(
-                  children: RenderUtils.renderCards(
-                      data.data,
-                      context,
-                      _update,
+                        children: RenderUtils.renderCards(
+                  data.data,
+                  context,
+                  _update,
                 )));
-                case ConnectionState.none: return Center(child: Text('Something went wrong!'));
+              case ConnectionState.none:
+                return Center(child: Text('Something went wrong!'));
               default:
                 return Center(child: Text('Something went wrong!'));
             }
           }),
-          
     );
   }
 }
