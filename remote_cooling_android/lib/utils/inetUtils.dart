@@ -57,9 +57,9 @@ class InetUtils {
     String pingMessage = settingsBox.get('command', defaultValue: 'ping');
     List<Conditioner> result = [];
     InternetAddress destination = InternetAddress(broadcastIP);
+    List<int> message = utf8.encode(pingMessage);
     RawDatagramSocket udp =
         await RawDatagramSocket.bind(InternetAddress.anyIPv4, broadcastPort);
-    List<int> message = utf8.encode(pingMessage);
     udp.broadcastEnabled = true;
     udp.listen((e) {
       Datagram dg = udp.receive();
@@ -69,6 +69,7 @@ class InetUtils {
       }
     });
     udp.send(message, destination, broadcastPort);
+
     await Future.delayed(Duration(seconds: delayInSeconds));
     udp.close();
     return result;

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/constants.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
@@ -20,24 +21,26 @@ class _ConditionerState extends State<ConditionerPage> {
   Widget build(BuildContext context) {
     Conditioner conditioner = ModalRoute.of(context).settings.arguments;
 
-    void _setMode(ConditionerStatus status) {
+    void _setMode(ConditionerStatus status) async {
       ConditionerCommand command = InetUtils.statusToCommand(status);
       setState(() {
         isLoading = true;
       });
-      InetUtils.sendCommand(conditioner.endpoint, command).then((response) => {
-            if (response == null) {
-              isLoading = false,
-              RouteUtils.showNotification(context, 'Проверьте подключение к сети!', Colors.red)
-            }
-            else if (response.statusCode == 200)
+      try {
+        var response = await InetUtils.sendCommand(conditioner.endpoint, command);
+            if (response.statusCode == 200)
               {
                 setState(() {
                   conditioner.setStatus(json.decode(response.body)['status']);
                   isLoading = false;
-                })
+                });
               }
-          });
+      } on SocketException catch (exception) {
+        setState(() {
+          isLoading = false;
+          RouteUtils.showNotification(context, exception.message, Colors.red);
+        });
+      }      
     }
 
     on = RenderUtils.isConditionerOn(conditioner);
