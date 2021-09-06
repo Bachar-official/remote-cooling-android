@@ -8,15 +8,21 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class InetUtils {
   static Map<String, String> getQueryParameters(ConditionerCommand command) {
+    Box settingsBox = Hive.box('settings');
+    String userName = settingsBox.get('user', defaultValue: 'Anonymous');
     if (command == ConditionerCommand.off ||
         command == ConditionerCommand.ping) {
-      return {'date': DateTime.now().toString()};
+      return {
+        'date': DateTime.now().toString(),
+        'user': userName
+        };
     }
     List<String> stringCommand = command.toString().split('.');
     List<String> profileNumber = stringCommand[1].split('_');
     return {
       'profile': profileNumber[1],
       'date': DateTime.now().toString(),
+      'user': userName
     };
   }
 

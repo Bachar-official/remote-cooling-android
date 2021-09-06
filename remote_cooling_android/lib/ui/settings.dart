@@ -13,6 +13,7 @@ class _SettingsState extends State<SettingsPage> {
   int port;
   int duration;
   String pingCommand;
+  String userName;
 
   @override
   void initState() {
@@ -20,6 +21,7 @@ class _SettingsState extends State<SettingsPage> {
     port = settingsBox.get('port', defaultValue: 1337);
     duration = settingsBox.get('duration', defaultValue: 2);
     pingCommand = settingsBox.get('command', defaultValue: 'ping');
+    userName = settingsBox.get('user', defaultValue: 'Anonymous');
   }
 
   @override
@@ -35,6 +37,12 @@ class _SettingsState extends State<SettingsPage> {
               padding: EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  TextFormField(
+                      initialValue: userName,
+                      decoration: InputDecoration(
+                          labelText: 'Имя пользователя'),
+                      validator: ValidationUtils.validateEnglish,
+                      onChanged: (newUser) => {userName = newUser}),
                   TextFormField(
                       initialValue: port.toString(),
                       decoration: InputDecoration(labelText: 'Порт'),
@@ -66,6 +74,7 @@ class _SettingsState extends State<SettingsPage> {
                           settingsBox.put('port', port);
                           settingsBox.put('duration', duration);
                           settingsBox.put('command', pingCommand);
+                          settingsBox.put('user', userName);
                           RouteUtils.showNotification(
                               ctx, 'Успешно!', Colors.green);
                         }

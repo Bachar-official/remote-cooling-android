@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:remote_cooling_android/app/routing.dart';
 import 'package:remote_cooling_android/constants.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
+import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/ui/navbar.dart';
 import 'package:remote_cooling_android/utils/inetUtils.dart';
-import 'package:remote_cooling_android/utils/renderUtils.dart';
+import 'package:remote_cooling_android/utils/routeUtils.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -58,7 +60,7 @@ class _HomepageState extends State<Homepage> {
               case ConnectionState.done:
                 return Center(
                     child: Column(
-                        children: RenderUtils.renderCards(
+                        children: renderCards(
                   data.data,
                   context,
                   _update,
@@ -72,3 +74,70 @@ class _HomepageState extends State<Homepage> {
     );
   }
 }
+
+List<Widget> renderCards(
+      List<Conditioner> conditioners, BuildContext context, Function callback) {
+    List<Widget> result = [];
+    if (conditioners == null || conditioners.length == 0) {
+      result.add(SizedBox(
+        child: Center(child: Text('Устройств в вашей подсети не найдено.\n'+
+        'Попробуйте повторить поиск или проверьте настройки сети.'))
+      ));
+    } else {
+      for (Conditioner conditioner in conditioners) {
+        result.add(_ConditionerCard(conditioner, callback));
+      }
+    }
+    return result;
+  }
+
+class _ConditionerCard extends StatelessWidget {
+  final Conditioner conditioner;
+  final Function callback;
+  _ConditionerCard(this.conditioner, this.callback);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 60,
+      child: GestureDetector(
+        onTap: () => RouteUtils.goToPage(
+                context, AppRouter.conditionerPage, conditioner, callback),
+        child: Card(
+              color: Constants.mainOrange,
+              child: Row(
+                children: [
+                  conditioner.name == null
+                      ? Text('')
+                      : Text(
+                          conditioner.name,
+                          style: TextStyle(
+                              fontSize: 20, color: Constants.mainBlack),
+                        ),
+                  Spacer(),
+                  getIconStatus(conditioner.status),
+                ],
+              ),
+            )
+      ),
+    );
+  }
+}
+
+Icon getIconStatus(ConditionerStatus status) {
+    switch (status) {
+      case ConditionerStatus.undefined:
+        return Icon(Icons.leak_remove, color: Constants.mainBlack);
+      case ConditionerStatus.off:
+        return Icon(Icons.flash_off, color: Constants.mainBlack);
+      case ConditionerStatus.auto:
+        return Icon(Icons.auto_fix_high, color: Constants.mainBlack);
+      case ConditionerStatus.fan:
+        return Icon(Icons.waves, color: Constants.mainBlack);
+      case ConditionerStatus.cold17:
+        return Icon(Icons.ac_unit, color: Constants.mainBlack);
+      case ConditionerStatus.cold22:
+        return Icon(Icons.ac_unit_outlined, color: Constants.mainBlack);
+      default: return Icon(Icons.no_accounts);
+    }
+  }

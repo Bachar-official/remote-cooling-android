@@ -43,4 +43,14 @@ class ValidationUtils {
     }
     return null;
   }
+
+  static String validateEnglish(String value) {
+    if (value == null || value.isEmpty) {
+      return 'Поле не может быть пустым!';
+    }
+    else if (RegExp(r'^[a-zA-Z]+$').hasMatch(value) == false) {
+      return 'Только латинница';
+    }
+    return null;
+  }
 }

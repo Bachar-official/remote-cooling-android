@@ -5,6 +5,7 @@ class Conditioner {
   String endpoint;
   ConditionerStatus status;
   DateTime updatedAt;
+  String userName;
 
   static ConditionerStatus getConditionerStatus(String digitStatus) {
     switch (digitStatus) {
@@ -18,7 +19,7 @@ class Conditioner {
   }
 
   Conditioner(String name, String endpoint, ConditionerStatus status,
-      DateTime updatedAt) {
+      DateTime updatedAt, String userName) {
     this.name = name;
     this.endpoint = endpoint;
     this.status = status;
@@ -30,6 +31,10 @@ class Conditioner {
     this.updatedAt = DateTime.now();
   }
 
+  void setUsername(String userName) {
+    this.userName = userName;
+  }
+
   @override
   String toString() {
     return 'name: $name, endpoint: $endpoint, status:$status';
@@ -39,7 +44,8 @@ class Conditioner {
       : name = json['name'],
         endpoint = json['ipAddress'],
         status = getConditionerStatus(json['status']),
-        updatedAt = DateTime.parse(json['date']);
+        updatedAt = DateTime.parse(json['date']),
+        userName = json['user'];
 
   Map<String, dynamic> toJson() => {
         '\"name\"': '"$name"',
