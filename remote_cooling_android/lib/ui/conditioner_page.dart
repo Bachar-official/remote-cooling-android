@@ -87,22 +87,40 @@ class _ConditionerState extends State<ConditionerPage> {
         ],
       ),
       body: Builder(
-        builder: (ctx) => Column(
-          children: isLoading
-              ? [
-                  Center(
-                      child: CircularProgressIndicator(
-                          color: Constants.mainOrange))
-                ]
-              : [
-                  _getStatus(conditioner),
+        builder: (ctx) => _ConditionerBody(
+          isLoading: isLoading,
+          conditioner: conditioner,
+          setMode: _setMode,
+        )
+      ),
+    );
+  }
+}
+
+class _ConditionerBody extends StatelessWidget {
+  final bool isLoading;
+  final Conditioner conditioner;
+  final Function setMode;
+  _ConditionerBody({this.isLoading, this.conditioner, this.setMode});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        children: isLoading
+            ? [
+                Center(
+                    child:
+                        CircularProgressIndicator(color: Constants.mainOrange))
+              ]
+            : [
+              _getStatus(conditioner),
                   Divider(
                     height: 20,
                     thickness: 5,
                     indent: 20,
                     endIndent: 20,
                   ),
-                  _renderModeChoose(conditioner, _setMode),
+                  _renderModeChoose(conditioner, setMode),
                   Divider(
                     height: 20,
                     thickness: 5,
@@ -110,27 +128,21 @@ class _ConditionerState extends State<ConditionerPage> {
                     endIndent: 20,
                   ),
                   Spacer(),
-                  _ConditionerFooter(conditioner)
-                ],
-        ),
-      ),
-    );
+                  _ConditionerFooter(conditioner: conditioner)
+            ]);
   }
 }
 
 class _ConditionerFooter extends StatelessWidget {
   final Conditioner conditioner;
-  _ConditionerFooter(this.conditioner);
+  _ConditionerFooter({this.conditioner});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        _getEndpoint(conditioner),
-        _getUpdated(conditioner)
-      ],
+      children: [_getEndpoint(conditioner), _getUpdated(conditioner)],
     );
-  } 
+  }
 }
 
 Row _getUpdated(Conditioner conditioner) {
