@@ -2,37 +2,34 @@ import 'dart:convert';
 import 'dart:io';
 
 class Broadcast {
-  List<dynamic> result;
-  RawDatagramSocket socket;
-  int port;
-  InternetAddress address;
+  final String broadcastIp;
+  final String pingMessage;
+  final int delayInSeconds;
+  final int broadcastPort;
 
-  Broadcast(InternetAddress address, int port) {
-    this.result = [];
-    this.address = address;
-    this.port = port;
-  }
+  Broadcast(
+      {this.broadcastIp,
+      this.broadcastPort,
+      this.delayInSeconds,
+      this.pingMessage});
 
-  void _getEvent(RawSocketEvent event) {
-    Datagram dg = socket.receive();
-    if (dg != null) {
-      print(utf8.decode(dg.data));
-      this.result.add(utf8.decode(dg.data));
-    }
-  }
+  Future<List<String>> sendBroadcast() async {
+    List<String> result = [];
+    InternetAddress destination = InternetAddress(broadcastIp);
+    List<int> message = utf8.encode(pingMessage);
+    RawDatagramSocket udp =
+        await RawDatagramSocket.bind(InternetAddress.anyIPv4, broadcastPort);
+    udp.broadcastEnabled = true;
+    udp.listen((event) {
+        Datagram datagram = udp.receive();
+        if (datagram != null && datagram.data.length != message.length) {
+          result.add(utf8.decode(datagram.data));
+        }
+    });
+    udp.send(message, destination, broadcastPort);
 
-  void printList() {
-    print(this.result.length);
-    for(var e in result) {
-      print(e);
-    }
-  }
-
-  Future<void> doBroadcast() async {
-    socket = await RawDatagramSocket.bind(InternetAddress.anyIPv4, port);
-    socket.broadcastEnabled = true;
-    List<int> callsign = utf8.encode('TEST');
-    socket.listen(_getEvent);
-    socket.send(callsign, address, 1337);
+    await Future.delayed(Duration(seconds: delayInSeconds));
+    udp.close();
+    return result;
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+import 'package:remote_cooling_android/entities/broadcast.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:http/http.dart' as http;
@@ -62,22 +62,16 @@ class InetUtils {
     int delayInSeconds = settingsBox.get('duration', defaultValue: 2);
     String pingMessage = settingsBox.get('command', defaultValue: 'ping');
     List<Conditioner> result = [];
-    InternetAddress destination = InternetAddress(broadcastIP);
-    List<int> message = utf8.encode(pingMessage);
-    RawDatagramSocket udp =
-        await RawDatagramSocket.bind(InternetAddress.anyIPv4, broadcastPort);
-    udp.broadcastEnabled = true;
-    udp.listen((e) {
-      Datagram dg = udp.receive();
-      if (dg != null && dg.data.length != message.length) {
-        var json = utf8.decode(dg.data);
-        result.add(Conditioner.fromJson(jsonDecode(json)));
-      }
-    });
-    udp.send(message, destination, broadcastPort);
-
-    await Future.delayed(Duration(seconds: delayInSeconds));
-    udp.close();
+    Broadcast broadcast = Broadcast(
+      broadcastIp: broadcastIP,
+      broadcastPort: broadcastPort,
+      delayInSeconds: delayInSeconds,
+      pingMessage: pingMessage
+    );
+    List<String> strings = await broadcast.sendBroadcast();
+    for (String str in strings) {
+      result.add(Conditioner.fromJson(json.decode(str)));
+    }
     return result;
   }
 }
