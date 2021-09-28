@@ -59,12 +59,10 @@ class _HomepageState extends State<Homepage> {
                         CircularProgressIndicator(color: Constants.mainOrange));
               case ConnectionState.done:
                 return Center(
-                    child: Column(
-                        children: renderCards(
-                  data.data,
-                  context,
-                  _update,
-                )));
+                    child: _ConditionerCards(
+                      conditioners: data.data,
+                      callback: _update,
+                    ));
               case ConnectionState.none:
                 return Center(child: Text('Something went wrong!'));
               default:
@@ -75,21 +73,27 @@ class _HomepageState extends State<Homepage> {
   }
 }
 
-List<Widget> renderCards(
-      List<Conditioner> conditioners, BuildContext context, Function callback) {
-    List<Widget> result = [];
+class _ConditionerCards extends StatelessWidget {
+  final List<Conditioner> conditioners;
+  final Function callback;
+  _ConditionerCards({this.conditioners, @required this.callback});
+
+  @override
+  Widget build(BuildContext context) {
     if (conditioners == null || conditioners.length == 0) {
-      result.add(SizedBox(
-        child: Center(child: Text('Устройств в вашей подсети не найдено.\n'+
-        'Попробуйте повторить поиск или проверьте настройки сети.'))
-      ));
-    } else {
-      for (Conditioner conditioner in conditioners) {
-        result.add(_ConditionerCard(conditioner, callback));
-      }
+      return SizedBox(
+        child: Center(
+            child: Text('Устройств в вашей подсети не найдено.\n' +
+                'Попробуйте повторить поиск или проверьте настройки сети.')));
     }
-    return result;
+    return ListView.builder(
+      itemCount: conditioners.length,
+      itemBuilder: (context, index) {
+        return _ConditionerCard(conditioners[index], callback);
+      },
+    );
   }
+}
 
 class _ConditionerCard extends StatelessWidget {
   final Conditioner conditioner;
@@ -101,43 +105,43 @@ class _ConditionerCard extends StatelessWidget {
     return SizedBox(
       height: 60,
       child: GestureDetector(
-        onTap: () => RouteUtils.goToPage(
-                context, AppRouter.conditionerPage, conditioner, callback),
-        child: Card(
-              color: Constants.mainOrange,
-              child: Row(
-                children: [
-                  conditioner.name == null
-                      ? Text('')
-                      : Text(
-                          conditioner.name,
-                          style: TextStyle(
-                              fontSize: 20, color: Constants.mainBlack),
-                        ),
-                  Spacer(),
-                  getIconStatus(conditioner.status),
-                ],
-              ),
-            )
-      ),
+          onTap: () => RouteUtils.goToPage(
+              context, AppRouter.conditionerPage, conditioner, callback),
+          child: Card(
+            color: Constants.mainOrange,
+            child: Row(
+              children: [
+                conditioner.name == null
+                    ? Text('')
+                    : Text(
+                        conditioner.name,
+                        style:
+                            TextStyle(fontSize: 20, color: Constants.mainBlack),
+                      ),
+                Spacer(),
+                getIconStatus(conditioner.status),
+              ],
+            ),
+          )),
     );
   }
 }
 
 Icon getIconStatus(ConditionerStatus status) {
-    switch (status) {
-      case ConditionerStatus.undefined:
-        return Icon(Icons.leak_remove, color: Constants.mainBlack);
-      case ConditionerStatus.off:
-        return Icon(Icons.flash_off, color: Constants.mainBlack);
-      case ConditionerStatus.auto:
-        return Icon(Icons.auto_fix_high, color: Constants.mainBlack);
-      case ConditionerStatus.fan:
-        return Icon(Icons.waves, color: Constants.mainBlack);
-      case ConditionerStatus.cold17:
-        return Icon(Icons.ac_unit, color: Constants.mainBlack);
-      case ConditionerStatus.cold22:
-        return Icon(Icons.ac_unit_outlined, color: Constants.mainBlack);
-      default: return Icon(Icons.no_accounts);
-    }
+  switch (status) {
+    case ConditionerStatus.undefined:
+      return Icon(Icons.leak_remove, color: Constants.mainBlack);
+    case ConditionerStatus.off:
+      return Icon(Icons.flash_off, color: Constants.mainBlack);
+    case ConditionerStatus.auto:
+      return Icon(Icons.auto_fix_high, color: Constants.mainBlack);
+    case ConditionerStatus.fan:
+      return Icon(Icons.waves, color: Constants.mainBlack);
+    case ConditionerStatus.cold17:
+      return Icon(Icons.ac_unit, color: Constants.mainBlack);
+    case ConditionerStatus.cold22:
+      return Icon(Icons.ac_unit_outlined, color: Constants.mainBlack);
+    default:
+      return Icon(Icons.no_accounts);
   }
+}
