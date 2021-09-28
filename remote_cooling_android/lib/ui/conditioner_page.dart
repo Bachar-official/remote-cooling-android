@@ -127,9 +127,7 @@ class _ConditionerBody extends StatelessWidget {
                   endIndent: 20,
                 ),
                 _ConditionerModeChooser(
-                  conditioner: conditioner,
-                  onChange: setMode
-                ),
+                    conditioner: conditioner, onChange: setMode),
                 Divider(
                   height: 20,
                   thickness: 5,
@@ -172,6 +170,8 @@ String _getStringStatus(ConditionerStatus status) {
       return 'охлаждение, 17°С';
     case ConditionerStatus.cold22:
       return 'охлаждение, 22°С';
+    case ConditionerStatus.hot30:
+      return 'обогрев, 30°С';
     case ConditionerStatus.fan:
       return 'проветривание';
     case ConditionerStatus.auto:
@@ -189,6 +189,8 @@ String _getTemperature(ConditionerStatus status) {
       return '17°С';
     case ConditionerStatus.cold22:
       return '22°С';
+    case ConditionerStatus.hot30:
+      return '30°С';
     case ConditionerStatus.fan:
       return '--';
     case ConditionerStatus.off:
@@ -206,6 +208,8 @@ String _getMode(ConditionerStatus status) {
     case ConditionerStatus.cold17:
     case ConditionerStatus.cold22:
       return 'охлаждение';
+    case ConditionerStatus.hot30:
+      return 'обогрев';
     case ConditionerStatus.fan:
       return 'проветривание';
     case ConditionerStatus.off:
@@ -223,6 +227,7 @@ bool _isConditionerOn(Conditioner conditioner) {
     case ConditionerStatus.auto:
     case ConditionerStatus.cold17:
     case ConditionerStatus.cold22:
+    case ConditionerStatus.hot30:
     case ConditionerStatus.fan:
       return true;
     default:
@@ -233,8 +238,8 @@ bool _isConditionerOn(Conditioner conditioner) {
 class _ConditionerModeChooser extends StatelessWidget {
   final Conditioner conditioner;
   final Function onChange;
-  _ConditionerModeChooser({@required this.conditioner,
-  @required this.onChange});
+  _ConditionerModeChooser(
+      {@required this.conditioner, @required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -262,6 +267,15 @@ class _ConditionerModeChooser extends StatelessWidget {
           title: Text(_getStringStatus(ConditionerStatus.cold22)),
           leading: Radio(
               value: ConditionerStatus.cold22,
+              groupValue: conditioner.status,
+              onChanged: (value) {
+                onChange(value);
+              }),
+        ),
+        ListTile(
+          title: Text(_getStringStatus(ConditionerStatus.hot30)),
+          leading: Radio(
+              value: ConditionerStatus.hot30,
               groupValue: conditioner.status,
               onChanged: (value) {
                 onChange(value);

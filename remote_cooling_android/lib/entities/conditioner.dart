@@ -11,6 +11,7 @@ class Conditioner {
     switch (digitStatus) {
       case '200': return ConditionerStatus.cold17;
       case '201': return ConditionerStatus.cold22;
+      case '202': return ConditionerStatus.hot30;
       case '100': return ConditionerStatus.auto;
       case '101': return ConditionerStatus.fan;
       case '300': return ConditionerStatus.off;

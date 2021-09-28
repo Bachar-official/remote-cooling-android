@@ -36,6 +36,8 @@ class InetUtils {
         return ConditionerCommand.set_200;
       case ConditionerStatus.cold22:
         return ConditionerCommand.set_201;
+      case ConditionerStatus.hot30:
+        return ConditionerCommand.set_202;
       default:
         return ConditionerCommand.off;
     }

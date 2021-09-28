@@ -60,9 +60,9 @@ class _HomepageState extends State<Homepage> {
               case ConnectionState.done:
                 return Center(
                     child: _ConditionerCards(
-                      conditioners: data.data,
-                      callback: _update,
-                    ));
+                  conditioners: data.data,
+                  callback: _update,
+                ));
               case ConnectionState.none:
                 return Center(child: Text('Something went wrong!'));
               default:
@@ -82,9 +82,9 @@ class _ConditionerCards extends StatelessWidget {
   Widget build(BuildContext context) {
     if (conditioners == null || conditioners.length == 0) {
       return SizedBox(
-        child: Center(
-            child: Text('Устройств в вашей подсети не найдено.\n' +
-                'Попробуйте повторить поиск или проверьте настройки сети.')));
+          child: Center(
+              child: Text('Устройств в вашей подсети не найдено.\n' +
+                  'Попробуйте повторить поиск или проверьте настройки сети.')));
     }
     return ListView.builder(
       itemCount: conditioners.length,
@@ -141,6 +141,8 @@ Icon getIconStatus(ConditionerStatus status) {
       return Icon(Icons.ac_unit, color: Constants.mainBlack);
     case ConditionerStatus.cold22:
       return Icon(Icons.ac_unit_outlined, color: Constants.mainBlack);
+    case ConditionerStatus.hot30:
+      return Icon(Icons.local_fire_department, color: Constants.mainBlack);
     default:
       return Icon(Icons.no_accounts);
   }
