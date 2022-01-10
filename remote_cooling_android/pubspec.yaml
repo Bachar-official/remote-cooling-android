@@ -36,6 +36,7 @@ dependencies:
   ping_discover_network: ^0.2.0+1
   hive_flutter: ^1.1.0
   provider: ^6.0.2
+  logging: ^1.0.2
 
 dev_dependencies:
   flutter_test:
