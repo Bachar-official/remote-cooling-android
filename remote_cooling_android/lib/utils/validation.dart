@@ -1,12 +1,12 @@
 class ValidationUtils {
-  static String validateNull(String value) {
+  static String? validateNull(String? value) {
     if (value == null || value.isEmpty) {
       return 'Поле не может быть пустым!';
     }
     return null;
   }
 
-  static String validateIp(String value) {
+  static String? validateIp(String? value) {
     if (value == null || value.isEmpty) {
       return 'Поле не может быть пустым!';
     }
@@ -16,8 +16,11 @@ class ValidationUtils {
     return null;
   }
 
-  static String validatePort(String value) {
-    int port = int.tryParse(value, radix: 10);    
+  static String? validatePort(String? value) {
+    int? port = null;
+    if (value != null) {
+      port = int.tryParse(value, radix: 10);
+    }
     if (value == null) {
       return 'Поле не может быть пустым!';
     }
@@ -30,8 +33,11 @@ class ValidationUtils {
     return null;
   }
 
-  static String validateDuration(String value) {
-    int duration = int.tryParse(value, radix: 10);    
+  static String? validateDuration(String? value) {
+    int? duration = null;
+    if (value != null) {
+      duration = int.tryParse(value, radix: 10);
+    }
     if (value == null) {
       return 'Поле не может быть пустым!';
     }
@@ -44,7 +50,7 @@ class ValidationUtils {
     return null;
   }
 
-  static String validateEnglish(String value) {
+  static String? validateEnglish(String? value) {
     if (value == null || value.isEmpty) {
       return 'Поле не может быть пустым!';
     }

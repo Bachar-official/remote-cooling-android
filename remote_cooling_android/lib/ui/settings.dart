@@ -10,10 +10,10 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsState extends State<SettingsPage> {
   Box settingsBox = Hive.box('settings');
-  int port;
-  int duration;
-  String pingCommand;
-  String userName;
+  late int port;
+  late int duration;
+  late String pingCommand;
+  late String userName;
 
   @override
   void initState() {
@@ -70,7 +70,7 @@ class _SettingsState extends State<SettingsPage> {
                             }),
                   ElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {
+                        if (_formKey.currentState!.validate()) {
                           settingsBox.put('port', port);
                           settingsBox.put('duration', duration);
                           settingsBox.put('command', pingCommand);

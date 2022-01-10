@@ -8,10 +8,10 @@ class Broadcast {
   final int broadcastPort;
 
   Broadcast(
-      {this.broadcastIp,
-      this.broadcastPort,
-      this.delayInSeconds,
-      this.pingMessage});
+      {required this.broadcastIp,
+      required this.broadcastPort,
+      required this.delayInSeconds,
+      required this.pingMessage});
 
   Future<List<String>> sendBroadcast() async {
     List<String> result = [];
@@ -21,10 +21,10 @@ class Broadcast {
         await RawDatagramSocket.bind(InternetAddress.anyIPv4, broadcastPort);
     udp.broadcastEnabled = true;
     udp.listen((event) {
-        Datagram datagram = udp.receive();
-        if (datagram != null && datagram.data.length != message.length) {
-          result.add(utf8.decode(datagram.data));
-        }
+      Datagram? datagram = udp.receive();
+      if (datagram != null && datagram.data.length != message.length) {
+        result.add(utf8.decode(datagram.data));
+      }
     });
     udp.send(message, destination, broadcastPort);
 

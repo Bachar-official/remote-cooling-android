@@ -15,11 +15,12 @@ class ConditionerPage extends StatefulWidget {
 
 class _ConditionerState extends State<ConditionerPage> {
   bool isLoading = false;
-  bool on;
+  late bool on;
 
   @override
   Widget build(BuildContext context) {
-    Conditioner conditioner = ModalRoute.of(context).settings.arguments;
+    Conditioner conditioner =
+        ModalRoute.of(context)!.settings.arguments as Conditioner;
 
     void _setMode(ConditionerStatus status) async {
       ConditionerCommand command = InetUtils.statusToCommand(status);
@@ -100,7 +101,11 @@ class _ConditionerBody extends StatelessWidget {
   final bool isLoading;
   final Conditioner conditioner;
   final Function setMode;
-  _ConditionerBody({this.isLoading, this.conditioner, this.setMode});
+
+  _ConditionerBody(
+      {required this.isLoading,
+      required this.conditioner,
+      required this.setMode});
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +147,8 @@ class _ConditionerBody extends StatelessWidget {
 
 class _ConditionerFooter extends StatelessWidget {
   final Conditioner conditioner;
-  _ConditionerFooter({this.conditioner});
+
+  _ConditionerFooter({required this.conditioner});
 
   @override
   Widget build(BuildContext context) {
@@ -238,8 +244,9 @@ bool _isConditionerOn(Conditioner conditioner) {
 class _ConditionerModeChooser extends StatelessWidget {
   final Conditioner conditioner;
   final Function onChange;
+
   _ConditionerModeChooser(
-      {@required this.conditioner, @required this.onChange});
+      {required this.conditioner, required this.onChange});
 
   @override
   Widget build(BuildContext context) {

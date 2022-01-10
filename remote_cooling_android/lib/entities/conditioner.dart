@@ -1,11 +1,11 @@
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 
 class Conditioner {
-  String name;
-  String endpoint;
-  ConditionerStatus status;
-  DateTime updatedAt;
-  String userName;
+  late String name;
+  late String endpoint;
+  late ConditionerStatus status;
+  late DateTime updatedAt;
+  late String userName;
 
   static ConditionerStatus getConditionerStatus(String digitStatus) {
     switch (digitStatus) {

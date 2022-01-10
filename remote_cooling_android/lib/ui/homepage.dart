@@ -13,7 +13,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  Future<List<Conditioner>> conditioners;
+  late Future<List<Conditioner>> conditioners;
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _HomepageState extends State<Homepage> {
               case ConnectionState.done:
                 return Center(
                     child: _ConditionerCards(
-                  conditioners: data.data,
+                  conditioners: data.data as List<Conditioner>,
                   callback: _update,
                 ));
               case ConnectionState.none:
@@ -76,7 +76,8 @@ class _HomepageState extends State<Homepage> {
 class _ConditionerCards extends StatelessWidget {
   final List<Conditioner> conditioners;
   final Function callback;
-  _ConditionerCards({this.conditioners, @required this.callback});
+
+  _ConditionerCards({required this.conditioners, required this.callback});
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +99,7 @@ class _ConditionerCards extends StatelessWidget {
 class _ConditionerCard extends StatelessWidget {
   final Conditioner conditioner;
   final Function callback;
+
   _ConditionerCard(this.conditioner, this.callback);
 
   @override
