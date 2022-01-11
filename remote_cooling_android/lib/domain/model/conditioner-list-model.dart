@@ -9,6 +9,10 @@ class ConditionerListModel extends ChangeNotifier {
   bool _isLoading = false;
   final log = Logger('Conditioner list');
 
+  ConditionerListModel() {
+    this.getConditioners();
+  }
+
   List<Conditioner> get conditioners => _list;
 
   bool get isLoading => _isLoading;

@@ -11,12 +11,15 @@ class ConditionerModel extends ChangeNotifier {
   final log = Logger('Conditioner');
   bool _isLoading = false;
 
-  ConditionerModel({required this.conditioner});
-
   bool get isOn => _isConditionerOn(conditioner);
   String get stringMode => _getMode(conditioner.status);
   String get temperature => _getTemperature(conditioner.status);
   bool get isLoading => _isLoading;
+
+  @required
+  void setConditioner (Conditioner newConditioner) {
+    conditioner = newConditioner;
+  }
 
   void _setLoading() {
     _isLoading = true;

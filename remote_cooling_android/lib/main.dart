@@ -24,6 +24,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('settings');
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => ConditionerListModel())
+    ChangeNotifierProvider(create: (context) => ConditionerListModel()),
+    ChangeNotifierProvider(create: (context) => ConditionerModel())
   ], child: App()));
 }

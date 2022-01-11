@@ -6,7 +6,6 @@ import 'package:remote_cooling_android/domain/model/conditioner-list-model.dart'
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/ui/navbar.dart';
-import 'package:remote_cooling_android/utils/inetUtils.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 
 class Homepage extends StatefulWidget {
@@ -15,26 +14,10 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  late Future<List<Conditioner>> conditioners;
 
   @override
   void initState() {
     super.initState();
-    try {
-      conditioners = InetUtils.sendBroadcast();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void _update() {
-    setState(() {
-      try {
-        conditioners = InetUtils.sendBroadcast();
-      } catch (e) {
-        print(e);
-      }
-    });
   }
 
   @override
@@ -64,26 +47,6 @@ class _HomepageState extends State<Homepage> {
           ),
         )
       ),
-      // body: FutureBuilder(
-      //     future: conditioners,
-      //     builder: (ctx, data) {
-      //       switch (data.connectionState) {
-      //         case ConnectionState.waiting:
-      //           return Center(
-      //               child:
-      //                   CircularProgressIndicator(color: Constants.mainOrange));
-      //         case ConnectionState.done:
-      //           return Center(
-      //               child: _ConditionerCards(
-      //             conditioners: data.data as List<Conditioner>,
-      //             callback: _update,
-      //           ));
-      //         case ConnectionState.none:
-      //           return Center(child: Text('Something went wrong!'));
-      //         default:
-      //           return Center(child: Text('Something went wrong!'));
-      //       }
-      //     }),
     );
   }
 }
@@ -96,7 +59,7 @@ class _ConditionerCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (conditioners == null || conditioners.length == 0) {
+    if (conditioners.length == 0) {
       return SizedBox(
           child: Center(
               child: Text('Устройств в вашей подсети не найдено.\n' +
@@ -128,7 +91,7 @@ class _ConditionerCard extends StatelessWidget {
             color: Constants.mainOrange,
             child: Row(
               children: [
-                conditioner.name == null
+                conditioner.name.isEmpty
                     ? Text('')
                     : Text(
                         conditioner.name,
