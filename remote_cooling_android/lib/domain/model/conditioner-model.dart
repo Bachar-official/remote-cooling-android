@@ -35,7 +35,7 @@ class ConditionerModel extends ChangeNotifier {
       if (response.statusCode == 200) {
         conditioner.setStatus(json.decode(response.body)['status']);
         conditioner.setUsername(json.decode(response.body)['user']);
-        log.info('Setting mode successful!');
+        log.fine('Setting mode successful!');
       } else {
         log.warning('Something went wrong: status code ${response.statusCode}');
       }
@@ -59,7 +59,7 @@ class ConditionerModel extends ChangeNotifier {
       if (response.statusCode == 200) {
         conditioner.setStatus(json.decode(response.body)['status']);
         conditioner.setUsername(json.decode(response.body)['user']);
-        log.info('Switching ${value ? 'on': 'off'} successful!');
+        log.fine('Switching ${value ? 'on': 'off'} successful!');
       } else {
         log.warning('Something went wrong: status code ${response.statusCode}');
       }
