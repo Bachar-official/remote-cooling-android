@@ -21,18 +21,21 @@ class ConditionerCard extends StatelessWidget {
               context, AppRouter.conditionerPage, conditioner, callback),
           child: Card(
             color: Constants.mainOrange,
-            child: Row(
-              children: [
-                conditioner.name.isEmpty
-                    ? Text('')
-                    : Text(
-                  conditioner.name,
-                  style:
-                  TextStyle(fontSize: 20, color: Constants.mainBlack),
-                ),
-                Spacer(),
-                _getIconStatus(conditioner.status),
-              ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              child: Row(
+                children: [
+                  conditioner.name.isEmpty
+                      ? Text('')
+                      : Text(
+                          conditioner.name,
+                          style:
+                              TextStyle(fontSize: 20, color: Constants.mainBlack),
+                        ),
+                  Spacer(),
+                  _getIconStatus(conditioner.status),
+                ],
+              ),
             ),
           )),
     );
