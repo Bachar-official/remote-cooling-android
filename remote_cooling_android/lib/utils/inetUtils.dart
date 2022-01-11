@@ -70,7 +70,12 @@ class InetUtils {
       delayInSeconds: delayInSeconds,
       pingMessage: pingMessage
     );
-    List<String> strings = await broadcast.sendBroadcast();
+    List<String> strings = [];
+    try {
+      strings = await broadcast.sendBroadcast();
+    } catch (e) {
+      print(e.toString());
+    }
     for (String str in strings) {
       result.add(Conditioner.fromJson(json.decode(str)));
     }

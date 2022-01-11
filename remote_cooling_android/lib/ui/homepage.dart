@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/app/routing.dart';
 import 'package:remote_cooling_android/constants.dart';
+import 'package:remote_cooling_android/domain/model/conditioner-list-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/ui/navbar.dart';
@@ -37,6 +39,7 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<ConditionerListModel>(context, listen: true);
     return Scaffold(
       drawer: NavBar(),
       appBar: AppBar(
@@ -45,30 +48,42 @@ class _HomepageState extends State<Homepage> {
           IconButton(
               icon: Icon(Icons.refresh),
               onPressed: () {
-                _update();
+                provider.getConditioners();
               }),
         ],
       ),
-      body: FutureBuilder(
-          future: conditioners,
-          builder: (ctx, data) {
-            switch (data.connectionState) {
-              case ConnectionState.waiting:
-                return Center(
-                    child:
-                        CircularProgressIndicator(color: Constants.mainOrange));
-              case ConnectionState.done:
-                return Center(
-                    child: _ConditionerCards(
-                  conditioners: data.data as List<Conditioner>,
-                  callback: _update,
-                ));
-              case ConnectionState.none:
-                return Center(child: Text('Something went wrong!'));
-              default:
-                return Center(child: Text('Something went wrong!'));
-            }
-          }),
+      body: Center(
+        child: provider.isLoading ?
+        CircularProgressIndicator(color: Constants.mainOrange) :
+        Consumer<ConditionerListModel>(
+          builder: (context, model, child) => Center(
+            child: _ConditionerCards(
+              conditioners: model.conditioners,
+                callback: () => {}
+            )
+          ),
+        )
+      ),
+      // body: FutureBuilder(
+      //     future: conditioners,
+      //     builder: (ctx, data) {
+      //       switch (data.connectionState) {
+      //         case ConnectionState.waiting:
+      //           return Center(
+      //               child:
+      //                   CircularProgressIndicator(color: Constants.mainOrange));
+      //         case ConnectionState.done:
+      //           return Center(
+      //               child: _ConditionerCards(
+      //             conditioners: data.data as List<Conditioner>,
+      //             callback: _update,
+      //           ));
+      //         case ConnectionState.none:
+      //           return Center(child: Text('Something went wrong!'));
+      //         default:
+      //           return Center(child: Text('Something went wrong!'));
+      //       }
+      //     }),
     );
   }
 }

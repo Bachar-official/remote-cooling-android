@@ -18,11 +18,16 @@ class ConditionerModel extends ChangeNotifier {
   String get temperature => _getTemperature(conditioner.status);
   bool get isLoading => _isLoading;
 
+  void _setLoading() {
+    _isLoading = true;
+    notifyListeners();
+  }
+
   void setMode(ConditionerStatus status) async {
     ConditionerCommand command = InetUtils.statusToCommand(status);
     try {
       log.info('Trying to set new mode: ${command.toString()}');
-      _isLoading = true;
+      _setLoading();
       var response = await InetUtils.sendCommand(conditioner.endpoint, command);
       if (response.statusCode == 200) {
         conditioner.setStatus(json.decode(response.body)['status']);
@@ -42,7 +47,7 @@ class ConditionerModel extends ChangeNotifier {
     bool on = _isConditionerOn(conditioner);
     try {
       log.info('Trying to switch conditioner \"${conditioner.name}\" to state ${value ? '\"on\"': '\"off\"'}');
-      _isLoading = true;
+      _setLoading();
       var response = await InetUtils.sendCommand(
           conditioner.endpoint,
           on

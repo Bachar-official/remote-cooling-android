@@ -17,16 +17,20 @@ class Broadcast {
     List<String> result = [];
     InternetAddress destination = InternetAddress(broadcastIp);
     List<int> message = utf8.encode(pingMessage);
-    RawDatagramSocket udp =
-        await RawDatagramSocket.bind(InternetAddress.anyIPv4, broadcastPort);
+    RawDatagramSocket udp = await RawDatagramSocket.bind(InternetAddress.anyIPv4, broadcastPort);
     udp.broadcastEnabled = true;
+    try {
     udp.listen((event) {
       Datagram? datagram = udp.receive();
       if (datagram != null && datagram.data.length != message.length) {
         result.add(utf8.decode(datagram.data));
       }
     });
-    udp.send(message, destination, broadcastPort);
+      udp.send(message, destination, broadcastPort);
+    } on Exception catch (e) {
+      print(e.toString());
+      udp.close();
+    }
 
     await Future.delayed(Duration(seconds: delayInSeconds));
     udp.close();
