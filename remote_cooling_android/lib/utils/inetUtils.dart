@@ -17,42 +17,30 @@ class InetUtils {
         'user': userName
         };
     }
-    List<String> stringCommand = command.toString().split('.');
-    List<String> profileNumber = stringCommand[1].split('_');
+    String stringCommand = commandDictionary[command]!;
     return {
-      'profile': profileNumber[1],
+      'profile': stringCommand,
       'date': DateTime.now().toString(),
       'user': userName
     };
   }
 
   static ConditionerCommand statusToCommand(ConditionerStatus status) {
-    switch (status) {
-      case ConditionerStatus.auto:
-        return ConditionerCommand.set_100;
-      case ConditionerStatus.fan:
-        return ConditionerCommand.set_101;
-      case ConditionerStatus.cold17:
-        return ConditionerCommand.set_200;
-      case ConditionerStatus.cold22:
-        return ConditionerCommand.set_201;
-      case ConditionerStatus.hot30:
-        return ConditionerCommand.set_202;
-      default:
-        return ConditionerCommand.off;
-    }
+    return statusCommandDictionary[status]!;
   }
 
   static String getCommand(ConditionerCommand command) {
-    String commandPrefix = command.toString().split('.')[1];
-    if (commandPrefix.contains('set')) {
-      return 'set';
+    switch (command) {
+      case ConditionerCommand.off:
+      case ConditionerCommand.ping:
+        return commandDictionary[command]!;
+      default: return 'set';
     }
-    return commandPrefix;
   }
 
   static Future<http.Response> sendCommand(
       String url, ConditionerCommand command) async {
+    print(getCommand(command));
     return http
         .get(Uri.http(url, getCommand(command), getQueryParameters(command)));
   }
