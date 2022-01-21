@@ -13,9 +13,12 @@ class ConditionerCards extends StatelessWidget {
   Widget build(BuildContext context) {
     if (conditioners.length == 0) {
       return SizedBox(
-          child: Center(
-              child: Text('Устройств в вашей подсети не найдено.\n' +
-                  'Попробуйте повторить поиск или проверьте настройки сети.')));
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Center(
+                child: Text('Устройств в вашей подсети не найдено.\n' +
+                    'Попробуйте повторить поиск или проверьте настройки сети.')),
+          ));
     }
     return ListView.builder(
       itemCount: conditioners.length,
