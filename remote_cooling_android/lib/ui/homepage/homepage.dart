@@ -6,17 +6,8 @@ import 'package:remote_cooling_android/ui/navbar.dart';
 
 import 'components/conditioner-cards.dart';
 
-class Homepage extends StatefulWidget {
-  @override
-  _HomepageState createState() => _HomepageState();
-}
-
-class _HomepageState extends State<Homepage> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
+class Homepage extends StatelessWidget {
+  const Homepage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

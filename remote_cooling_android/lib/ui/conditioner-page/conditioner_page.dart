@@ -17,7 +17,6 @@ class _ConditionerState extends State<ConditionerPage> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<ConditionerModel>(context, listen: true);
-    provider.setConditioner(ModalRoute.of(context)!.settings.arguments as Conditioner);
 
     on = provider.isOn;
     bool isLoading = provider.isLoading;
