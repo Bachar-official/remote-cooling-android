@@ -22,6 +22,12 @@ class ConditionerListModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void changeConditioner(Conditioner conditioner) {
+    int index = _list.indexWhere((element) => element.endpoint == conditioner.endpoint);
+    _list[index] = conditioner;
+    notifyListeners();
+  }
+
   ///Get conditioners from the network
   void getConditioners() async {
     _setLoading();

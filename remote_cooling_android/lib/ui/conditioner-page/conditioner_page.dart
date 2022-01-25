@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/constants.dart';
+import 'package:remote_cooling_android/domain/model/conditioner-list-model.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 
@@ -17,6 +18,8 @@ class _ConditionerState extends State<ConditionerPage> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<ConditionerModel>(context, listen: true);
+    var changeCallback = Provider.of<ConditionerListModel>(context, listen: false).changeConditioner;
+    provider.setCallback(changeCallback);
 
     on = provider.isOn;
     bool isLoading = provider.isLoading;

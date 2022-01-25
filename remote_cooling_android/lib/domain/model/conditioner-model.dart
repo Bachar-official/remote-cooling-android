@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
@@ -8,6 +9,7 @@ import 'package:remote_cooling_android/utils/inetUtils.dart';
 
 class ConditionerModel extends ChangeNotifier {
   late Conditioner conditioner;
+  late Function callback;
   final log = Logger('Conditioner');
   bool _isLoading = false;
 
@@ -19,6 +21,10 @@ class ConditionerModel extends ChangeNotifier {
   @required
   void setConditioner (Conditioner newConditioner) {
     conditioner = newConditioner;
+  }
+
+  void setCallback(Function callback) {
+    this.callback = callback;
   }
 
   void _setLoading() {
@@ -42,6 +48,7 @@ class ConditionerModel extends ChangeNotifier {
     } catch (e) {
       log.warning('ERROR: ${e.toString()}');
     }
+    callback(conditioner);
     _isLoading = false;
     notifyListeners();
   }
@@ -66,6 +73,7 @@ class ConditionerModel extends ChangeNotifier {
     } catch (e) {
       log.warning('ERROR: ${e.toString()}');
     }
+    callback(conditioner);
     _isLoading = false;
     notifyListeners();
   }
