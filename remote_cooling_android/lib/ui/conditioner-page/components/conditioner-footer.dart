@@ -4,15 +4,15 @@ import 'package:remote_cooling_android/utils/time_ago.dart';
 
 class ConditionerFooter extends StatelessWidget {
   late final Conditioner conditioner;
+  late final bool isDeveloper;
 
-  ConditionerFooter({required this.conditioner});
+  ConditionerFooter({required this.conditioner, required this.isDeveloper});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('API: '),
-        Text(conditioner.endpoint),
+        isDeveloper ? Text('API: ${conditioner.endpoint}') : Text(''),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text('Обновлено: '),
           Text(TimeAgo.timeAgoSinceDate(conditioner.updatedAt)),

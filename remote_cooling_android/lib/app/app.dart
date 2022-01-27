@@ -4,6 +4,7 @@ import 'package:remote_cooling_android/app/routing.dart';
 import 'package:remote_cooling_android/constants.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-list-model.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
+import 'package:remote_cooling_android/domain/model/settings-model.dart';
 
 class App extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _AppState extends State<App> {
         providers: [
           ChangeNotifierProvider(create: (_) => ConditionerListModel()),
           ChangeNotifierProvider(create: (_) => ConditionerModel()),
+          ChangeNotifierProvider(create: (_) => SettingsModel()),
         ],
         child: MaterialApp(
           title: 'Cinimex Conditioner',
