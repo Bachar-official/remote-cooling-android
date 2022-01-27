@@ -19,7 +19,7 @@ class NavBar extends StatelessWidget {
                   child: Center(
                       child: Text(
                     userName,
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontFamily: 'Europe'),
                   ))),
               Padding(
                 padding:
