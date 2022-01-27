@@ -1,8 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class AboutPage extends StatelessWidget{
+String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((e) =>
+          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+}
 
+final Uri emailLaunchUri = Uri(
+  scheme: 'mailto',
+  path: 'ibacharnikov@cinimex.ru',
+  query:
+      encodeQueryParameters(<String, String>{'subject': 'Cinimex Cooling app'}),
+);
+
+final Uri githubLaunchUri = Uri(
+  scheme: 'https',
+  path: 'github.com/Bachar-official',
+);
+
+final Uri telegramLaunchUri = Uri(
+  scheme: 'https',
+  path: 'telegram.me/Bachar_official',
+);
+
+TextStyle linksStyle = TextStyle(fontSize: 15);
+
+
+class AboutPage extends StatelessWidget {
   Future<String> getVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;
@@ -19,7 +46,10 @@ class AboutPage extends StatelessWidget{
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           child: Column(
             children: [
-              Text('Cinimex Cooling'),
+              Text(
+                'Cinimex Cooling',
+                style: TextStyle(fontFamily: 'Europe', fontSize: 30),
+              ),
               FutureBuilder<String>(
                   future: getVersion(),
                   builder: (context, snapshot) {
@@ -27,10 +57,19 @@ class AboutPage extends StatelessWidget{
                     final text = data != null ? data : '';
                     return Text('Version ${text}');
                   }),
-              Text('Developer: Ivan Bacharnikov'),
-              Text('Email: ibacharnikov@cinimex.ru'),
-              Text('Github: https://github.com/Bachar_official'),
-              Text('Telegram: @Bachar-official')
+              Text('Разработчик: Иван Бачарников'),
+              TextButton(
+                child: Text('Написать на электропочту', style: linksStyle,),
+                onPressed: () => launch(emailLaunchUri.toString()),
+              ),
+              TextButton(
+                child: Text('Посмотреть профиль GitHub', style: linksStyle,),
+                onPressed: () => launch(githubLaunchUri.toString()),
+              ),
+              TextButton(
+                child: Text('Связаться через Telegram', style: linksStyle,),
+                onPressed: () => launch(telegramLaunchUri.toString()),
+              )
             ],
           ),
         ),

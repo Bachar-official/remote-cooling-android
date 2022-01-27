@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/app/routing.dart';
+import 'package:remote_cooling_android/constants.dart';
 import 'package:remote_cooling_android/domain/model/settings-model.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 
@@ -14,6 +15,15 @@ class NavBar extends StatelessWidget {
         child: Drawer(
           child: ListView(
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: CircleAvatar(
+                  backgroundColor: Constants.mainBlue,
+                  foregroundColor: Colors.white,
+                  radius: 30,
+                  child: Icon(Icons.account_circle, size: 50),
+                ),
+              ),
               Padding(
                   padding: const EdgeInsets.all(10),
                   child: Center(
