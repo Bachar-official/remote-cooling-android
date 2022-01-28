@@ -4,7 +4,7 @@ class TimeAgo{
     final difference = date2.difference(date);
 
     if (difference.inDays > 8) {
-      return 'больше недели назад';
+      return 'очень давно';
     } else if ((difference.inDays / 7).floor() >= 1) {
       return (numericDates) ? '1 неделю назад' : 'на прошлой неделе';
     } else if (difference.inDays >= 2) {

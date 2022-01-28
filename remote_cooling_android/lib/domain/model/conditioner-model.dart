@@ -15,7 +15,6 @@ class ConditionerModel extends ChangeNotifier {
   bool _isLoading = false;
 
   bool get isOn => _isConditionerOn(conditioner);
-  String get stringMode => _getMode(conditioner.status);
   String get temperature => _getTemperature(conditioner.status);
   bool get isLoading => _isLoading;
   String get updatedWhile => TimeAgo.timeAgoSinceDate(conditioner.updatedAt);
@@ -95,29 +94,10 @@ class ConditionerModel extends ChangeNotifier {
     }
   }
 
-  String _getMode(ConditionerStatus status) {
-    switch (status) {
-      case ConditionerStatus.auto:
-        return 'автоматически';
-      case ConditionerStatus.cold17:
-      case ConditionerStatus.cold22:
-        return 'охлаждение';
-      case ConditionerStatus.hot30:
-        return 'обогрев';
-      case ConditionerStatus.fan:
-        return 'проветривание';
-      case ConditionerStatus.off:
-        return 'выключен';
-      case ConditionerStatus.undefined:
-      default:
-        return '-';
-    }
-  }
-
   String _getTemperature(ConditionerStatus status) {
     switch (status) {
       case ConditionerStatus.auto:
-        return '--';
+        return 'автоматический';
       case ConditionerStatus.cold17:
         return '17°С';
       case ConditionerStatus.cold22:
@@ -125,12 +105,12 @@ class ConditionerModel extends ChangeNotifier {
       case ConditionerStatus.hot30:
         return '30°С';
       case ConditionerStatus.fan:
-        return '--';
+        return 'проветривание';
       case ConditionerStatus.off:
-        return '--';
+        return 'выключен';
       case ConditionerStatus.undefined:
       default:
-        return '--';
+        return 'неизвестно';
     }
   }
 }

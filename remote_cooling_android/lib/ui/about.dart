@@ -28,7 +28,6 @@ final Uri telegramLaunchUri = Uri(
 
 TextStyle linksStyle = TextStyle(fontSize: 15);
 
-
 class AboutPage extends StatelessWidget {
   Future<String> getVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -39,14 +38,17 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('О программе'),
+        title: const Text(
+          'О программе',
+          style: TextStyle(fontFamily: 'Europe'),
+        ),
       ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           child: Column(
             children: [
-              Text(
+              const Text(
                 'Cinimex Cooling',
                 style: TextStyle(fontFamily: 'Europe', fontSize: 30),
               ),
@@ -59,15 +61,24 @@ class AboutPage extends StatelessWidget {
                   }),
               Text('Разработчик: Иван Бачарников'),
               TextButton(
-                child: Text('Написать на электропочту', style: linksStyle,),
+                child: Text(
+                  'Написать на электропочту',
+                  style: linksStyle,
+                ),
                 onPressed: () => launch(emailLaunchUri.toString()),
               ),
               TextButton(
-                child: Text('Посмотреть профиль GitHub', style: linksStyle,),
+                child: Text(
+                  'Посмотреть профиль GitHub',
+                  style: linksStyle,
+                ),
                 onPressed: () => launch(githubLaunchUri.toString()),
               ),
               TextButton(
-                child: Text('Связаться через Telegram', style: linksStyle,),
+                child: Text(
+                  'Связаться через Telegram',
+                  style: linksStyle,
+                ),
                 onPressed: () => launch(telegramLaunchUri.toString()),
               )
             ],

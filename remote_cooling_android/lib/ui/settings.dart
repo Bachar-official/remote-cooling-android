@@ -17,7 +17,11 @@ class _SettingsState extends State<SettingsPage> {
     var provider = Provider.of<SettingsModel>(context, listen: false);
 
     return Scaffold(
-        appBar: AppBar(title: Text('Настройки')),
+        appBar: AppBar(
+            title: Text(
+          'Настройки',
+          style: TextStyle(fontFamily: 'Europe'),
+        )),
         body: Consumer<SettingsModel>(
           builder: (context, model, child) => Builder(
             builder: (ctx) => Form(
@@ -60,7 +64,8 @@ class _SettingsState extends State<SettingsPage> {
                               else
                                 provider.setDuration(int.parse(newDuration))
                             }),
-                    CheckboxListTile( title: Text('Опции разработчика'),
+                    CheckboxListTile(
+                        title: Text('Опции разработчика'),
                         activeColor: Constants.mainOrange,
                         value: provider.isDeveloper,
                         onChanged: (value) => provider.setDeveloper(value)),

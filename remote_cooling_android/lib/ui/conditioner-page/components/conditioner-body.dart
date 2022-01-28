@@ -30,13 +30,17 @@ class ConditionerBody extends StatelessWidget {
               CircularProgressIndicator(color: Constants.mainOrange))
         ]
             : [
-          Text(
-            provider.temperature,
-            style: TextStyle(fontSize: 100),
-          ),
-          Text(
-            provider.stringMode,
-            style: TextStyle(fontSize: 60),
+          SizedBox(
+            height: 100,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: FittedBox(
+                child: Text(
+                  provider.temperature,
+                  style: TextStyle(fontSize: 100),
+                ),
+              ),
+            ),
           ),
           Divider(
             height: 20,

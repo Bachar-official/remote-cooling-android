@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/app/routing.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 
 import '../../../constants.dart';
@@ -38,6 +37,12 @@ class ConditionerCard extends StatelessWidget {
                               TextStyle(fontSize: 20, color: Constants.mainBlack),
                         ),
                   Spacer(),
+                  VerticalDivider(
+                    color: Constants.mainBlack,
+                    thickness: 2,
+                    indent: 5,
+                    endIndent: 5,
+                  ),
                   ConditionerInfoColumn(provider: provider),
                 ],
               ),

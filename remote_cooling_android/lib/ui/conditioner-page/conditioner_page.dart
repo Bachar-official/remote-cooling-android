@@ -18,14 +18,19 @@ class _ConditionerState extends State<ConditionerPage> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<ConditionerModel>(context, listen: true);
-    var changeCallback = Provider.of<ConditionerListModel>(context, listen: false).changeConditioner;
+    var changeCallback =
+        Provider.of<ConditionerListModel>(context, listen: false)
+            .changeConditioner;
     provider.setCallback(changeCallback);
 
     on = provider.isOn;
     bool isLoading = provider.isLoading;
     return Scaffold(
       appBar: AppBar(
-        title: Text(provider.conditioner.name),
+        title: Text(
+          provider.conditioner.name,
+          style: TextStyle(fontFamily: 'Europe'),
+        ),
         actions: [
           isLoading
               ? Icon(Icons.watch_later_outlined, color: Constants.mainOrange)
@@ -37,13 +42,10 @@ class _ConditionerState extends State<ConditionerPage> {
         ],
       ),
       body: Consumer<ConditionerModel>(
-        builder: (context, model, child) => ConditionerBody(
-            isLoading: isLoading,
-            conditioner: provider.conditioner,
-            setMode: provider.setMode)
-      ),
+          builder: (context, model, child) => ConditionerBody(
+              isLoading: isLoading,
+              conditioner: provider.conditioner,
+              setMode: provider.setMode)),
     );
   }
 }
-
-

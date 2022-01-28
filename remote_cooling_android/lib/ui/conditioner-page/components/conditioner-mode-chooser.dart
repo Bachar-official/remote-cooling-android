@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
+import 'package:remote_cooling_android/ui/conditioner-page/components/mode-title.dart';
 
 class ConditionerModeChooser extends StatelessWidget {
   late final Conditioner conditioner;
@@ -11,54 +12,69 @@ class ConditionerModeChooser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          title: Text(_getStringStatus(ConditionerStatus.auto)),
-          leading: Radio(
-              value: ConditionerStatus.auto,
-              groupValue: conditioner.status,
-              onChanged: (value) {
-                onChange(value);
-              }),
-        ),
-        ListTile(
-          title: Text(_getStringStatus(ConditionerStatus.cold17)),
-          leading: Radio(
-              value: ConditionerStatus.cold17,
-              groupValue: conditioner.status,
-              onChanged: (value) {
-                onChange(value);
-              }),
-        ),
-        ListTile(
-          title: Text(_getStringStatus(ConditionerStatus.cold22)),
-          leading: Radio(
-              value: ConditionerStatus.cold22,
-              groupValue: conditioner.status,
-              onChanged: (value) {
-                onChange(value);
-              }),
-        ),
-        ListTile(
-          title: Text(_getStringStatus(ConditionerStatus.hot30)),
-          leading: Radio(
-              value: ConditionerStatus.hot30,
-              groupValue: conditioner.status,
-              onChanged: (value) {
-                onChange(value);
-              }),
-        ),
-        ListTile(
-          title: Text(_getStringStatus(ConditionerStatus.fan)),
-          leading: Radio(
-              value: ConditionerStatus.fan,
-              groupValue: conditioner.status,
-              onChanged: (value) {
-                onChange(value);
-              }),
-        ),
-      ],
+    return Container(
+      child: Column(
+        children: [
+          ListTile(
+            title: ModeTitle(
+              icon: Icon(Icons.auto_fix_high),
+                title: _getStringStatus(ConditionerStatus.auto),
+            ),
+            leading: Radio(
+                value: ConditionerStatus.auto,
+                groupValue: conditioner.status,
+                onChanged: (value) {
+                  onChange(value);
+                }),
+          ),
+          ListTile(
+            title: ModeTitle(
+                icon: Icon(Icons.ac_unit_outlined),
+                title: _getStringStatus(ConditionerStatus.cold17)
+            ),
+            leading: Radio(
+                value: ConditionerStatus.cold17,
+                groupValue: conditioner.status,
+                onChanged: (value) {
+                  onChange(value);
+                }),
+          ),
+          ListTile(
+            title: ModeTitle(
+                icon: Icon(Icons.ac_unit_outlined),
+                title: _getStringStatus(ConditionerStatus.cold22)
+            ),
+            leading: Radio(
+                value: ConditionerStatus.cold22,
+                groupValue: conditioner.status,
+                onChanged: (value) {
+                  onChange(value);
+                }),
+          ),
+          ListTile(
+            title: ModeTitle(
+                icon: Icon(Icons.local_fire_department),
+                title: _getStringStatus(ConditionerStatus.hot30)),
+            leading: Radio(
+                value: ConditionerStatus.hot30,
+                groupValue: conditioner.status,
+                onChanged: (value) {
+                  onChange(value);
+                }),
+          ),
+          ListTile(
+            title: ModeTitle(
+                icon: Icon(Icons.air_outlined),
+                title: _getStringStatus(ConditionerStatus.fan)),
+            leading: Radio(
+                value: ConditionerStatus.fan,
+                groupValue: conditioner.status,
+                onChanged: (value) {
+                  onChange(value);
+                }),
+          ),
+        ],
+      ),
     );
   }
 }

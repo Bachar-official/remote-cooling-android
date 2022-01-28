@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
-import 'package:remote_cooling_android/utils/time_ago.dart';
 
 import '../../../constants.dart';
 
@@ -8,10 +7,11 @@ class ConditionerInfoColumn extends StatelessWidget {
   late final provider;
 
   ConditionerInfoColumn({required this.provider});
-  TextStyle textStyle = TextStyle(color: Constants.mainBlack, fontSize: 20);
-  Color mainBlack = Constants.mainBlack;
-  MainAxisAlignment columnAlignment = MainAxisAlignment.center;
-  MainAxisAlignment rowAlignment = MainAxisAlignment.spaceBetween;
+
+  final TextStyle textStyle = TextStyle(color: Constants.mainBlack, fontSize: 18);
+  final Color mainBlack = Constants.mainBlack;
+  final MainAxisAlignment columnAlignment = MainAxisAlignment.center;
+  final MainAxisAlignment rowAlignment = MainAxisAlignment.spaceBetween;
 
   Widget build(BuildContext context) {
     return Expanded(

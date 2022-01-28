@@ -6,6 +6,8 @@ import 'package:remote_cooling_android/domain/model/settings-model.dart';
 import 'package:remote_cooling_android/utils/routeUtils.dart';
 
 class NavBar extends StatelessWidget {
+  final EdgeInsets buttonPadding = EdgeInsets.symmetric(horizontal: 15, vertical: 5);
+
   @override
   Widget build(BuildContext context) {
     String userName =
@@ -32,8 +34,7 @@ class NavBar extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontFamily: 'Europe'),
                   ))),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: buttonPadding,
                 child: ElevatedButton.icon(
                     onPressed: () {
                       RouteUtils.goToPage(
@@ -43,7 +44,7 @@ class NavBar extends StatelessWidget {
                     label: Text('Настройки')),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: buttonPadding,
                 child: ElevatedButton.icon(
                     onPressed: () {
                       RouteUtils.goToPage(
