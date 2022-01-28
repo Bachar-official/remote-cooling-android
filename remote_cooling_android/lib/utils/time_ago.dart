@@ -22,7 +22,7 @@ class TimeAgo{
     } else if (difference.inSeconds >= 3) {
       return '${difference.inSeconds} секунд назад';
     } else {
-      return 'прямо сейчас';
+      return 'только что';
     }
   }
 

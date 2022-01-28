@@ -6,6 +6,7 @@ import 'package:logging/logging.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/utils/inetUtils.dart';
+import 'package:remote_cooling_android/utils/time_ago.dart';
 
 class ConditionerModel extends ChangeNotifier {
   late Conditioner conditioner;
@@ -17,6 +18,7 @@ class ConditionerModel extends ChangeNotifier {
   String get stringMode => _getMode(conditioner.status);
   String get temperature => _getTemperature(conditioner.status);
   bool get isLoading => _isLoading;
+  String get updatedWhile => TimeAgo.timeAgoSinceDate(conditioner.updatedAt);
 
   @required
   void setConditioner (Conditioner newConditioner) {
