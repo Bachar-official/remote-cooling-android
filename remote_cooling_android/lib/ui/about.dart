@@ -48,21 +48,30 @@ class AboutPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           child: Column(
             children: [
-              const Text(
-                'Cinimex Cooling',
-                style: TextStyle(fontFamily: 'Europe', fontSize: 30),
-              ),
-              FutureBuilder<String>(
-                  future: getVersion(),
-                  builder: (context, snapshot) {
-                    final data = snapshot.data;
-                    final text = data != null ? data : '';
-                    return Text('Version ${text}');
-                  }),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Cinimex Cooling',
+                      style: TextStyle(fontFamily: 'Europe', fontSize: 30),
+                    ),
+                    FutureBuilder<String>(
+                        future: getVersion(),
+                        builder: (context, snapshot) {
+                          final data = snapshot.data;
+                          final text = data != null ? data : '';
+                          return Text(
+                            text,
+                            style:
+                                TextStyle(fontFamily: 'Europe', fontSize: 10),
+                          );
+                        }),
+                  ]),
               Text('Разработчик: Иван Бачарников'),
               TextButton(
                 child: Text(
-                  'Написать на электропочту',
+                  'Написать на электронную почту',
                   style: linksStyle,
                 ),
                 onPressed: () => launch(emailLaunchUri.toString()),
