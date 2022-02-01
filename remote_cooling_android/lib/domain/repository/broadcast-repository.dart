@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-class Broadcast {
+class BroadcastRepository {
   final String broadcastIp;
   final String pingMessage;
   final int delayInSeconds;
   final int broadcastPort;
 
-  Broadcast(
+  BroadcastRepository(
       {required this.broadcastIp,
       required this.broadcastPort,
       required this.delayInSeconds,

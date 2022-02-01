@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RouteUtils {
-  static void goToPage(context, path, param, Function callback) {
-    Navigator.pushNamed(context, path, arguments: param).then((value) => {
+  static void goToPage(context, path, {dynamic prop, Function? callback}) {
+    Navigator.pushNamed(context, path, arguments: prop).then((value) => {
       if (callback != null) {
         callback(),
       }

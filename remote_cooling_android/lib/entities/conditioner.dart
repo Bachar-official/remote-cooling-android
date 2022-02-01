@@ -1,4 +1,4 @@
-import 'package:remote_cooling_android/entities/conditioner_status.dart';
+import 'package:remote_cooling_android/entities/conditioner-status.dart';
 
 class Conditioner {
   late String name;

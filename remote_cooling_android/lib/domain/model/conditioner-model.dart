@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/entities/conditioner_status.dart';
-import 'package:remote_cooling_android/utils/inetUtils.dart';
-import 'package:remote_cooling_android/utils/time_ago.dart';
+import 'package:remote_cooling_android/entities/conditioner-status.dart';
+import 'package:remote_cooling_android/domain/repository/net-repository.dart';
+import 'package:remote_cooling_android/utils/time-ago.dart';
 
 class ConditionerModel extends ChangeNotifier {
   late Conditioner _conditioner;
@@ -35,11 +35,11 @@ class ConditionerModel extends ChangeNotifier {
   }
 
   void setMode(ConditionerStatus status) async {
-    ConditionerCommand command = InetUtils.statusToCommand(status);
+    ConditionerCommand command = NetRepository.statusToCommand(status);
     try {
       log.info('Trying to set new mode: ${command.toString()}');
       _setLoading();
-      var response = await InetUtils.sendCommand(_conditioner.endpoint, command);
+      var response = await NetRepository.sendCommand(_conditioner.endpoint, command);
       if (response.statusCode == 200) {
         var answer = json.decode(response.body);
         _conditioner.setStatus(answer['status']);
@@ -61,7 +61,7 @@ class ConditionerModel extends ChangeNotifier {
     try {
       log.info('Trying to switch conditioner \"${_conditioner.name}\" to state ${value ? '\"on\"': '\"off\"'}');
       _setLoading();
-      var response = await InetUtils.sendCommand(
+      var response = await NetRepository.sendCommand(
           _conditioner.endpoint,
           on
               ? ConditionerCommand.off

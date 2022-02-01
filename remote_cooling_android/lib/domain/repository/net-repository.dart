@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:remote_cooling_android/entities/broadcast.dart';
+import 'package:remote_cooling_android/domain/repository/broadcast-repository.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/entities/conditioner_status.dart';
+import 'package:remote_cooling_android/entities/conditioner-status.dart';
 import 'package:http/http.dart' as http;
 import 'package:hive_flutter/hive_flutter.dart';
 
-class InetUtils {
+class NetRepository {
   static Map<String, String> getQueryParameters(ConditionerCommand command) {
     Box settingsBox = Hive.box('settings');
     String userName = settingsBox.get('user', defaultValue: 'Anonymous');
@@ -52,7 +52,7 @@ class InetUtils {
     int delayInSeconds = settingsBox.get('duration', defaultValue: 2);
     String pingMessage = settingsBox.get('command', defaultValue: 'ping');
     List<Conditioner> result = [];
-    Broadcast broadcast = Broadcast(
+    BroadcastRepository broadcast = BroadcastRepository(
       broadcastIp: broadcastIP,
       broadcastPort: broadcastPort,
       delayInSeconds: delayInSeconds,

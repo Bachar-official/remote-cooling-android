@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/domain/model/settings-model.dart';
 import 'package:remote_cooling_android/entities/theme.dart';
-import 'package:remote_cooling_android/utils/routeUtils.dart';
-import 'package:remote_cooling_android/utils/validation.dart';
+import 'package:remote_cooling_android/utils/route-utils.dart';
+import 'package:remote_cooling_android/utils/validation-utils.dart';
 
 class SettingsPage extends StatefulWidget {
   @override

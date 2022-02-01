@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/ui/homepage/homepage.dart';
 import 'package:remote_cooling_android/ui/conditioner-page/conditioner_page.dart';
 import 'package:remote_cooling_android/ui/about.dart';
-import 'package:remote_cooling_android/ui/settings.dart';
+import 'package:remote_cooling_android/ui/settings-page.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {

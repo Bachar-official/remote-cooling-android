@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../cinimex-colors.dart';
 
 ThemeData cinimexTheme = ThemeData(
   brightness: Brightness.dark,
-  primaryColorLight: Constants.mainOrange,
-  primaryColor: Constants.mainBlue,
-  toggleableActiveColor: Constants.mainOrange,
-  scaffoldBackgroundColor: Constants.mainBlue,
+  primaryColorLight: CinimexColors.mainOrange,
+  primaryColor: CinimexColors.mainBlue,
+  toggleableActiveColor: CinimexColors.mainOrange,
+  scaffoldBackgroundColor: CinimexColors.mainBlue,
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedIconTheme: IconThemeData(color: CinimexColors.mainOrange),
+    selectedLabelStyle: TextStyle(color: CinimexColors.mainOrange),
+    selectedItemColor: CinimexColors.mainOrange,
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      primary: Constants.mainOrange,
-      onPrimary: Constants.mainBlack,
+      primary: CinimexColors.mainOrange,
+      onPrimary: CinimexColors.mainBlack,
     ),
   ),
 );
@@ -23,9 +28,9 @@ Color getColor(Set<MaterialState> states) {
     MaterialState.focused,
   };
   if (states.any(interactiveStates.contains)) {
-    return Constants.mainOrange;
+    return CinimexColors.mainOrange;
   }
-  return Constants.mainBlack;
+  return CinimexColors.mainBlack;
 }
 
 ThemeData lightTheme = ThemeData.light();

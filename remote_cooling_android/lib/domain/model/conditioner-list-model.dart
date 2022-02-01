@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/utils/inetUtils.dart';
+import 'package:remote_cooling_android/domain/repository/net-repository.dart';
 
 class ConditionerListModel extends ChangeNotifier {
   ///List of conditioners
@@ -33,7 +33,7 @@ class ConditionerListModel extends ChangeNotifier {
     _setLoading();
     log.info('Trying to fetch list of conditioners');
     try {
-      _list = await InetUtils.sendBroadcast();
+      _list = await NetRepository.sendBroadcast();
       if (_list.length == 0) {
         log.warning('Something went wrong!');
       } else {

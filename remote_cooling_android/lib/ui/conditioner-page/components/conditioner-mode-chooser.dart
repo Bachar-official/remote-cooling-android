@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/entities/conditioner_status.dart';
+import 'package:remote_cooling_android/entities/conditioner-status.dart';
 import 'package:remote_cooling_android/ui/conditioner-page/components/mode-title.dart';
 
 class ConditionerModeChooser extends StatelessWidget {

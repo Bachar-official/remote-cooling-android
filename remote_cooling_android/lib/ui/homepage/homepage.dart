@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/constants.dart';
+import 'package:remote_cooling_android/cinimex-colors.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-list-model.dart';
 import 'package:remote_cooling_android/domain/model/settings-model.dart';
+import 'package:remote_cooling_android/ui/bottom-bar.dart';
 import 'package:remote_cooling_android/ui/empty-name-dialog.dart';
-import 'package:remote_cooling_android/ui/navbar.dart';
 
 import 'components/conditioner-cards.dart';
 
@@ -21,7 +21,7 @@ class Homepage extends StatelessWidget {
       return EmptyNameDialog();
     }
     return Scaffold(
-      drawer: NavBar(),
+      bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text(
           'Cinimex Cooling',
@@ -37,7 +37,7 @@ class Homepage extends StatelessWidget {
       ),
       body: Center(
           child: provider.isLoading
-              ? CircularProgressIndicator(color: Constants.mainOrange)
+              ? CircularProgressIndicator(color: CinimexColors.mainOrange)
               : Consumer<ConditionerListModel>(
                   builder: (context, model, child) => Center(
                       child: ConditionerCards(

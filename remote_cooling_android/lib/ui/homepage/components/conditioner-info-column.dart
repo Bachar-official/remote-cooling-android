@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:remote_cooling_android/entities/conditioner_status.dart';
+import 'package:remote_cooling_android/entities/conditioner-status.dart';
 
-import '../../../constants.dart';
+import '../../../cinimex-colors.dart';
 
 class ConditionerInfoColumn extends StatelessWidget {
   late final provider;
 
   ConditionerInfoColumn({required this.provider});
 
-  final TextStyle textStyle = TextStyle(color: Constants.mainBlack, fontSize: 18);
-  final Color mainBlack = Constants.mainBlack;
+  final TextStyle textStyle = TextStyle(color: CinimexColors.mainBlack, fontSize: 18);
+  final Color mainBlack = CinimexColors.mainBlack;
   final MainAxisAlignment columnAlignment = MainAxisAlignment.center;
   final MainAxisAlignment rowAlignment = MainAxisAlignment.spaceBetween;
 

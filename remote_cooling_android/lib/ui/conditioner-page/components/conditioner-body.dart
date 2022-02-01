@@ -4,7 +4,7 @@ import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
 import 'package:remote_cooling_android/domain/model/settings-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 
-import '../../../constants.dart';
+import '../../../cinimex-colors.dart';
 import 'conditioner-footer.dart';
 import 'conditioner-mode-chooser.dart';
 
@@ -32,7 +32,7 @@ class ConditionerBody extends StatelessWidget {
             ? [
           Center(
               child:
-              CircularProgressIndicator(color: Constants.mainOrange))
+              CircularProgressIndicator(color: CinimexColors.mainOrange))
         ]
             : [
           SizedBox(

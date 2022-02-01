@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/constants.dart';
+import 'package:remote_cooling_android/cinimex-colors.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-list-model.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
 

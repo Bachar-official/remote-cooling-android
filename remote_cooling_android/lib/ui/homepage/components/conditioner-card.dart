@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/app/routing.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/utils/routeUtils.dart';
+import 'package:remote_cooling_android/utils/route-utils.dart';
 
-import '../../../constants.dart';
+import '../../../cinimex-colors.dart';
 import 'conditioner-info-column.dart';
 
 class ConditionerCard extends StatelessWidget {
@@ -22,9 +22,9 @@ class ConditionerCard extends StatelessWidget {
       height: 120,
       child: GestureDetector(
           onTap: () => RouteUtils.goToPage(
-              context, AppRouter.conditionerPage, conditioner, callback),
+              context, AppRouter.conditionerPage, prop: conditioner),
           child: Card(
-            color: Constants.mainOrange,
+            color: CinimexColors.mainOrange,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               child: Row(
@@ -34,11 +34,11 @@ class ConditionerCard extends StatelessWidget {
                       : Text(
                           provider.conditioner.name,
                           style:
-                              TextStyle(fontSize: 20, color: Constants.mainBlack),
+                              TextStyle(fontSize: 20, color: CinimexColors.mainBlack),
                         ),
                   Spacer(),
                   VerticalDivider(
-                    color: Constants.mainBlack,
+                    color: CinimexColors.mainBlack,
                     thickness: 2,
                     indent: 5,
                     endIndent: 5,

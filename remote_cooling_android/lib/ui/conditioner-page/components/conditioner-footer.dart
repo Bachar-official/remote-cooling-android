@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/utils/time_ago.dart';
+import 'package:remote_cooling_android/utils/time-ago.dart';
 
 class ConditionerFooter extends StatelessWidget {
   late final Conditioner conditioner;
