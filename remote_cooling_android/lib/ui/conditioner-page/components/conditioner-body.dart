@@ -12,11 +12,16 @@ class ConditionerBody extends StatelessWidget {
   late final bool isLoading;
   late final Conditioner conditioner;
   late final Function setMode;
+  late final Function setOnOff;
+  late final bool isOn;
 
   ConditionerBody(
       {required this.isLoading,
         required this.conditioner,
-        required this.setMode});
+        required this.setMode,
+        required this.setOnOff,
+        required this.isOn
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +52,16 @@ class ConditionerBody extends StatelessWidget {
             thickness: 5,
             indent: 20,
             endIndent: 20,
+          ),
+          Row(
+            children: [
+              Switch(
+                value: isOn,
+                onChanged: (value) => setOnOff(value),
+              ),
+              Container(width: 18),
+              Text(isOn ? 'включён' : 'выключен', style: TextStyle(fontSize: 17))
+            ],
           ),
           ConditionerModeChooser(
               conditioner: conditioner, onChange: setMode),

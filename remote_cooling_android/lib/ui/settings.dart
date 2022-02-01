@@ -34,7 +34,6 @@ class _SettingsState extends State<SettingsPage> {
                   child: Column(
                     children: [
                       TextFormField(
-                          autofocus: true,
                           initialValue: provider.userName,
                           decoration:
                               InputDecoration(labelText: 'Имя пользователя'),

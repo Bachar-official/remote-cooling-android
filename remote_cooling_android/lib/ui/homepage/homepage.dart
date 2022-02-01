@@ -14,7 +14,9 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<ConditionerListModel>(context, listen: true);
-    String userName = Provider.of<SettingsModel>(context, listen: true).userName;
+    var settingsProvider = Provider.of<SettingsModel>(context, listen: true);
+    String userName = settingsProvider.userName;
+
     if (userName == 'Anonymous') {
       return EmptyNameDialog();
     }

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/constants.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-list-model.dart';
 import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
-import 'package:remote_cooling_android/entities/conditioner.dart';
 
 import 'components/conditioner-body.dart';
 
@@ -22,8 +21,6 @@ class _ConditionerState extends State<ConditionerPage> {
         Provider.of<ConditionerListModel>(context, listen: false)
             .changeConditioner;
     provider.setCallback(changeCallback);
-
-    on = provider.isOn;
     bool isLoading = provider.isLoading;
     return Scaffold(
       appBar: AppBar(
@@ -31,21 +28,15 @@ class _ConditionerState extends State<ConditionerPage> {
           provider.conditioner.name,
           style: TextStyle(fontFamily: 'Europe'),
         ),
-        actions: [
-          isLoading
-              ? Icon(Icons.watch_later_outlined, color: Constants.mainOrange)
-              : Switch(
-                  value: on,
-                  onChanged: (value) {
-                    provider.switchOnOff(value);
-                  }),
-        ],
       ),
       body: Consumer<ConditionerModel>(
           builder: (context, model, child) => ConditionerBody(
-              isLoading: isLoading,
-              conditioner: provider.conditioner,
-              setMode: provider.setMode)),
+                isLoading: isLoading,
+                conditioner: provider.conditioner,
+                setMode: provider.setMode,
+                isOn: provider.isOn,
+                setOnOff: provider.switchOnOff,
+              )),
     );
   }
 }

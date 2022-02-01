@@ -14,9 +14,8 @@ class ConditionerFooter extends StatelessWidget {
       children: [
         isDeveloper ? Text('API: ${conditioner.endpoint}') : Text(''),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text('Обновлено: '),
+          Text('Обновлено '),
           Text(TimeAgo.timeAgoSinceDate(conditioner.updatedAt)),
-          Text(' пользователем ${conditioner.userName}')
         ])
       ],
     );

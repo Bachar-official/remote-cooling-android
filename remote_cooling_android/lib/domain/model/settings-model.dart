@@ -10,7 +10,6 @@ class SettingsModel extends ChangeNotifier {
   late String _pingCommand;
   late String _userName;
   late bool _isDeveloper;
-  late bool _autofocus;
   late String _theme;
   Box _settingsBox = Hive.box('settings');
 
@@ -21,7 +20,6 @@ class SettingsModel extends ChangeNotifier {
     _userName = _settingsBox.get('user', defaultValue: 'Anonymous');
     _isDeveloper = _settingsBox.get('isDeveloper', defaultValue: false);
     _theme = _settingsBox.get('theme', defaultValue: 'Cinimex');
-    _autofocus = true;
   }
 
   int get port => _port;
@@ -34,22 +32,18 @@ class SettingsModel extends ChangeNotifier {
 
   void setPort(int port) {
     _port = port;
-    notifyListeners();
   }
 
   void setDuration(int duration) {
     _duration = duration;
-    notifyListeners();
   }
 
   void setPingCommand(String command) {
     _pingCommand = command;
-    notifyListeners();
   }
 
   void setUserName(String userName) {
     _userName = userName;
-    notifyListeners();
   }
 
   void setTheme(String themeName) {
@@ -66,11 +60,6 @@ class SettingsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _setAutofocus() {
-    _autofocus = false;
-    notifyListeners();
-  }
-
   void storeSettings() {
     _settingsBox.put('port', _port);
     _settingsBox.put('duration', _duration);
@@ -78,6 +67,6 @@ class SettingsModel extends ChangeNotifier {
     _settingsBox.put('user', _userName);
     _settingsBox.put('isDeveloper', _isDeveloper);
     _settingsBox.put('theme', _theme);
-    _setAutofocus();
+    notifyListeners();
   }
 }
