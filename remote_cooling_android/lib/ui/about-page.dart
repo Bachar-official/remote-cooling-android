@@ -36,14 +36,7 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'О программе',
-          style: TextStyle(fontFamily: 'Europe'),
-        ),
-      ),
-      body: Center(
+    return Center(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           child: Column(
@@ -93,7 +86,6 @@ class AboutPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

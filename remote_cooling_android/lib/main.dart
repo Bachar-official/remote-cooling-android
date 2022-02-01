@@ -7,6 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'domain/model/conditioner-list-model.dart';
 import 'domain/model/conditioner-model.dart';
+import 'domain/model/navigation-model.dart';
 import 'domain/model/settings-model.dart';
 
 void main() async {
@@ -30,6 +31,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ConditionerListModel()),
         ChangeNotifierProvider(create: (_) => ConditionerModel()),
         ChangeNotifierProvider(create: (_) => SettingsModel()),
+        ChangeNotifierProvider(create: (_) => NavigationModel()),
       ],
       child: App()));
 }

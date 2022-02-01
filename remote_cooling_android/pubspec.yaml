@@ -3,7 +3,7 @@ description: Simple Flutter app for manage conditioners connected with ESP32.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 0.6.0
+version: 0.7.0
 
 environment:
   sdk: ">=2.13.0 <3.0.0"

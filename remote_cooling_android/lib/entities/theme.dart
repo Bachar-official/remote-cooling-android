@@ -8,6 +8,9 @@ ThemeData cinimexTheme = ThemeData(
   primaryColor: CinimexColors.mainBlue,
   toggleableActiveColor: CinimexColors.mainOrange,
   scaffoldBackgroundColor: CinimexColors.mainBlue,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: CinimexColors.mainOrange
+  ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     selectedIconTheme: IconThemeData(color: CinimexColors.mainOrange),
     selectedLabelStyle: TextStyle(color: CinimexColors.mainOrange),

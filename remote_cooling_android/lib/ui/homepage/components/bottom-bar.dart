@@ -3,10 +3,16 @@ import 'package:remote_cooling_android/app/routing.dart';
 import 'package:remote_cooling_android/utils/route-utils.dart';
 
 class BottomBar extends StatelessWidget {
+  late final int pageNumber;
+  late final Function onPageChanged;
+
+  BottomBar({required this.pageNumber, required this.onPageChanged});
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-        items: _items(), onTap: (value) => _onItemTapped(value, context));
+      currentIndex: pageNumber,
+        items: _items(), onTap: (value) => onPageChanged(value));
   }
 
   List<BottomNavigationBarItem> _items() {
@@ -16,19 +22,5 @@ class BottomBar extends StatelessWidget {
       BottomNavigationBarItem(
           icon: Icon(Icons.add_to_home_screen), label: 'О программе'),
     ];
-  }
-
-  void _onItemTapped(int index, BuildContext context) {
-    switch (index) {
-      case 0:
-        RouteUtils.goToPage(context, AppRouter.homepage);
-        break;
-      case 1:
-        RouteUtils.goToPage(context, AppRouter.settingsPage);
-        break;
-      case 2:
-        RouteUtils.goToPage(context, AppRouter.aboutPage);
-        break;
-    }
   }
 }
