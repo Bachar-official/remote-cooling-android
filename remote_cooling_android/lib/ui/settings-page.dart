@@ -16,7 +16,6 @@ class _SettingsState extends State<SettingsPage> {
     final _formKey = GlobalKey<FormState>();
     var provider = Provider.of<SettingsModel>(context, listen: false);
     final MainAxisAlignment rowAlignment = MainAxisAlignment.spaceBetween;
-    final TextStyle textStyle = TextStyle(fontSize: 13);
 
     return Consumer<SettingsModel>(
       builder: (context, model, child) => Builder(
@@ -63,8 +62,7 @@ class _SettingsState extends State<SettingsPage> {
                               provider.setDuration(int.parse(newDuration))
                           }),
                   DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                        labelText: 'Тема оформления'),
+                    decoration: InputDecoration(labelText: 'Тема оформления'),
                     isExpanded: true,
                     value: provider.themeName,
                     items: _themeList(themeDictionary.keys.toList()),
@@ -73,7 +71,19 @@ class _SettingsState extends State<SettingsPage> {
                   Row(
                     mainAxisAlignment: rowAlignment,
                     children: [
-                      Text('Режим разработчика', style: textStyle),
+                      Tooltip(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Режим разработчика',
+                                style: TextStyle(fontSize: 15)),
+                            Icon(Icons.info_outline, size: 10)
+                          ],
+                        ),
+                        message: 'Показывает API кондиционера',
+                        showDuration: Duration(seconds: 3),
+                        triggerMode: TooltipTriggerMode.tap,
+                      ),
                       Checkbox(
                           //activeColor: Constants.mainOrange,
                           value: provider.isDeveloper,
@@ -99,8 +109,7 @@ class _SettingsState extends State<SettingsPage> {
   }
 }
 
-List<DropdownMenuItem<String>> _themeList(
-    List<String> options) {
+List<DropdownMenuItem<String>> _themeList(List<String> options) {
   return options.map<DropdownMenuItem<String>>((String option) {
     return DropdownMenuItem<String>(
       value: option,

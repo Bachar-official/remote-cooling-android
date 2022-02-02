@@ -1,7 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:remote_cooling_android/domain/repository/settings-repository.dart';
 import 'package:remote_cooling_android/entities/theme.dart';
 
 class SettingsModel extends ChangeNotifier {
@@ -11,15 +11,16 @@ class SettingsModel extends ChangeNotifier {
   late String _userName;
   late bool _isDeveloper;
   late String _theme;
-  Box _settingsBox = Hive.box('settings');
+  late SettingsRepository _settingsRepository;
 
   SettingsModel() {
-    _port = _settingsBox.get('port', defaultValue: 1337);
-    _duration = _settingsBox.get('duration', defaultValue: 2);
-    _pingCommand = _settingsBox.get('command', defaultValue: 'ping');
-    _userName = _settingsBox.get('user', defaultValue: 'Anonymous');
-    _isDeveloper = _settingsBox.get('isDeveloper', defaultValue: false);
-    _theme = _settingsBox.get('theme', defaultValue: 'Cinimex');
+    _settingsRepository = SettingsRepository();
+    _port = _settingsRepository.port;
+    _duration = _settingsRepository.duration;
+    _pingCommand = _settingsRepository.pingCommand;
+    _userName = _settingsRepository.userName;
+    _isDeveloper = _settingsRepository.isDeveloper;
+    _theme = _settingsRepository.themeName;
   }
 
   int get port => _port;
@@ -61,12 +62,13 @@ class SettingsModel extends ChangeNotifier {
   }
 
   void storeSettings() {
-    _settingsBox.put('port', _port);
-    _settingsBox.put('duration', _duration);
-    _settingsBox.put('command', _pingCommand);
-    _settingsBox.put('user', _userName);
-    _settingsBox.put('isDeveloper', _isDeveloper);
-    _settingsBox.put('theme', _theme);
+    _settingsRepository.storeSettings(
+        port: _port,
+        duration: _duration,
+        pingCommand: _pingCommand,
+        userName: _userName,
+        isDeveloper: _isDeveloper,
+        themeName: _theme);
     notifyListeners();
   }
 }
