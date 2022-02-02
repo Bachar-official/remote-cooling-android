@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/domain/model/settings-model.dart';
+import 'package:remote_cooling_android/domain/view-model/settings-view-model.dart';
 import 'package:remote_cooling_android/entities/theme.dart';
 import 'package:remote_cooling_android/utils/route-utils.dart';
 import 'package:remote_cooling_android/utils/validation-utils.dart';
@@ -14,10 +14,10 @@ class _SettingsState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-    var provider = Provider.of<SettingsModel>(context, listen: false);
+    var provider = Provider.of<SettingsViewModel>(context, listen: false);
     final MainAxisAlignment rowAlignment = MainAxisAlignment.spaceBetween;
 
-    return Consumer<SettingsModel>(
+    return Consumer<SettingsViewModel>(
       builder: (context, model, child) => Builder(
         builder: (ctx) => Form(
           key: _formKey,

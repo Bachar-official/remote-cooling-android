@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/cinimex-colors.dart';
-import 'package:remote_cooling_android/domain/model/conditioner-list-model.dart';
-import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
+import 'package:remote_cooling_android/domain/view-model/conditioner-list-view-model.dart';
+import 'package:remote_cooling_android/domain/view-model/conditioner-view-model.dart';
 
 import 'components/conditioner-body.dart';
 
@@ -16,9 +15,9 @@ class _ConditionerState extends State<ConditionerPage> {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<ConditionerModel>(context, listen: true);
+    var provider = Provider.of<ConditionerViewModel>(context, listen: true);
     var changeCallback =
-        Provider.of<ConditionerListModel>(context, listen: false)
+        Provider.of<ConditionerListViewModel>(context, listen: false)
             .changeConditioner;
     provider.setCallback(changeCallback);
     bool isLoading = provider.isLoading;
@@ -29,7 +28,7 @@ class _ConditionerState extends State<ConditionerPage> {
           style: TextStyle(fontFamily: 'Europe'),
         ),
       ),
-      body: Consumer<ConditionerModel>(
+      body: Consumer<ConditionerViewModel>(
           builder: (context, model, child) => ConditionerBody(
                 isLoading: isLoading,
                 conditioner: provider.conditioner,

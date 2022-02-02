@@ -8,7 +8,7 @@ import 'package:remote_cooling_android/entities/conditioner-status.dart';
 import 'package:remote_cooling_android/domain/repository/net-repository.dart';
 import 'package:remote_cooling_android/utils/time-ago.dart';
 
-class ConditionerModel extends ChangeNotifier {
+class ConditionerViewModel extends ChangeNotifier {
   late Conditioner _conditioner;
   late Function mutateListWith;
   final log = Logger('Conditioner');

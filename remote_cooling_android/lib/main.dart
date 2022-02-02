@@ -5,10 +5,10 @@ import 'package:logging/logging.dart';
 import 'package:remote_cooling_android/app/app.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'domain/model/conditioner-list-model.dart';
-import 'domain/model/conditioner-model.dart';
-import 'domain/model/navigation-model.dart';
-import 'domain/model/settings-model.dart';
+import 'domain/view-model/conditioner-list-view-model.dart';
+import 'domain/view-model/conditioner-view-model.dart';
+import 'domain/view-model/navigation-view-model.dart';
+import 'domain/view-model/settings-view-model.dart';
 
 void main() async {
   ansiColorDisabled = false;
@@ -28,10 +28,10 @@ void main() async {
   await Hive.openBox('settings');
   runApp(MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ConditionerListModel()),
-        ChangeNotifierProvider(create: (_) => ConditionerModel()),
-        ChangeNotifierProvider(create: (_) => SettingsModel()),
-        ChangeNotifierProvider(create: (_) => NavigationModel()),
+        ChangeNotifierProvider(create: (_) => ConditionerListViewModel()),
+        ChangeNotifierProvider(create: (_) => ConditionerViewModel()),
+        ChangeNotifierProvider(create: (_) => SettingsViewModel()),
+        ChangeNotifierProvider(create: (_) => NavigationViewModel()),
       ],
       child: App()));
 }

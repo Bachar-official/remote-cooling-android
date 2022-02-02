@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 
 import 'conditioner-card.dart';

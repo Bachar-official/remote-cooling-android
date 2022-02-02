@@ -3,13 +3,13 @@ import 'package:logging/logging.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/domain/repository/net-repository.dart';
 
-class ConditionerListModel extends ChangeNotifier {
+class ConditionerListViewModel extends ChangeNotifier {
   ///List of conditioners
   List<Conditioner> _list = [];
   bool _isLoading = false;
   final log = Logger('Conditioner list');
 
-  ConditionerListModel() {
+  ConditionerListViewModel() {
     this.getConditioners();
   }
 

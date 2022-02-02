@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
-class NavigationModel extends ChangeNotifier{
+class NavigationViewModel extends ChangeNotifier{
   late int _index;
 
   int get pageNumber => _index;
 
-  NavigationModel() {
+  NavigationViewModel() {
     _index = 0;
   }
 

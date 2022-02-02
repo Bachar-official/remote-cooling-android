@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/app/routing.dart';
-import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
+import 'package:remote_cooling_android/domain/view-model/conditioner-view-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/utils/route-utils.dart';
 
@@ -16,7 +16,7 @@ class ConditionerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<ConditionerModel>(context, listen: true);
+    var provider = Provider.of<ConditionerViewModel>(context, listen: true);
     provider.setConditioner(conditioner);
     return SizedBox(
       height: 120,

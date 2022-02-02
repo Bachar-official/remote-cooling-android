@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/domain/model/conditioner-model.dart';
-import 'package:remote_cooling_android/domain/model/settings-model.dart';
+import 'package:remote_cooling_android/domain/view-model/conditioner-view-model.dart';
+import 'package:remote_cooling_android/domain/view-model/settings-view-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 
 import '../../../cinimex-colors.dart';
@@ -25,8 +25,8 @@ class ConditionerBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<ConditionerModel>(context, listen: true);
-    bool isDeveloper = Provider.of<SettingsModel>(context, listen: false).isDeveloper;
+    var provider = Provider.of<ConditionerViewModel>(context, listen: true);
+    bool isDeveloper = Provider.of<SettingsViewModel>(context, listen: false).isDeveloper;
     return Column(
         children: isLoading
             ? [

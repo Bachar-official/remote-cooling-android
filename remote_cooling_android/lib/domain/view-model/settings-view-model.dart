@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/domain/repository/settings-repository.dart';
 import 'package:remote_cooling_android/entities/theme.dart';
 
-class SettingsModel extends ChangeNotifier {
+class SettingsViewModel extends ChangeNotifier {
   late int _port;
   late int _duration;
   late String _pingCommand;
@@ -13,7 +13,7 @@ class SettingsModel extends ChangeNotifier {
   late String _theme;
   late SettingsRepository _settingsRepository;
 
-  SettingsModel() {
+  SettingsViewModel() {
     _settingsRepository = SettingsRepository();
     _port = _settingsRepository.port;
     _duration = _settingsRepository.duration;

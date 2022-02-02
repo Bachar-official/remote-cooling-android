@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/cinimex-colors.dart';
-import 'package:remote_cooling_android/domain/model/conditioner-list-model.dart';
+import 'package:remote_cooling_android/domain/view-model/conditioner-list-view-model.dart';
 
 import 'components/conditioner-cards.dart';
 
@@ -10,7 +10,7 @@ class ConditionerListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<ConditionerListModel>(context, listen: true);
+    var provider = Provider.of<ConditionerListViewModel>(context, listen: true);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -20,7 +20,7 @@ class ConditionerListPage extends StatelessWidget {
       body: Center(
           child: provider.isLoading
               ? CircularProgressIndicator(color: CinimexColors.mainOrange)
-              : Consumer<ConditionerListModel>(
+              : Consumer<ConditionerListViewModel>(
                   builder: (context, model, child) => Center(
                       child: ConditionerCards(
                           conditioners: model.conditioners,

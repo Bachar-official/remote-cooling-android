@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/domain/model/navigation-model.dart';
-import 'package:remote_cooling_android/domain/model/settings-model.dart';
+import 'package:remote_cooling_android/domain/view-model/navigation-view-model.dart';
+import 'package:remote_cooling_android/domain/view-model/settings-view-model.dart';
 import 'package:remote_cooling_android/ui/homepage/components/bottom-bar.dart';
 import 'package:remote_cooling_android/ui/empty-name-dialog.dart';
 import 'package:remote_cooling_android/ui/settings-page.dart';
@@ -12,8 +12,8 @@ import '../conditioner-list-page/conditioner-list-page.dart';
 class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var userName = Provider.of<SettingsModel>(context, listen: true).userName;
-    var navigationProvider = Provider.of<NavigationModel>(context, listen:true);
+    var userName = Provider.of<SettingsViewModel>(context, listen: true).userName;
+    var navigationProvider = Provider.of<NavigationViewModel>(context, listen:true);
 
     Widget _chooseWidget(int number) {
       switch(number) {
