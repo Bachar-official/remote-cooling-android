@@ -14,7 +14,6 @@ class _SettingsState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-    var provider = Provider.of<SettingsViewModel>(context, listen: false);
     final MainAxisAlignment rowAlignment = MainAxisAlignment.spaceBetween;
 
     return Consumer<SettingsViewModel>(
@@ -28,47 +27,47 @@ class _SettingsState extends State<SettingsPage> {
                 child: Column(
                   children: [
                     TextFormField(
-                        initialValue: provider.userName,
+                        initialValue: model.userName,
                         decoration: const InputDecoration(
                             labelText: 'Имя пользователя'),
                         validator: ValidationUtils.validateEnglish,
-                        onChanged: (newUser) => provider.setUserName(newUser)),
+                        onChanged: (newUser) => model.setUserName(newUser)),
                     TextFormField(
                         keyboardType: TextInputType.number,
-                        initialValue: provider.port.toString(),
+                        initialValue: model.port.toString(),
                         decoration: const InputDecoration(labelText: 'Порт'),
                         validator: ValidationUtils.validatePort,
                         onChanged: (newPort) => {
-                              provider.setPort(int.parse(newPort)),
+                          model.setPort(int.parse(newPort)),
                             }),
                     TextFormField(
-                        initialValue: provider.command,
+                        initialValue: model.command,
                         decoration: const InputDecoration(
                             labelText: 'Команда для сканирования'),
                         validator: ValidationUtils.validateNull,
                         onChanged: (newCommand) =>
-                            provider.setPingCommand(newCommand)),
+                            model.setPingCommand(newCommand)),
                     TextFormField(
                         keyboardType: TextInputType.number,
-                        initialValue: provider.duration.toString(),
+                        initialValue: model.duration.toString(),
                         decoration: const InputDecoration(
                             labelText: 'Длительность ожидания (сек.)'),
                         validator: ValidationUtils.validateDuration,
                         onChanged: (newDuration) => {
                               if (newDuration == '')
                                 {
-                                  provider.setDuration(0),
+                                  model.setDuration(0),
                                 }
                               else
-                                provider.setDuration(int.parse(newDuration))
+                                model.setDuration(int.parse(newDuration))
                             }),
                     DropdownButtonFormField<String>(
                       decoration:
                           const InputDecoration(labelText: 'Тема оформления'),
                       isExpanded: true,
-                      value: provider.themeName,
+                      value: model.themeName,
                       items: _themeList(themeDictionary.keys.toList()),
-                      onChanged: (value) => provider.setTheme(value!),
+                      onChanged: (value) => model.setTheme(value!),
                     ),
                     Row(
                       mainAxisAlignment: rowAlignment,
@@ -88,14 +87,14 @@ class _SettingsState extends State<SettingsPage> {
                         ),
                         Checkbox(
                             //activeColor: Constants.mainOrange,
-                            value: provider.isDeveloper,
-                            onChanged: (value) => provider.setDeveloper(value)),
+                            value: model.isDeveloper,
+                            onChanged: (value) => model.setDeveloper(value)),
                       ],
                     ),
                     ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            provider.storeSettings();
+                            model.storeSettings();
                             RouteUtils.showNotification(
                                 ctx, 'Успешно!', Colors.green);
                           }

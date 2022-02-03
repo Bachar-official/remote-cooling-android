@@ -34,28 +34,28 @@ class SettingsViewModel extends ChangeNotifier {
   String get themeName => _theme;
 
   void setPort(int port) {
-    log.fine('Sets \"port\" to value ${port.toString()}');
     _port = port;
+    log.fine('Sets \"port\" to value ${port.toString()}');
   }
 
   void setDuration(int duration) {
-    log.fine('Sets \"duration\" to value ${duration.toString()}');
     _duration = duration;
+    log.fine('Sets \"duration\" to value ${duration.toString()}');
   }
 
   void setPingCommand(String command) {
-    log.fine('Sets \"command\" to value ${command.toString()}');
     _pingCommand = command;
+    log.fine('Sets \"command\" to value ${command.toString()}');
   }
 
   void setUserName(String userName) {
-    log.fine('Sets \"userName\" to value ${userName.toString()}');
     _userName = userName;
+    log.fine('Sets \"userName\" to value ${userName.toString()}');
   }
 
   void setTheme(String themeName) {
-    log.fine('Sets \"themeName\" to value ${themeName.toString()}');
     _theme = themeName;
+    log.fine('Sets \"themeName\" to value ${themeName.toString()}');
     notifyListeners();
   }
 
@@ -63,8 +63,8 @@ class SettingsViewModel extends ChangeNotifier {
     if (isDeveloper == null) {
       _isDeveloper = false;
     } else {
-      log.fine('Sets \"isDeveloper\" to value ${isDeveloper.toString()}');
       _isDeveloper = isDeveloper;
+      log.fine('Sets \"isDeveloper\" to value ${isDeveloper.toString()}');
     }
     notifyListeners();
   }

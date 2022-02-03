@@ -13,7 +13,7 @@ class Homepage extends StatelessWidget {
   final int settingsPageNumber = 1;
   @override
   Widget build(BuildContext context) {
-    var userName =
+    String userName =
         Provider.of<SettingsViewModel>(context, listen: true).userName;
     var navigationProvider =
         Provider.of<NavigationViewModel>(context, listen: true);
