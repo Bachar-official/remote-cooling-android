@@ -10,28 +10,38 @@ import '../about-page.dart';
 import '../conditioner-list-page/conditioner-list-page.dart';
 
 class Homepage extends StatelessWidget {
+  final int settingsPageNumber = 1;
   @override
   Widget build(BuildContext context) {
-    var userName = Provider.of<SettingsViewModel>(context, listen: true).userName;
-    var navigationProvider = Provider.of<NavigationViewModel>(context, listen:true);
+    var userName =
+        Provider.of<SettingsViewModel>(context, listen: true).userName;
+    var navigationProvider =
+        Provider.of<NavigationViewModel>(context, listen: true);
 
     Widget _chooseWidget(int number) {
-      switch(number) {
-        case 0: return ConditionerListPage();
-        case 1: return SettingsPage();
-        case 2: return AboutPage();
-        default: return Center();
+      switch (number) {
+        case 0:
+          return ConditionerListPage();
+        case 1:
+          return SettingsPage();
+        case 2:
+          return AboutPage();
+        default:
+          return Center();
       }
     }
 
-    if(userName == 'Anonymous') {
-      return EmptyNameDialog();
-    }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cinimex Cooling', style: TextStyle(fontFamily: 'Europe')),
+        title: const Text('Cinimex Cooling', style: TextStyle(fontFamily: 'Europe')),
       ),
-      body: _chooseWidget(navigationProvider.pageNumber),
+      body: navigationProvider.pageNumber == settingsPageNumber
+          ? SettingsPage()
+          : userName == 'Anonymous'
+              ? EmptyNameDialog(
+                  openSettings: navigationProvider.setPage,
+                )
+              : _chooseWidget(navigationProvider.pageNumber),
       bottomNavigationBar: BottomBar(
         onPageChanged: (pageNumber) => navigationProvider.setPage(pageNumber),
         pageNumber: navigationProvider.pageNumber,
