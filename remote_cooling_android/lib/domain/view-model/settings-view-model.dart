@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:remote_cooling_android/domain/repository/settings-repository.dart';
 import 'package:remote_cooling_android/entities/theme.dart';
 
@@ -12,6 +13,7 @@ class SettingsViewModel extends ChangeNotifier {
   late bool _isDeveloper;
   late String _theme;
   late SettingsRepository _settingsRepository;
+  final log = Logger('Settings');
 
   SettingsViewModel() {
     _settingsRepository = SettingsRepository();
@@ -32,22 +34,27 @@ class SettingsViewModel extends ChangeNotifier {
   String get themeName => _theme;
 
   void setPort(int port) {
+    log.fine('Sets \"port\" to value ${port.toString()}');
     _port = port;
   }
 
   void setDuration(int duration) {
+    log.fine('Sets \"duration\" to value ${duration.toString()}');
     _duration = duration;
   }
 
   void setPingCommand(String command) {
+    log.fine('Sets \"command\" to value ${command.toString()}');
     _pingCommand = command;
   }
 
   void setUserName(String userName) {
+    log.fine('Sets \"userName\" to value ${userName.toString()}');
     _userName = userName;
   }
 
   void setTheme(String themeName) {
+    log.fine('Sets \"themeName\" to value ${themeName.toString()}');
     _theme = themeName;
     notifyListeners();
   }
@@ -56,6 +63,7 @@ class SettingsViewModel extends ChangeNotifier {
     if (isDeveloper == null) {
       _isDeveloper = false;
     } else {
+      log.fine('Sets \"isDeveloper\" to value ${isDeveloper.toString()}');
       _isDeveloper = isDeveloper;
     }
     notifyListeners();
@@ -69,6 +77,7 @@ class SettingsViewModel extends ChangeNotifier {
         userName: _userName,
         isDeveloper: _isDeveloper,
         themeName: _theme);
+    log.fine('Stored settings!');
     notifyListeners();
   }
 }
