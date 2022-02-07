@@ -33,7 +33,6 @@ class _ConditionerState extends State<ConditionerPage> {
                 isLoading: isLoading,
                 conditioner: provider.conditioner,
                 setMode: provider.setMode,
-                isOn: provider.isOn,
                 setOnOff: provider.switchOnOff,
               )),
     );

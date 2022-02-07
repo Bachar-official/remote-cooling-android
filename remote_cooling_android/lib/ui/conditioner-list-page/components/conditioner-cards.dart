@@ -17,8 +17,10 @@ class ConditionerCards extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Center(
-            child: Text('Устройств в вашей подсети не найдено.\n' +
-                'Попробуйте повторить поиск или проверьте настройки сети.')),
+            child: Text(
+                'Устройств в вашей подсети не найдено.\n' +
+                    'Попробуйте повторить поиск или проверьте настройки сети.',
+                textAlign: TextAlign.center)),
       ));
     }
     return ListView.builder(

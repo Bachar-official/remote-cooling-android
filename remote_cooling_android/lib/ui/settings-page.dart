@@ -5,12 +5,7 @@ import 'package:remote_cooling_android/entities/theme.dart';
 import 'package:remote_cooling_android/utils/route-utils.dart';
 import 'package:remote_cooling_android/utils/validation-utils.dart';
 
-class SettingsPage extends StatefulWidget {
-  @override
-  _SettingsState createState() => _SettingsState();
-}
-
-class _SettingsState extends State<SettingsPage> {
+class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/domain/view-model/conditioner-view-model.dart';
 import 'package:remote_cooling_android/domain/view-model/settings-view-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 
@@ -13,19 +12,17 @@ class ConditionerBody extends StatelessWidget {
   late final Conditioner conditioner;
   late final Function setMode;
   late final Function setOnOff;
-  late final bool isOn;
 
   ConditionerBody(
       {required this.isLoading,
         required this.conditioner,
         required this.setMode,
         required this.setOnOff,
-        required this.isOn
       });
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<ConditionerViewModel>(context, listen: true);
+    bool isConditionerOn = conditioner.isOn;
     bool isDeveloper = Provider.of<SettingsViewModel>(context, listen: false).isDeveloper;
     return Column(
         children: isLoading
@@ -41,7 +38,7 @@ class ConditionerBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: FittedBox(
                 child: Text(
-                  provider.temperature,
+                  conditioner.temperature,
                   style: TextStyle(fontSize: 100),
                 ),
               ),
@@ -56,11 +53,11 @@ class ConditionerBody extends StatelessWidget {
           Row(
             children: [
               Switch(
-                value: isOn,
+                value: isConditionerOn,
                 onChanged: (value) => setOnOff(value),
               ),
               Container(width: 18),
-              Text(isOn ? 'включён' : 'выключен', style: TextStyle(fontSize: 17))
+              Text(isConditionerOn ? 'включён' : 'выключен', style: TextStyle(fontSize: 17))
             ],
           ),
           ConditionerModeChooser(

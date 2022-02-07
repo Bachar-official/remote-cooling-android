@@ -23,7 +23,7 @@ class ConditionerInfoColumn extends StatelessWidget {
             mainAxisAlignment: rowAlignment,
             children: [
               _getIconStatus(provider.conditioner.status, mainBlack),
-              Text(provider.temperature, style: textStyle,),
+              Text(provider.conditioner.temperature, style: textStyle,),
             ],
           ),
           Row(

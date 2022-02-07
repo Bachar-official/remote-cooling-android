@@ -35,27 +35,27 @@ class SettingsViewModel extends ChangeNotifier {
 
   void setPort(int port) {
     _port = port;
-    log.fine('Sets \"port\" to value ${port.toString()}');
+    log.fine('Sets port to value ${port.toString()}');
   }
 
   void setDuration(int duration) {
     _duration = duration;
-    log.fine('Sets \"duration\" to value ${duration.toString()}');
+    log.fine('Sets duration to value ${duration.toString()}');
   }
 
   void setPingCommand(String command) {
     _pingCommand = command;
-    log.fine('Sets \"command\" to value ${command.toString()}');
+    log.fine('Sets command to value ${command.toString()}');
   }
 
   void setUserName(String userName) {
     _userName = userName;
-    log.fine('Sets \"userName\" to value ${userName.toString()}');
+    log.fine('Sets userName to value ${userName.toString()}');
   }
 
   void setTheme(String themeName) {
     _theme = themeName;
-    log.fine('Sets \"themeName\" to value ${themeName.toString()}');
+    log.fine('Sets themeName to value ${themeName.toString()}');
     notifyListeners();
   }
 
@@ -64,7 +64,7 @@ class SettingsViewModel extends ChangeNotifier {
       _isDeveloper = false;
     } else {
       _isDeveloper = isDeveloper;
-      log.fine('Sets \"isDeveloper\" to value ${isDeveloper.toString()}');
+      log.fine('Sets isDeveloper to value ${isDeveloper.toString()}');
     }
     notifyListeners();
   }
@@ -77,7 +77,7 @@ class SettingsViewModel extends ChangeNotifier {
         userName: _userName,
         isDeveloper: _isDeveloper,
         themeName: _theme);
-    log.fine('Stored settings!');
+    log.fine('Settings stored successfully!');
     notifyListeners();
   }
 }
