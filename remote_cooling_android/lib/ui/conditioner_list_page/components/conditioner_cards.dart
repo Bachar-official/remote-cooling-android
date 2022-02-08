@@ -42,6 +42,7 @@ class ConditionerCards extends StatelessWidget {
                     textAlign: TextAlign.center)),
           ))
       : ListView.builder(
+        padding: const EdgeInsets.symmetric(vertical: 10),
         itemCount: conditioners.length,
         itemBuilder: (context, index) {
           return ConditionerCard(
