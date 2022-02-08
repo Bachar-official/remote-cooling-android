@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:remote_cooling_android/entities/conditioner-status.dart';
+import 'package:remote_cooling_android/entities/conditioner_status.dart';
 
-import '../../../cinimex-colors.dart';
+import '../../ui_constants/colors.dart';
 
 class ConditionerInfoColumn extends StatelessWidget {
   late final provider;

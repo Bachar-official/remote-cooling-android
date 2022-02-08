@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 
-import 'conditioner-card.dart';
+import 'conditioner_card.dart';
 
 class ConditionerCards extends StatelessWidget {
   late final List<Conditioner> conditioners;

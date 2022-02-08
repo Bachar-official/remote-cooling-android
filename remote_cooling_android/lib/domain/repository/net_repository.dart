@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:remote_cooling_android/entities/conditioner-status.dart';
+import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:http/http.dart' as http;
 
 class NetRepository {

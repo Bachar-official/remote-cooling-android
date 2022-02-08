@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:remote_cooling_android/domain/view-model/conditioner-view-model.dart';
-import 'package:remote_cooling_android/entities/conditioner-status.dart';
+import 'package:remote_cooling_android/domain/view_model/conditioner-view-model.dart';
+import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 
 void main() {

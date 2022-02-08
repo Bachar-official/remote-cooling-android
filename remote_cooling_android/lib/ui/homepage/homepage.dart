@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/domain/view-model/navigation-view-model.dart';
-import 'package:remote_cooling_android/domain/view-model/settings-view-model.dart';
+import 'package:remote_cooling_android/domain/view_model/navigation_view_model.dart';
+import 'package:remote_cooling_android/domain/view_model/settings_view_model.dart';
 import 'package:remote_cooling_android/ui/homepage/components/bottom-bar.dart';
 import 'package:remote_cooling_android/ui/empty-name-dialog.dart';
-import 'package:remote_cooling_android/ui/settings-page.dart';
+import 'package:remote_cooling_android/ui/settings_page.dart';
 
 import '../about-page.dart';
-import '../conditioner-list-page/conditioner-list-page.dart';
+import '../conditioner_list_page/conditioner_list_page.dart';
 
 class Homepage extends StatelessWidget {
   final int settingsPageNumber = 1;

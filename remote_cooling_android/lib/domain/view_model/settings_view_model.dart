@@ -2,8 +2,8 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:remote_cooling_android/domain/repository/settings-repository.dart';
-import 'package:remote_cooling_android/entities/theme.dart';
+import 'package:remote_cooling_android/domain/repository/settings_repository.dart';
+import 'package:remote_cooling_android/ui/ui_constants/theme.dart';
 
 class SettingsViewModel extends ChangeNotifier {
   late int _port;

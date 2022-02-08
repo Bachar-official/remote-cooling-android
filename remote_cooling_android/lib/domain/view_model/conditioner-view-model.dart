@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:remote_cooling_android/domain/repository/settings-repository.dart';
+import 'package:remote_cooling_android/domain/repository/settings_repository.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/entities/conditioner-status.dart';
-import 'package:remote_cooling_android/domain/repository/net-repository.dart';
-import 'package:remote_cooling_android/utils/time-ago.dart';
+import 'package:remote_cooling_android/entities/conditioner_status.dart';
+import 'package:remote_cooling_android/domain/repository/net_repository.dart';
+import 'package:remote_cooling_android/utils/time_ago.dart';
 
 class ConditionerViewModel extends ChangeNotifier {
   late Conditioner _conditioner;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/entities/conditioner-status.dart';
-import 'package:remote_cooling_android/ui/conditioner-page/components/mode-title.dart';
+import 'package:remote_cooling_android/entities/conditioner_status.dart';
+import 'package:remote_cooling_android/ui/conditioner_page/components/mode-title.dart';
 
-class ConditionerModeChooser extends StatelessWidget {
+class ConditionerModeSwitcher extends StatelessWidget {
   late final Conditioner conditioner;
   late final Function onChange;
 
-  ConditionerModeChooser(
+  ConditionerModeSwitcher(
       {required this.conditioner, required this.onChange});
 
   @override

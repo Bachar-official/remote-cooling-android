@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/domain/view-model/settings-view-model.dart';
+import 'package:remote_cooling_android/domain/view_model/settings_view_model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/ui/conditioner-page/components/conditioner_header.dart';
+import 'package:remote_cooling_android/ui/conditioner_page/components/conditioner_header.dart';
 
-import '../../../cinimex-colors.dart';
-import 'conditioner-footer.dart';
-import 'conditioner-mode-chooser.dart';
+import '../../ui_constants/colors.dart';
+import 'conditioner_footer.dart';
+import 'conditioner_mode_switcher.dart';
 
 class ConditionerBody extends StatelessWidget {
   late final bool isLoading;
@@ -48,7 +48,7 @@ class ConditionerBody extends StatelessWidget {
                         style: TextStyle(fontSize: 17))
                   ],
                 ),
-                ConditionerModeChooser(
+                ConditionerModeSwitcher(
                     conditioner: conditioner, onChange: setMode),
                 Divider(
                   height: 20,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/app/routing.dart';
-import 'package:remote_cooling_android/domain/view-model/conditioner-view-model.dart';
+import 'package:remote_cooling_android/domain/view_model/conditioner-view-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
-import 'package:remote_cooling_android/utils/route-utils.dart';
+import 'package:remote_cooling_android/utils/route_utils.dart';
 
-import '../../../cinimex-colors.dart';
-import 'conditioner-info-column.dart';
+import '../../ui_constants/colors.dart';
+import 'conditioner_info_column.dart';
 
 class ConditionerCard extends StatelessWidget {
   late final Conditioner conditioner;

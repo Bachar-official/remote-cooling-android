@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
-import 'package:remote_cooling_android/domain/repository/broadcast-repository.dart';
-import 'package:remote_cooling_android/domain/repository/settings-repository.dart';
+import 'package:remote_cooling_android/domain/repository/broadcast_repository.dart';
+import 'package:remote_cooling_android/domain/repository/settings_repository.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 
 class ConditionerListViewModel extends ChangeNotifier {

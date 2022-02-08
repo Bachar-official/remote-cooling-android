@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/domain/view-model/settings-view-model.dart';
-import 'package:remote_cooling_android/entities/theme.dart';
-import 'package:remote_cooling_android/utils/route-utils.dart';
-import 'package:remote_cooling_android/utils/validation-utils.dart';
+import 'package:remote_cooling_android/domain/view_model/settings_view_model.dart';
+import 'package:remote_cooling_android/ui/ui_constants/theme.dart';
+import 'package:remote_cooling_android/utils/route_utils.dart';
+import 'package:remote_cooling_android/utils/validation_utils.dart';
 
 class SettingsPage extends StatelessWidget {
   @override

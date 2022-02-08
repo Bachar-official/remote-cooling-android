@@ -5,10 +5,10 @@ import 'package:logging/logging.dart';
 import 'package:remote_cooling_android/app/app.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'domain/view-model/conditioner-list-view-model.dart';
-import 'domain/view-model/conditioner-view-model.dart';
-import 'domain/view-model/navigation-view-model.dart';
-import 'domain/view-model/settings-view-model.dart';
+import 'domain/view_model/conditioner_list_view_model.dart';
+import 'domain/view_model/conditioner-view-model.dart';
+import 'domain/view_model/navigation_view_model.dart';
+import 'domain/view_model/settings_view_model.dart';
 
 void main() async {
   ansiColorDisabled = false;

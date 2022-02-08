@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/domain/view-model/conditioner-list-view-model.dart';
-import 'package:remote_cooling_android/domain/view-model/conditioner-view-model.dart';
+import 'package:remote_cooling_android/domain/view_model/conditioner_list_view_model.dart';
+import 'package:remote_cooling_android/domain/view_model/conditioner-view-model.dart';
 
-import 'components/conditioner-body.dart';
+import 'components/conditioner_body.dart';
 
 class ConditionerPage extends StatefulWidget {
   @override

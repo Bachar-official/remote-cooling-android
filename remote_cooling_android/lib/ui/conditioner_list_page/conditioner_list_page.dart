@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_cooling_android/cinimex-colors.dart';
-import 'package:remote_cooling_android/domain/view-model/conditioner-list-view-model.dart';
+import 'package:remote_cooling_android/domain/view_model/conditioner_list_view_model.dart';
 
-import 'components/conditioner-cards.dart';
+import 'components/conditioner_cards.dart';
 import 'components/conditioner_list_skeleton.dart';
 
 class ConditionerListPage extends StatelessWidget {
@@ -21,7 +20,6 @@ class ConditionerListPage extends StatelessWidget {
         onPressed: provider.getConditioners
       ),
       body: provider.isLoading
-          //? CircularProgressIndicator(color: CinimexColors.mainOrange)
           ? ConditionerListSkeleton()
           : Consumer<ConditionerListViewModel>(
               builder: (context, model, child) => Center(

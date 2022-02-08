@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../cinimex-colors.dart';
+import 'colors.dart';
 
 Color cmxBlack = CinimexColors.mainBlack;
 Color cmxBlue = CinimexColors.mainBlue;
