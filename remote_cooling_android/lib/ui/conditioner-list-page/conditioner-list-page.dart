@@ -4,6 +4,7 @@ import 'package:remote_cooling_android/cinimex-colors.dart';
 import 'package:remote_cooling_android/domain/view-model/conditioner-list-view-model.dart';
 
 import 'components/conditioner-cards.dart';
+import 'components/conditioner_list_skeleton.dart';
 
 class ConditionerListPage extends StatelessWidget {
   const ConditionerListPage({Key? key}) : super(key: key);
@@ -14,18 +15,20 @@ class ConditionerListPage extends StatelessWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.refresh, size: 30),
+        child: provider.isLoading
+          ? Icon(Icons.watch_later_outlined, size: 30)
+          : Icon(Icons.refresh, size: 30),
         onPressed: provider.getConditioners
       ),
-      body: Center(
-          child: provider.isLoading
-              ? CircularProgressIndicator(color: CinimexColors.mainOrange)
-              : Consumer<ConditionerListViewModel>(
-                  builder: (context, model, child) => Center(
-                      child: ConditionerCards(
-                          conditioners: model.conditioners,
-                          callback: () => {})),
-                )),
+      body: provider.isLoading
+          //? CircularProgressIndicator(color: CinimexColors.mainOrange)
+          ? ConditionerListSkeleton()
+          : Consumer<ConditionerListViewModel>(
+              builder: (context, model, child) => Center(
+                  child: ConditionerCards(
+                      conditioners: model.conditioners,
+                      callback: () => {})),
+            ),
     );
   }
 }
