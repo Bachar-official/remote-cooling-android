@@ -38,7 +38,7 @@ ThemeData cinimexTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: cmxBlack,
-    unselectedItemColor: Colors.white,
+    unselectedItemColor: Colors.grey,
     selectedIconTheme: IconThemeData(color: cmxOrange),
     selectedLabelStyle: TextStyle(color: cmxOrange),
     selectedItemColor: cmxOrange,

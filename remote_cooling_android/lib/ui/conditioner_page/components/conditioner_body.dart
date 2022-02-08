@@ -23,7 +23,6 @@ class ConditionerBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isConditionerOn = conditioner.isOn;
     bool isDeveloper =
         Provider.of<SettingsViewModel>(context, listen: false).isDeveloper;
     return Column(
@@ -37,19 +36,12 @@ class ConditionerBody extends StatelessWidget {
                   indent: 20,
                   endIndent: 20,
                 ),
-                Row(
-                  children: [
-                    Switch(
-                      value: isConditionerOn,
-                      onChanged: (value) => setOnOff(value),
-                    ),
-                    Container(width: 18),
-                    Text(isConditionerOn ? 'включён' : 'выключен',
-                        style: TextStyle(fontSize: 17))
-                  ],
-                ),
                 ConditionerModeSwitcher(
-                    conditioner: conditioner, onChange: setMode),
+                    conditioner: conditioner,
+                    onSetMode: setMode,
+                    onSwitchPower: setOnOff,
+                    isLoading: isLoading,
+                ),
                 Divider(
                   height: 20,
                   thickness: 5,
@@ -58,7 +50,10 @@ class ConditionerBody extends StatelessWidget {
                 ),
                 Spacer(),
                 ConditionerFooter(
-                    conditioner: conditioner, isDeveloper: isDeveloper)
+                    conditioner: conditioner,
+                    isDeveloper: isDeveloper,
+                    isLoading: isLoading,
+                )
               ]);
   }
 }
