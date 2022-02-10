@@ -27,7 +27,7 @@ class Homepage extends StatelessWidget {
         case 2:
           return AboutPage();
         default:
-          return Center();
+          return SizedBox.shrink();
       }
     }
 
