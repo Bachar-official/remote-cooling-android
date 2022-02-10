@@ -5,7 +5,7 @@ import 'package:remote_cooling_android/domain/repository/net_repository.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 
 void main() {
-  test('', () async {
+  test('should return right data', () async {
     final dio = Dio();
     final dioAdapter = DioAdapter(dio: dio);
     dio.httpClientAdapter = dioAdapter;
@@ -13,7 +13,7 @@ void main() {
     NetRepository netRepository = NetRepository(userName: 'testUser');
 
     String path =
-        '192.168.0.100/set';
+        'http://192.168.0.100/set';
     Map<String, String> queryParameters = {
       'date': now.toString(),
       'profile': '100',
