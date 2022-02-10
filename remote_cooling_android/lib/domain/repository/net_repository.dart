@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class NetRepository {
   late String _userName;
@@ -9,18 +9,18 @@ class NetRepository {
     this._userName = userName;
   }
 
-  Map<String, String> getQueryParameters(ConditionerCommand command) {
+  Map<String, String> getQueryParameters(ConditionerCommand command, DateTime dateTime) {
     if (command == ConditionerCommand.off ||
         command == ConditionerCommand.ping) {
       return {
-        'date': DateTime.now().toString(),
+        'date': dateTime.toString(),
         'user': _userName
         };
     }
     String stringCommand = commandDictionary[command]!;
     return {
       'profile': stringCommand,
-      'date': DateTime.now().toString(),
+      'date': dateTime.toString(),
       'user': _userName
     };
   }
@@ -38,9 +38,10 @@ class NetRepository {
     }
   }
 
-  Future<http.Response> sendCommand(
-      String url, ConditionerCommand command) async {
-    return http
-        .get(Uri.http(url, getCommand(command), getQueryParameters(command)));
+  Future<Response> sendCommand(
+      String url, ConditionerCommand command, DateTime dateTime, Dio dio) async {
+    return dio
+        .get('$url/${getCommand(command)}',
+        queryParameters: getQueryParameters(command, dateTime));
   }
 }
