@@ -41,7 +41,7 @@ class NetRepository {
   Future<Response> sendCommand(
       String url, ConditionerCommand command, DateTime dateTime, Dio dio) async {
     return dio
-        .get('$url/${getCommand(command)}',
+        .get('http://$url/${getCommand(command)}',
         queryParameters: getQueryParameters(command, dateTime));
   }
 }
