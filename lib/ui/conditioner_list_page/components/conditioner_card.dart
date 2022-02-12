@@ -29,14 +29,20 @@ class ConditionerCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               child: Row(
                 children: [
-                  provider.conditioner.name.isEmpty
-                      ? Text('')
-                      : Text(
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        provider.conditioner.name.isEmpty
+                            ? Text('')
+                            : Text(
                           provider.conditioner.name,
                           style:
-                              TextStyle(fontSize: 20, color: CinimexColors.mainBlack),
+                          TextStyle(fontSize: 30, color: CinimexColors.mainBlack),
                         ),
-                  Spacer(),
+                      ],
+                    ),
+                  ),
                   VerticalDivider(
                     color: CinimexColors.mainBlack,
                     thickness: 2,
