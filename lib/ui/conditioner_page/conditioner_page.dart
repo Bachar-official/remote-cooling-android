@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/domain/view_model/conditioner_list_view_model.dart';
 import 'package:remote_cooling_android/domain/view_model/conditioner-view-model.dart';
+import 'package:remote_cooling_android/entities/conditioner.dart';
 
 import 'components/conditioner_body.dart';
 
@@ -15,11 +16,13 @@ class _ConditionerState extends State<ConditionerPage> {
 
   @override
   Widget build(BuildContext context) {
+    Conditioner conditioner = ModalRoute.of(context)!.settings.arguments as Conditioner;
     var provider = Provider.of<ConditionerViewModel>(context, listen: true);
     var changeCallback =
         Provider.of<ConditionerListViewModel>(context, listen: false)
             .changeConditioner;
     provider.setCallback(changeCallback);
+    provider.setConditioner(conditioner);
     bool isLoading = provider.isLoading;
     return Scaffold(
       appBar: AppBar(
