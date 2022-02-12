@@ -29,8 +29,6 @@ class ConditionerViewModel extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  String get updatedWhile => TimeAgo.timeAgoSinceDate(_conditioner.updatedAt);
-
   ///Initiate conditioner to work
   @required
   void setConditioner(Conditioner newConditioner) {

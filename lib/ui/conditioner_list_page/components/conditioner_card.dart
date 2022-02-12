@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:remote_cooling_android/app/routing.dart';
-import 'package:remote_cooling_android/domain/view_model/conditioner-view-model.dart';
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/utils/route_utils.dart';
 
@@ -16,8 +14,6 @@ class ConditionerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<ConditionerViewModel>(context, listen: true);
-    provider.setConditioner(conditioner);
     return SizedBox(
       height: 120,
       child: GestureDetector(
@@ -33,10 +29,10 @@ class ConditionerCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        provider.conditioner.name.isEmpty
+                        conditioner.name.isEmpty
                             ? Text('')
                             : Text(
-                          provider.conditioner.name,
+                          conditioner.name,
                           style:
                           TextStyle(fontSize: 30, color: CinimexColors.mainBlack),
                         ),
@@ -49,7 +45,7 @@ class ConditionerCard extends StatelessWidget {
                     indent: 5,
                     endIndent: 5,
                   ),
-                  ConditionerInfoColumn(provider: provider),
+                  ConditionerInfoColumn(conditioner: conditioner),
                 ],
               ),
             ),

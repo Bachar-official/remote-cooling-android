@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 
 import '../../ui_constants/colors.dart';
 
 class ConditionerInfoColumn extends StatelessWidget {
-  late final provider;
+  late final Conditioner conditioner;
 
-  ConditionerInfoColumn({required this.provider});
+  ConditionerInfoColumn({required this.conditioner});
 
   final TextStyle textStyle = TextStyle(color: CinimexColors.mainBlack, fontSize: 18);
   final Color mainBlack = CinimexColors.mainBlack;
@@ -22,22 +23,22 @@ class ConditionerInfoColumn extends StatelessWidget {
           Row(
             mainAxisAlignment: rowAlignment,
             children: [
-              _getIconStatus(provider.conditioner.status, mainBlack),
-              Text(provider.conditioner.temperature, style: textStyle,),
+              _getIconStatus(conditioner.status, mainBlack),
+              Text(conditioner.temperature, style: textStyle,),
             ],
           ),
           Row(
             mainAxisAlignment: rowAlignment,
             children: [
               Icon(Icons.access_time, color: mainBlack),
-              Text(provider.updatedWhile, style: textStyle),
+              Text(conditioner.whereUpdated, style: textStyle),
             ],
           ),
           Row(
             mainAxisAlignment: rowAlignment,
             children: [
               Icon(Icons.badge_outlined, color: mainBlack),
-              Text(provider.conditioner.userName, style: textStyle)
+              Text(conditioner.userName, style: textStyle)
             ],
           ),
         ],

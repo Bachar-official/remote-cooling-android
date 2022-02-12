@@ -1,4 +1,5 @@
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
+import 'package:remote_cooling_android/utils/time_ago.dart';
 
 class Conditioner {
   late String _name;
@@ -36,18 +37,13 @@ class Conditioner {
   }
 
   String get name => _name;
-
   String get endpoint => _endpoint;
-
   ConditionerStatus get status => _status;
-
   DateTime get updatedAt => _updatedAt;
-
   String get userName => _userName;
-
   bool get isOn => _isConditionerOn();
-
   String get temperature => _getTemperature();
+  String get whereUpdated => _whereUpdated();
 
   void setStatus(String status) {
     this._status = getConditionerStatus(status);
@@ -111,5 +107,9 @@ class Conditioner {
       default:
         return 'неизвестно';
     }
+  }
+
+  String _whereUpdated() {
+    return TimeAgo.timeAgoSinceDate(_updatedAt);
   }
 }
