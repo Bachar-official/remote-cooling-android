@@ -64,6 +64,7 @@ class SettingsPage extends StatelessWidget {
                       items: _themeList(themeDictionary.keys.toList()),
                       onChanged: (value) => model.setTheme(value!),
                     ),
+
                     Row(
                       mainAxisAlignment: rowAlignment,
                       children: [
@@ -72,7 +73,7 @@ class SettingsPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text('Режим разработчика',
-                                  style: TextStyle(fontSize: 15)),
+                                  style: TextStyle(fontSize: 14, decoration: TextDecoration.underline)),
                               const Icon(Icons.info_outline, size: 10)
                             ],
                           ),

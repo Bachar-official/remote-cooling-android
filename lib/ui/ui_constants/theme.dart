@@ -14,6 +14,7 @@ ThemeData cinimexTheme = ThemeData(
         fontSize: 20
     ),
   ),
+  cardColor: cmxOrange,
   colorScheme: ColorScheme(
       primary: Colors.blue,
       primaryVariant: Colors.blue,

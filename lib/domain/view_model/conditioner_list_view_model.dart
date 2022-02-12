@@ -10,9 +10,10 @@ class ConditionerListViewModel extends ChangeNotifier {
   List<Conditioner> _list = [];
   bool _isLoading = false;
   final log = Logger('Conditioner list');
-  late SettingsRepository _settings;
-  late BroadcastRepository _broadcast;
-  String broadcastIp = '255.255.255.255';
+  final String broadcastIp = '255.255.255.255';
+
+  late final SettingsRepository _settings;
+  late final BroadcastRepository _broadcast;
 
   ConditionerListViewModel() {
     _settings = SettingsRepository();
@@ -25,22 +26,22 @@ class ConditionerListViewModel extends ChangeNotifier {
   }
 
   List<Conditioner> get conditioners => _list;
-
   bool get isLoading => _isLoading;
 
+  //Sets conditioner to current model
   void _setLoading() {
     _isLoading = true;
     notifyListeners();
   }
 
-  ///Mutate conditioner in the list
+  //Mutate conditioner in the list
   void changeConditioner(Conditioner conditioner) {
     int index = _list.indexWhere((element) => element.endpoint == conditioner.endpoint);
     _list[index] = conditioner;
     notifyListeners();
   }
 
-  ///Get conditioners from the network
+  //Get conditioners from the network
   void getConditioners() async {
     _setLoading();
     log.info('Trying to fetch list of conditioners');
@@ -59,7 +60,7 @@ class ConditionerListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  ///Convert a list of String to list of conditioners
+  //Convert a list of String to list of conditioners
   Future<List<Conditioner>> _sendBroadcast() async {
     List<String> strings = [];
     try {

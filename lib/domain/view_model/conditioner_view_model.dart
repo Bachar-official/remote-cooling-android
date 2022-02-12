@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +6,13 @@ import 'package:remote_cooling_android/domain/repository/settings_repository.dar
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/entities/conditioner_status.dart';
 import 'package:remote_cooling_android/domain/repository/net_repository.dart';
-import 'package:remote_cooling_android/utils/time_ago.dart';
 
 class ConditionerViewModel extends ChangeNotifier {
-  late Conditioner _conditioner;
-  late Function mutateListWith;
   final log = Logger('Conditioner');
   bool _isLoading = false;
+
+  late Conditioner _conditioner;
+  late Function mutateListWith;
   late NetRepository _netRepository;
   late String _userName;
   late Dio _dio;
@@ -29,13 +27,13 @@ class ConditionerViewModel extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  ///Initiate conditioner to work
+  //Initiate conditioner to work
   @required
   void setConditioner(Conditioner newConditioner) {
     _conditioner = newConditioner;
   }
 
-  ///Initiate mutation from the list
+  //Initiate mutation from the list
   void setCallback(Function callback) {
     this.mutateListWith = callback;
   }
@@ -45,47 +43,61 @@ class ConditionerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  ///Set another mode of conditioner
+  //Mutate current conditioner with specific fields
+  void _mutateConditioner({String? status, String? userName}) {
+    if (status != null) {
+      _conditioner.setStatus(status);
+    }
+    if (userName != null) {
+      _conditioner.setUsername(userName);
+    }
+  }
+
+  //Set another mode of conditioner
   void setMode(ConditionerStatus status) async {
     ConditionerCommand command = NetRepository.statusToCommand(status);
     try {
-      log.info('Trying to set new mode: ${command.toString()}');
+      log.info(
+          'Trying to set conditioner ${conditioner.name} to command $command');
       _setLoading();
-      var response =
-          await _netRepository.sendCommand(_conditioner.endpoint, command, DateTime.now(), _dio);
+      var response = await _netRepository.sendCommand(
+          _conditioner.endpoint, command, DateTime.now(), _dio);
       if (response.statusCode == 200) {
-        _conditioner.setStatus(response.data['status']);
-        _conditioner.setUsername(response.data['user']);
+        _mutateConditioner(
+            status: response.data['status'], userName: response.data['user']);
         log.fine('Setting mode successful!');
       } else {
-        log.warning('Something went wrong: status code ${response.statusCode}');
+        log.warning('Setting mode error: ${response.statusCode}');
       }
     } catch (e) {
-      log.warning('ERROR: ${e.toString()}');
+      log.warning(e.toString());
     }
     mutateListWith(_conditioner);
     _isLoading = false;
     notifyListeners();
   }
 
-  ///Switch conditioner on/off
+  //Switch conditioner on/off
   void switchOnOff(bool value) async {
     bool on = _conditioner.isOn;
     try {
       log.info(
-          'Trying to switch conditioner \"${_conditioner.name}\" to state ${value ? '\"on\"' : '\"off\"'}');
+          'Trying to switch conditioner ${_conditioner.name} to state ${value ? 'on' : 'off'}');
       _setLoading();
-      var response = await _netRepository.sendCommand(_conditioner.endpoint,
-          on ? ConditionerCommand.off : ConditionerCommand.set_100, DateTime.now(), _dio);
+      var response = await _netRepository.sendCommand(
+          _conditioner.endpoint,
+          on ? ConditionerCommand.off : ConditionerCommand.set_100,
+          DateTime.now(),
+          _dio);
       if (response.statusCode == 200) {
-        _conditioner.setStatus(response.data['status']);
-        _conditioner.setUsername(response.data['user']);
+        _mutateConditioner(
+            status: response.data['status'], userName: response.data['user']);
         log.fine('Switching ${value ? 'on' : 'off'} successful!');
       } else {
-        log.warning('Something went wrong: status code ${response.statusCode}');
+        log.warning('Setting mode error: ${response.statusCode}');
       }
     } catch (e) {
-      log.warning('ERROR: ${e.toString()}');
+      log.warning(e.toString());
     }
     mutateListWith(_conditioner);
     _isLoading = false;

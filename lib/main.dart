@@ -6,7 +6,7 @@ import 'package:remote_cooling_android/app/app.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'domain/view_model/conditioner_list_view_model.dart';
-import 'domain/view_model/conditioner-view-model.dart';
+import 'domain/view_model/conditioner_view_model.dart';
 import 'domain/view_model/navigation_view_model.dart';
 import 'domain/view_model/settings_view_model.dart';
 

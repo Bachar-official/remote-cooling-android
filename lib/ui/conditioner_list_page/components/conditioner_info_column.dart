@@ -6,10 +6,15 @@ import '../../ui_constants/colors.dart';
 
 class ConditionerInfoColumn extends StatelessWidget {
   late final Conditioner conditioner;
+  late final TextStyle style;
+  final Color? color;
 
-  ConditionerInfoColumn({required this.conditioner});
+  ConditionerInfoColumn({
+    required this.conditioner,
+    required this.style,
+    this.color
+  });
 
-  final TextStyle textStyle = TextStyle(color: CinimexColors.mainBlack, fontSize: 18);
   final Color mainBlack = CinimexColors.mainBlack;
   final MainAxisAlignment columnAlignment = MainAxisAlignment.center;
   final MainAxisAlignment rowAlignment = MainAxisAlignment.spaceBetween;
@@ -23,22 +28,22 @@ class ConditionerInfoColumn extends StatelessWidget {
           Row(
             mainAxisAlignment: rowAlignment,
             children: [
-              _getIconStatus(conditioner.status, mainBlack),
-              Text(conditioner.temperature, style: textStyle,),
+              _getIconStatus(conditioner.status, color),
+              Text(conditioner.temperature, style: style),
             ],
           ),
           Row(
             mainAxisAlignment: rowAlignment,
             children: [
-              Icon(Icons.access_time, color: mainBlack),
-              Text(conditioner.whereUpdated, style: textStyle),
+              Icon(Icons.access_time, color: color),
+              Text(conditioner.whereUpdated, style: style),
             ],
           ),
           Row(
             mainAxisAlignment: rowAlignment,
             children: [
-              Icon(Icons.badge_outlined, color: mainBlack),
-              Text(conditioner.userName, style: textStyle)
+              Icon(Icons.badge_outlined, color: color),
+              Text(conditioner.userName, style: style)
             ],
           ),
         ],
@@ -47,7 +52,7 @@ class ConditionerInfoColumn extends StatelessWidget {
   }
 }
 
-Icon _getIconStatus(ConditionerStatus status, Color color) {
+Icon _getIconStatus(ConditionerStatus status, Color? color) {
   switch (status) {
     case ConditionerStatus.undefined:
       return Icon(Icons.leak_remove, color: color);
@@ -64,6 +69,6 @@ Icon _getIconStatus(ConditionerStatus status, Color color) {
     case ConditionerStatus.hot30:
       return Icon(Icons.local_fire_department, color: color);
     default:
-      return Icon(Icons.no_accounts);
+      return Icon(Icons.no_accounts, color: color);
   }
 }
