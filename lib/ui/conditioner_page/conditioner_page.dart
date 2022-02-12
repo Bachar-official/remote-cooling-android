@@ -16,28 +16,29 @@ class _ConditionerState extends State<ConditionerPage> {
 
   @override
   Widget build(BuildContext context) {
-    Conditioner conditioner = ModalRoute.of(context)!.settings.arguments as Conditioner;
+    Conditioner conditioner =
+        ModalRoute.of(context)!.settings.arguments as Conditioner;
     var provider = Provider.of<ConditionerViewModel>(context, listen: true);
     var changeCallback =
         Provider.of<ConditionerListViewModel>(context, listen: false)
             .changeConditioner;
+
     provider.setCallback(changeCallback);
     provider.setConditioner(conditioner);
     bool isLoading = provider.isLoading;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          provider.conditioner.name,
-          style: TextStyle(fontFamily: 'Europe'),
+        appBar: AppBar(
+          title: Text(
+            provider.conditioner.name,
+            style: TextStyle(fontFamily: 'Europe'),
+          ),
         ),
-      ),
-      body: Consumer<ConditionerViewModel>(
-          builder: (context, model, child) => ConditionerBody(
-                isLoading: isLoading,
-                conditioner: provider.conditioner,
-                setMode: provider.setMode,
-                setOnOff: provider.switchOnOff,
-              )),
-    );
+        body: ConditionerBody(
+          isLoading: isLoading,
+          conditioner: provider.conditioner,
+          setMode: provider.setMode,
+          setOnOff: provider.switchOnOff,
+        ));
   }
 }

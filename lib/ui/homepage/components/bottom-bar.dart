@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:remote_cooling_android/app/routing.dart';
-import 'package:remote_cooling_android/utils/route_utils.dart';
 
 class BottomBar extends StatelessWidget {
   late final int pageNumber;

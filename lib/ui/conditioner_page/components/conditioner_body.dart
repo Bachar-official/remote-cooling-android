@@ -4,7 +4,6 @@ import 'package:remote_cooling_android/domain/view_model/settings_view_model.dar
 import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/ui/conditioner_page/components/conditioner_header.dart';
 
-import '../../ui_constants/colors.dart';
 import 'conditioner_footer.dart';
 import 'conditioner_mode_switcher.dart';
 

@@ -1,16 +1,14 @@
 # remote_cooling_android
 
-A new Flutter project.
+Flutter project for managing conditioners connected with IR controller made by ESP32.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+First of all, you need to have ESP32 controller.
+Then, you should connect an infrared diode to specific GPIO outputs.
+After that, [get a firmware](https://github.com/Bachar-official/ESP32-IR-sender).
+Edit firmware as you wish (ping message, port, etc).
+Upload firmware to your ESP32.
+Compile and run app.
+Set your settings according to your firmware (important to be connected the same WiFi network).
+Enjoy.

@@ -6,7 +6,6 @@ import 'package:remote_cooling_android/entities/conditioner.dart';
 import 'package:remote_cooling_android/ui/ui_constants/theme.dart';
 import 'package:remote_cooling_android/utils/route_utils.dart';
 
-import '../../ui_constants/colors.dart';
 import 'conditioner_info_column.dart';
 
 class ConditionerCard extends StatelessWidget {
