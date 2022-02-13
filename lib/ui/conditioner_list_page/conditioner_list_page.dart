@@ -18,15 +18,19 @@ class ConditionerListPage extends StatelessWidget {
     Color? backgroundRefreshColor = themeName == cmxName ? cmxBlue : null;
     Color? foregroundRefreshColor = themeName == cmxName ? cmxOrange : null;
 
-    return Scaffold(
-        body: RefreshIndicator(
-          backgroundColor: backgroundRefreshColor,
-          color: foregroundRefreshColor,
-          onRefresh:() async => provider.getConditioners(),
-          child: ConditionerCards(
+    return RefreshIndicator(
+      backgroundColor: backgroundRefreshColor,
+      color: foregroundRefreshColor,
+      onRefresh:() async => provider.getConditioners(),
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: provider.isLoading ? Icon(Icons.watch_later_outlined) : Icon(Icons.refresh),
+          onPressed: () async => provider.getConditioners(),
+        ),
+          body: ConditionerCards(
               isLoading: provider.isLoading,
               conditioners: provider.conditioners,
-              callback: () => {}),
-        ));
+              callback: () => {})),
+    );
   }
 }
