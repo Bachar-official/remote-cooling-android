@@ -30,10 +30,20 @@ class Homepage extends StatelessWidget {
           return SizedBox.shrink();
       }
     }
+    
+    Text _getAppBarText(int number) {
+      String title = '';
+      switch (number) {
+        case 1: title = 'Настройки'; break;
+        case 2: title = 'О программе'; break;
+        case 0: default: title = 'Cinimex Cooling'; break; 
+      }
+      return Text(title, style: TextStyle(fontFamily: 'Europe'));
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cinimex Cooling', style: TextStyle(fontFamily: 'Europe')),
+        title: _getAppBarText(navigationProvider.pageNumber),
       ),
       body: navigationProvider.pageNumber == settingsPageNumber
           ? SettingsPage()

@@ -12,22 +12,25 @@ class ConditionerListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<ConditionerListViewModel>(context, listen: true);
-    String themeName = Provider.of<SettingsViewModel>(context, listen: false).themeName;
+    String themeName =
+        Provider.of<SettingsViewModel>(context, listen: false).themeName;
     const String cmxName = 'Cinimex';
 
     Color? backgroundRefreshColor = themeName == cmxName ? cmxBlue : null;
     Color? foregroundRefreshColor = themeName == cmxName ? cmxOrange : null;
 
-    return RefreshIndicator(
-      backgroundColor: backgroundRefreshColor,
-      color: foregroundRefreshColor,
-      onRefresh:() async => provider.getConditioners(),
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: provider.isLoading ? Icon(Icons.watch_later_outlined) : Icon(Icons.refresh),
-          onPressed: () async => provider.getConditioners(),
-        ),
-          body: ConditionerCards(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: provider.isLoading
+            ? Icon(Icons.watch_later_outlined)
+            : Icon(Icons.refresh),
+        onPressed: () async => provider.getConditioners(),
+      ),
+      body: RefreshIndicator(
+          backgroundColor: backgroundRefreshColor,
+          color: foregroundRefreshColor,
+          onRefresh: () async => provider.getConditioners(),
+          child: ConditionerCards(
               isLoading: provider.isLoading,
               conditioners: provider.conditioners,
               callback: () => {})),
